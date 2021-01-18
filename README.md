@@ -20,8 +20,10 @@ This is a collection of commands I'm using on my linux machine as a python devel
 
 I use the alias `marcopolo` to reach this cheat sheet faster:
 
-<script src="https://gist.github.com/NiklasTiede/9c9cd248674576b4f97aa598066ffb2e.js"></script>
-
+```bash
+echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet'" >> ~/.zshrc
+source ~/.zshrc
+```
 
 # Contents
 
