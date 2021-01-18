@@ -1,4 +1,7 @@
-genereal ideas:
+<!-- translation
+[English](README.md) | [Tiếng Việt](README-vn.md) | [简体中文](README-cn.md) -->
+
+<!-- genereal ideas:
 * theme specific
 * powerful cheats in general
 * the whole design is done in a cool manner
@@ -9,71 +12,84 @@ concrete ideas:
 * important python standard libs cheat sheets
 * termux, raspi
 
+dotfiles -->
 
-# Cheatsheets of Mine
+# Cheat sheet (Linux)
 
-Herein I'm writing down all important/interesting commands to memoiye them better.
+This is a collection of commands I'm using on my linux machine as a python developer. 
 
+I use the alias `marcopolo` to reach this cheat sheet faster:
 
-Idee: dotfile auch machen, um schnell jedes linux system yu konfigurieren mit zshell und tollen tools!
+<script src="https://gist.github.com/NiklasTiede/9c9cd248674576b4f97aa598066ffb2e.js"></script>
+
 
 # Contents
-1. [Linux](#linux)
-    * [Arrays](#arrays)
-    * [Slices](#slices)
-2. [Python Standard Library](python-std-lib)
+
+1. [Operators, Shell Expansions](#Operators,-Shell-Expansions)
+2. [Basic Commands](#Basic-Commands)
+      * [Beginner](#Beginner)
+      * [Intermediate](#Intermediate)
+      * [Advanced](#Advanced)
+3. [Command Line Tools](#Command-Line-Tools)
+      * [git]()
+      * [anaconda]()
+      * [docker]()
+      * [LSDeluxe]()
+      * [git]()
+4. [Aliases](#Aliases)
+5. [Shortcuts](#Shortcuts)
+      * [Terminal](#Terminal) 
+      * [Chromium Browser](#Chromium-Browser) 
+      * [VSCode](#VSCode) 
+6. [Shell Scripting](#Shell-Scripting)
+      * [Bash in a Nutshell]()
+      * [variables](#)
+      * [loops](#)
+      * [functions](#)
+      * [condtionals](#)
+7. [Raspberry Pi](#Raspberry-Pi)
+
+---
 
 
-## 1. Linux
+# 1. Operators, Shell Expansions
+
+tilde expansion ~ --> $HOME
+filename expansion (*, ?, [0-9]/[a-z])
 
 
-Most important: TAB, arrow keys, crtl + r
-ctrl shift arrow keys
-ctrl alt t
-ctrl alt q 
-<kbd>Ctrl</kbd> + <kbd>Shift</kbd>
-<kbd style="color: blue"> Ctrl</kbd>
+| Symbol | Example | Description | 
+|--|--|--|
+| `&` |  |  |
+| `;` | `com1; com2` | executing  |
+| `&&` | `com1 && com2` | chaining |
+| `>` |  |  |
+| `>>` | `echo 'source x' >> ~/.bashrc` |  |
+| `|` |  | pipelining |
+|  |  |  |
 
 
-## shortcuts
+**[⬆ back to top](#contents)**
+
+---
+
+# 2. Basic Commands (GNOME)
+
+basic navigation on the system:
+## Beginner
+## Intermediate
+## Advanced
+help
+
 
 ```bash
-ctrl + r      # searching through 
-      # 
-      # 
-      # 
-```     
-
-## aliases
-
-## terminal logic: operators, shell expansion etc.
-
-## extreme useful command line tools
-
-fuzzyfinder
-
-
-
-
-
-basic navigation, yurechtkommen
-
-
-logical operators 
-
-&&
-;
-&
-
-make asliase to increase prodictivity 
-
-
-Some precious commands...
-
-
-
-
-help
+pwd
+ls
+cd
+clear
+history | tail
+df -h  
+```
 
 ```bash
 help   # 
@@ -135,21 +151,62 @@ text
 ```
 
 
+**[⬆ back to top](#contents)**
+
+---
+
+# 3. Command Line Tools (3rd party)
+
+text
+
+**[⬆ back to top](#contents)**
+
+---
+
+# 4.Aliases
+
+make asliase to increase prodictivity 
+
+
+**[⬆ back to top](#contents)**
+
+---
+
+# 5. Shortcuts
+
+Terminal Shortcuts on Linux
+|  Shortcut |  Meaning |
+|---|---|
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd> | open terminal |  
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd> | close terminal | 
+| <kbd>Tab</kbd> | autocomplete, navigation | 
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Up</kbd> or <kbd>Down</kbd> | scrolling up, down |
+| <kbd>Ctrl</kbd> <kbd>R</kbd> | search history |
+|  |  |
+|  |  |
+|  |  |
+
+**[⬆ back to top](#contents)**
+
+---
+
+# 6. Shell Scripting
+
+important shebang lines: what is a shebang line and why do they exist?
+
+`#!/bin/bash`
+`#!/bin/sh`
+`#!/usr/bin/env python`
+
+**[⬆ back to top](#contents)**
+
+---
+
+# 7. Raspberry Pi
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+**[⬆ back to top](#contents)**
 
 
 
@@ -158,14 +215,10 @@ text
 
 ---
 
-## Go in a Nutshell
-
-* Imperative language
-* Statically typed
-
 # Basic Syntax
 
 ## Hello World
+
 File `hello.go`:
 ```go
 package main
@@ -175,10 +228,12 @@ import "fmt"
 func main() {
     fmt.Println("Hello Go")
 }
+
 ```
+
 `$ go run hello.go`
 
-### Comparison
+
 |Operator|Description|
 |--------|-----------|
 |`==`|equal|
@@ -189,7 +244,6 @@ func main() {
 |`>=`|greater than or equal|
 
 
-## Type Conversions
 ```go
 var i int = 42
 var f float64 = float64(i)
@@ -201,9 +255,6 @@ f := float64(i)
 u := uint(f)
 ```
 
-# Arrays, Slices, Ranges
-
-text
 
 ```go
 ls -la
@@ -216,7 +267,3 @@ i := 42
 f := float64(i)
 u := uint(f)
 ```
-
-text
-
-**[⬆ back to top](#contents)**
