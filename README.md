@@ -165,7 +165,7 @@ text
 
 ---
 
-# 4.Aliases
+# 4. Aliases
 
 make asliase to increase prodictivity 
 
