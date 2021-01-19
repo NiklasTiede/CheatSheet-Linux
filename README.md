@@ -18,6 +18,33 @@ dotfiles -->
 
 This is a collection of commands I'm using on my linux machine as a python developer. 
 
+# Contents
+
+1. [Operators, Shell Expansions](#operators-shell-expansions)
+2. [Basic Commands](#basic-commands)
+      * [Beginner](#beginner)
+      * [Intermediate](#intermediate)
+      * [Advanced](#advanced)
+3. [Command Line Tools](#command-line-tools)
+      * [Git](#git)
+      * [Anaconda](#anaconda)
+      * [Docker](#docker)
+      * [LSDeluxe](#lsdeluxe)
+4. [Aliases](#aliases)
+5. [Shortcuts](#shortcuts)
+      * [Terminal](#terminal) 
+      * [Chromium Browser](#chromium-browser) 
+      * [VSCode](#vscode) 
+6. [Shell Scripting](#shell-scripting)
+      * [Bash in a Nutshell](#bash-in-a-nutshell)
+      * [Variables](#variables)
+      * [Loops](#loops)
+      * [Functions](#functions)
+      * [Condtionals](#conditionals)
+7. [Raspberry Pi](#raspberry-pi)
+
+
+
 I use the alias `marcopolo` to reach this cheat sheet faster:
 
 ```bash
@@ -25,36 +52,13 @@ echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet'" >>
 source ~/.zshrc
 ```
 
-# Contents
-
-1. [Operators, Shell Expansions](#Operators,-Shell-Expansions)
-2. [Basic Commands](#Basic-Commands)
-      * [Beginner](#Beginner)
-      * [Intermediate](#Intermediate)
-      * [Advanced](#Advanced)
-3. [Command Line Tools](#Command-Line-Tools)
-      * [git]()
-      * [anaconda]()
-      * [docker]()
-      * [LSDeluxe]()
-      * [git]()
-4. [Aliases](#Aliases)
-5. [Shortcuts](#Shortcuts)
-      * [Terminal](#Terminal) 
-      * [Chromium Browser](#Chromium-Browser) 
-      * [VSCode](#VSCode) 
-6. [Shell Scripting](#Shell-Scripting)
-      * [Bash in a Nutshell]()
-      * [variables](#)
-      * [loops](#)
-      * [functions](#)
-      * [condtionals](#)
-7. [Raspberry Pi](#Raspberry-Pi)
-
 ---
 
+# Operators, Shell Expansions
 
-# 1. Operators, Shell Expansions
+Special behaviour of the shell is explained here
+
+expanding globs
 
 tilde expansion ~ --> $HOME
 filename expansion (*, ?, [0-9]/[a-z])
@@ -75,12 +79,43 @@ filename expansion (*, ?, [0-9]/[a-z])
 
 ---
 
-# 2. Basic Commands (GNOME)
+# Basic Commands
+
+GNOME built-in
+
+
+## Beginner
 
 basic navigation on the system:
-## Beginner
+
+```bash
+cd
+ls
+pwd
+```
+
+
 ## Intermediate
+
+
+
+```bash
+
+```
+
 ## Advanced
+
+pretty useful combinations:
+
+```bash
+  
+```
+
+
+
+
+
+
 help
 
 
@@ -157,15 +192,18 @@ text
 
 ---
 
-# 3. Command Line Tools (3rd party)
+# Command Line Tools
 
 text
+
+## Git
+
 
 **[⬆ back to top](#contents)**
 
 ---
 
-# 4. Aliases
+# Aliases
 
 make asliase to increase prodictivity 
 
@@ -174,7 +212,7 @@ make asliase to increase prodictivity
 
 ---
 
-# 5. Shortcuts
+# Shortcuts
 
 Terminal Shortcuts on Linux
 |  Shortcut |  Meaning |
@@ -192,7 +230,7 @@ Terminal Shortcuts on Linux
 
 ---
 
-# 6. Shell Scripting
+# Shell Scripting
 
 important shebang lines: what is a shebang line and why do they exist?
 
@@ -204,7 +242,7 @@ important shebang lines: what is a shebang line and why do they exist?
 
 ---
 
-# 7. Raspberry Pi
+# Raspberry Pi
 
 
 
