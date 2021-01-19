@@ -20,7 +20,9 @@ This is a collection of commands I'm using on my linux machine as a python devel
 
 # Contents
 
-1. [Operators, Shell Expansions](#operators-shell-expansions)
+1. [Shell Expansions, Logical Operators](#shell-expansions-logical-operators)
+      * [Shell Expansions](#shell-expansions)
+      * [Logical Operators](#logical-operators)
 2. [Basic Commands](#basic-commands)
       * [Beginner](#beginner)
       * [Intermediate](#intermediate)
@@ -44,35 +46,70 @@ This is a collection of commands I'm using on my linux machine as a python devel
 7. [Raspberry Pi](#raspberry-pi)
 
 
-
 I use the alias `marcopolo` to reach this cheat sheet faster:
 
 ```bash
-echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet'" >> ~/.zshrc
-source ~/.zshrc
+echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet'" >> ~/.bashrc
+source ~/.bashrc
 ```
 
 ---
 
-# Operators, Shell Expansions
+# Shell Expansions, Logical Operators
 
-Special behaviour of the shell is explained here
+## Shell Expansions
 
-expanding globs
+Expansions are performed by the shell before the command is executed. **Tilde** and **filename** **expansion** are used more often when interacting with the shell. **Brace**, **variable** and **arithmetic** **expansion** tend to be used more often while doing shell scripting.
 
-tilde expansion ~ --> $HOME
-filename expansion (*, ?, [0-9]/[a-z])
+The tilde `~` expands to the environment variable `$HOME`, which is usually the home directory. If `$HOME` is not defined, tilde `~` expands with the home directory by default.
 
+```bash
+$ echo ~
+/home/username
+```
+
+Filename expansion is a way to select easily a number of files or directories from within the current working directory as arguments for a command. A glob pattern containing wildcard characters specifies the set of filenames. 
+
+| Wildcard Character | Represents | 
+|--|--|
+| `*` | 1 or more character |
+| `?` | 1 character |
+| `[0-9]` `[a-z]` | 1 specified character |
+
+Examples:
+
+```bash
+$ ls
+file1.go  file2.go  file3.py  file4.py  file40.py
+
+$ ls *.py
+file3.py  file4.py  file40.py
+
+$ ls file?.py
+file3.py  file4.py
+
+$ ls file[0-3].*
+file1.go  file2.go  file3.py
+```
+**[⬆ back to top](#contents)**
+
+---
+
+## Logical Operators
+
+Shell control operators let you expand your possibilities using the shell vastly. 
 
 | Symbol | Example | Description | 
 |--|--|--|
-| `&` |  |  |
-| `;` | `com1; com2` | executing  |
-| `&&` | `com1 && com2` | chaining |
-| `>` |  |  |
-| `>>` | `echo 'source x' >> ~/.bashrc` |  |
-| `|` |  | pipelining |
-|  |  |  |
+| `&` |  | execute in background |
+| `;` | `com1; com2` | execute always  |
+| `&&` | `com1 && com2` | logical and |
+| `>` or `<` |  | redirection |
+| `>>` or `<<` | `echo 'source x' >> ~/.bashrc` | append |
+| `|` | `history | grep 'patt'`  | pipelining |
+| `||` |  | logical or |
+
+These operators and shell expansions will be found throughout this cheat sheet repeatedly.
 
 
 **[⬆ back to top](#contents)**
@@ -81,8 +118,7 @@ filename expansion (*, ?, [0-9]/[a-z])
 
 # Basic Commands
 
-GNOME built-in
-
+GNOME built-in commands/programs
 
 ## Beginner
 
