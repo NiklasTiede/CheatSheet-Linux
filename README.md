@@ -91,13 +91,16 @@ file3.py  file4.py
 $ ls file[0-3].*
 file1.go  file2.go  file3.py
 ```
+
+Brace, variable and arithmetic expansions are explained within the [Shell Scripting](#shell-scripting) section.
+
 **[⬆ back to top](#contents)**
 
 ---
 
 ## Logical Operators
 
-Shell control operators let you expand your possibilities using the shell vastly. 
+Shell control operators let you expand your possibilities using shell commands. Redirecting the output of a command gives you endless possibilities to improve your workflow. 
 
 | Symbol | Example | Description | 
 |--|--|--|
