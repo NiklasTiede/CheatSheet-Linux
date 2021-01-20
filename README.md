@@ -25,7 +25,7 @@ This is a collection of commands I'm using on my linux machine as a python devel
    * [Shell Operators](#shell-operators)
 2. [Basic Commands](#basic-commands)
    * [Beginner](#beginner)
-     * [navigation]()
+     * [Navigation](#navigation)
    * [Intermediate](#intermediate)
    * [Advanced](#advanced)
 3. [Command Line Tools](#command-line-tools)
@@ -147,16 +147,20 @@ These operators and shell expansions will be found throughout this cheat sheet r
 
 Linux distributions contain a plethora of powerful built-in commands.
 
-## Beginner
+<!-- ## Beginner -->
+### Navigation
 
 Navigation on the file system:
 
+
+
 ```bash
-cd <directory>  # change directory
-cd ..           # goes on folder up
-ls              # list cotent of current wokring dir
-ls -la          # Display all and extended file metadata
-pwd             # print working directory
+$ ls              # list cotent of current wokring dir
+$ ls -la          # Display all and extended file metadata
+
+$ cd <directory>  # change directory
+$ cd ..           # goes on folder up
+$ pwd             # print working directory
 ```
 
 If you're not aware of a commands capabilities you can add the `--help` flag to display all options. The `--version` flag returns the version number.
@@ -308,18 +312,30 @@ echo $HOME
 
 ```
 
-apt - package managemtn tool
+package managemtn tools, see in the [command line tools]() section
 
-```bash
-apt-get install <tool>            # package management tool
-sudo apt-get remove <program_name>   # removes the program
-
-apt-cache search <program_name>*     # search for everything containing the word in the rep. example: apt-cache search gimp*
-```
 
 
 ## Intermediate
 
+ environment variables:
+ 
+```bash
+printenv      # 
+echo $PATH      # 
+      # 
+      # 
+      # 
+```
+
+
+cron jobs
+
+```bash
+
+```
+
+check cpu, gpu
 
 ```bash
 cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu core
@@ -335,34 +351,6 @@ If you wanna sort your command history to see which commands you use most often:
 history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 ```
 
-
-
-
-
-
-help
-
-
-```bash
-pwd
-ls
-cd
-clear
-history | tail
-df -h  
-```
-
-```bash
-help   # 
-<command> --help   # 
-man <command>   # 
-info <command>   # 
-whatis <command>
-which <command>   #  
-locate <command>  #
-
-file *             # lists the types of all files
-```
 
 
 using filename expansion, globbing, shell expansion, wildcard characters
@@ -391,15 +379,6 @@ grep -rnw -e 'patt' --include=*.py
 ```
 
 
- environment variables:
- 
-```bash
-printenv      # 
-echo $PATH      # 
-      # 
-      # 
-      # 
-```
 
 text
 
@@ -428,7 +407,6 @@ sudo apt-get remove <program_name>   # removes the program
 
 apt-cache search <program_name>*     # search for everything containing the word in the rep. example: apt-cache search gimp*
 ```
-
 
 
 ## Git
