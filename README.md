@@ -21,28 +21,29 @@ This is a collection of commands I'm using on my linux machine as a python devel
 # Contents
 
 1. [Shell Expansions, Shell Operators](#shell-expansions-shell-operators)
-      * [Shell Expansions](#shell-expansions)
-      * [Shell Operators](#shell-operators)
+   * [Shell Expansions](#shell-expansions)
+   * [Shell Operators](#shell-operators)
 2. [Basic Commands](#basic-commands)
-      * [Beginner](#beginner)
-      * [Intermediate](#intermediate)
-      * [Advanced](#advanced)
+   * [Beginner](#beginner)
+     * [navigation]()
+   * [Intermediate](#intermediate)
+   * [Advanced](#advanced)
 3. [Command Line Tools](#command-line-tools)
-      * [Git](#git)
-      * [Anaconda](#anaconda)
-      * [Docker](#docker)
-      * [LSDeluxe](#lsdeluxe)
+   * [Git](#git)
+   * [Anaconda](#anaconda)
+   * [Docker](#docker)
+   * [LSDeluxe](#lsdeluxe)
 4. [Aliases](#aliases)
 5. [Shortcuts](#shortcuts)
-      * [Terminal](#terminal) 
-      * [Chromium Browser](#chromium-browser) 
-      * [VSCode](#vscode) 
+   * [Terminal](#terminal) 
+   * [Chromium Browser](#chromium-browser) 
+   * [VSCode](#vscode) 
 6. [Shell Scripting](#shell-scripting)
-      * [Bash in a Nutshell](#bash-in-a-nutshell)
-      * [Variables](#variables)
-      * [Loops](#loops)
-      * [Functions](#functions)
-      * [Condtionals](#conditionals)
+   * [Bash in a Nutshell](#bash-in-a-nutshell)
+   * [Variables](#variables)
+   * [Loops](#loops)
+   * [Functions](#functions)
+   * [Condtionals](#conditionals)
 7. [Raspberry Pi](#raspberry-pi)
 
 
@@ -100,21 +101,41 @@ The lesser known extended globbing (like `*(pattern)`), is used more commonly in
 
 ## Shell Operators
 
-Shell operators let you combine commands which expands your toolbelt vastly. They can be divided into two categories: redirection and control operators. Control operators allow for coupling commands:
+Shell operators let you combine commands which expands your toolbelt vastly. They can be divided into two categories: redirection and control operators. Control operators allow for coupling commands. 
 
 | Token | Example | Description | 
 |--|--|--|
+| `|` | `history | grep "patt"` | Pipelining: direct output of com1 to com2 
 | `&` | `python myscript.py &` | Execute command in background |
 | `&&` | `com1 && com2` | Execute com2 only if com1 is executed |
-| `;` | `com1; com2` | Execute always |
-| `|` | `history | grep 'patt'` | Pipelining: direct output of com1 to com2 |
+| `;` | `com1; com2` | Execute both commands always |
+
+Especially the pipe operator `|` here shines. Any output printed by command1 is passed as input to command2. 
+
+Examples:
+
+```bash
+$ ls | head -3
+
+$ cat filename | grep 'pattern'
+```
+
+---
 
 Whereas redirection operators direct the output of a command to another command.
 
 | Token | Example | Description | 
 |--|--|--|
-| `>` or `<` | `echo 'projectname' > README.md` | Redirection: direct output of com1 to com2 or vice versa |
+| `>` or `<` | `echo '#projectname' > README.md` | Direct output of com1 to com2 or vice versa |
 | `>>` or `<<` | `echo 'source x' >> ~/.bashrc` | append output |
+
+Examples:
+
+```bash
+$ echo 'alias=' >> ~/.bashrc
+
+$ more good examples
+```
 
 These operators and shell expansions will be found throughout this cheat sheet repeatedly.
 
@@ -124,25 +145,184 @@ These operators and shell expansions will be found throughout this cheat sheet r
 
 # Basic Commands
 
-GNOME built-in commands/programs
+Linux distributions contain a plethora of powerful built-in commands.
 
 ## Beginner
 
-basic navigation on the system:
+Navigation on the file system:
 
 ```bash
-cd
-ls
-pwd
+cd <directory>  # change directory
+cd ..           # goes on folder up
+ls              # list cotent of current wokring dir
+ls -la          # Display all and extended file metadata
+pwd             # print working directory
+```
+
+If you're not aware of a commands capabilities you can add the `--help` flag to display all options. The `--version` flag returns the version number.
+
+```bash
+<command> --help
+<command> --version
+```
+
+All built-in commands have manual pages
+
+```bash
+man <command>  # shows a manual (man pages)
+info <command>  # 
+whatis <command>  # 
+```
+
+
+```bash
+sudo du -sh <file/dir>  # shows size of specified file/dir
+sudo du -sh *   # shows the size of all files/folders
+df -h # shows all memory usage on filesystem
+file *   # lists the types of all files
+which <command>  # returns path to the programs binary
+which brew, which go, which python, which ls
+```
+
+```bash
+date  
+jobs 
+kill %N
+ps
+```
+
+```bash
+clear  # clears the terminal
+history            # prints the list of all historically used commands
+ctrl + r           # search bar for commands typed (existent in history)
+```
+
+
+file editing
+
+```bash
+touch <file>       # creates a empty, new file
+rm <file_name>                       # removes a file from current 
+rm -i <file>                         # -i flag adds a "are your sure?" prompt
+nano ./<file>      # opens the file (nano is a terminal application for text editing)
+ctrl + O           # saves the file
+ctrl + X           # leaves file
+ctrl + c           # terminates the current process
+ctrl + d           # terminates shell-like sessions (mongo, sql, python etc)
+less -S <file>     # less (editor) prevents wrapping around, better representation
+
+head <file>        # prints the first 10 lines of a file
+head -n 5 <file>   # prints first 5 lines
+tail <file>        # shows last 10 lines
+cat 
+
+wc <file>          # word count, gives number of lines, words and characters of the file
+
+cat <fi1> <fi2>    # concatenates files and sends them to the standard output stream (usually the terminal)
+```
+
+
+updating the system
+
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get autoremove
+```
+
+decompress:
+
+```bash
+
+
+
+```
+
+operating with folder, create, delete etc.
+
+```bash
+mkdir <folder_name>                  # in current directory
+mkdir -p a/b/c                       # creates a directory tree
+tree -L 2                            # visualized directories as tree's. -L restricts the tree to two levels (default: complete tree)
+rmdir <path>                         # removes directory
+rm -rf                               # forces to remove a directory with all its content
+```
+
+
+```bash
+cp <file> <path>/<new_filename>      # copies a file to advised path
+
+ln <target> <new_link>               # creates a hard link to a file (hard links show to the actual bytes in memory)
+ln -s <target> <new_link>            # creates a soft link to a file (soft links point to the file which references to the place in memory)
+
+```
+
+
+```bash
+sudo chown user:group <file.txt>     # changes the file permissions of a file
+chmod +x <ba_scr.sh>                 # makes the bash-script executable
+```
+
+cut
+grep
+find
+sed
+awk
+
+
+```bash
+printenv
+printenv HOME
+echo $HOME
+
+```
+
+
+```bash
+
+```
+
+
+```bash
+
+```
+
+
+```bash
+
+```
+
+
+```bash
+
+```
+
+
+
+```bash
+
+```
+
+
+```bash
+
+```
+
+apt - package managemtn tool
+
+```bash
+apt-get install <tool>            # package management tool
+sudo apt-get remove <program_name>   # removes the program
+
+apt-cache search <program_name>*     # search for everything containing the word in the rep. example: apt-cache search gimp*
 ```
 
 
 ## Intermediate
 
 
-
 ```bash
-
+cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu core
 ```
 
 ## Advanced
@@ -238,7 +418,18 @@ text
 
 # Command Line Tools
 
-text
+Before we can use a tool, we have to use a package managagent system to install these tools. Linux distributions use different package managers, I use Ubuntu 20.04 LT so I'm using `apt` `snap` and `homebrew` to install packages. 
+
+apt - package managemtn tool
+
+```bash
+apt-get install <tool>            # package management tool
+sudo apt-get remove <program_name>   # removes the program
+
+apt-cache search <program_name>*     # search for everything containing the word in the rep. example: apt-cache search gimp*
+```
+
+
 
 ## Git
 
@@ -250,6 +441,10 @@ text
 # Aliases
 
 make asliase to increase prodictivity 
+
+```bash
+unalias lc
+```
 
 
 **[⬆ back to top](#contents)**
@@ -298,62 +493,3 @@ important shebang lines: what is a shebang line and why do they exist?
 
 **[⬆ back to top](#contents)**
 
-
-
-
-
-
----
-
-# Basic Syntax
-
-## Hello World
-
-File `hello.go`:
-```go
-package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Hello Go")
-}
-
-```
-
-`$ go run hello.go`
-
-
-|Operator|Description|
-|--------|-----------|
-|`==`|equal|
-|`!=`|not equal|
-|`<`|less than|
-|`<=`|less than or equal|
-|`>`|greater than|
-|`>=`|greater than or equal|
-
-
-```go
-var i int = 42
-var f float64 = float64(i)
-var u uint = uint(f)
-
-// alternative syntax
-i := 42
-f := float64(i)
-u := uint(f)
-```
-
-
-```go
-ls -la
-var i int = 42
-var f float64 = float64(i)
-var u uint = uint(f)
-
-// alternative syntax
-i := 42
-f := float64(i)
-u := uint(f)
-```
