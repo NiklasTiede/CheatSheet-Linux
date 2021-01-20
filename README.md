@@ -155,12 +155,13 @@ Navigation on the file system:
 
 
 ```bash
-ls              # list cotent of current wokring dir
-ls -la          # Display all and extended file metadata
+ls                # list content of current working dir
+ls -la            # Display all files and extended file metadata
 
-cd <directory>  # change directory
-cd ..           # goes on folder up
-pwd             # print working directory
+cd <directory>    # change directory
+cd ..             # goes on folder up
+
+pwd               # print working directory
 ```
 
 If you're not aware of a commands capabilities you can add the `--help` flag to display all options. The `--version` flag returns the version number.
