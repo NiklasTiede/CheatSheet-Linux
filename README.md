@@ -92,7 +92,7 @@ $ ls file[0-3].*
 file1.go  file2.go  file3.py
 ```
 
-The lesser known extended globbing (like `*(pattern)`), is used more commonly in shell scipting than in interactive shell sessions. The same applied for brace, variable and arithmetic expansions which are explained within the [Shell Scripting](#shell-scripting) section.
+The lesser known extended globbing (like `*(pattern)`), is used more commonly in shell scipting than in interactive shell sessions. The same applies for brace, variable and arithmetic expansions which are explained within the [Shell Scripting](#shell-scripting) section.
 
 **[⬆ back to top](#contents)**
 
@@ -100,33 +100,23 @@ The lesser known extended globbing (like `*(pattern)`), is used more commonly in
 
 ## Shell Operators
 
-### Redirection Operators
+Shell operators let you combine commands which expands your toolbelt vastly. They can be divided into two categories: redirection and control operators. Control operators allow for coupling commands:
 
-Shell operators let you combine commands. This expands your toolbelt .
+| Token | Example | Description | 
+|--|--|--|
+| `&` | `python myscript.py &` | Execute command in background |
+| `&&` | `com1 && com2` | Execute com2 only if com1 is executed |
+| `;` | `com1; com2` | Execute always |
+| `|` | `history | grep 'patt'` | Pipelining: direct output of com1 to com2 |
 
-The shell 
+Whereas redirection operators direct the output of a command to another command.
 
-### Control Operators
-
-
-Control oprators
-&   &&   (   )   ;   ;;   <newline>   |   ||
-
-redirection operators
-<     >     >|     <<     >>     <&     >&     <<-     <>
-
-| Symbol | Type | Example | Description | 
-|--|--|--|--|
-| `&` | | `python myscript.py &` | execute command in background |
-| `;` | | `com1; com2` | execute always  |
-| `&&` | | `com1 && com2` | logical AND, execute command 2 only if command 1 is executed successfully |
-| `>` or `<` | | `echo 'some text' > nohup.out` | redirection |
-| `>>` or `<<` | | `echo 'source x' >> ~/.bashrc` | append |
-| `|` | | `history | grep 'patt'`  | pipelining |
-| `||` | |  | logical OR |
+| Token | Example | Description | 
+|--|--|--|
+| `>` or `<` | `echo 'projectname' > README.md` | Redirection: direct output of com1 to com2 or vice versa |
+| `>>` or `<<` | `echo 'source x' >> ~/.bashrc` | append output |
 
 These operators and shell expansions will be found throughout this cheat sheet repeatedly.
-
 
 **[⬆ back to top](#contents)**
 
