@@ -16,13 +16,13 @@ dotfiles -->
 
 # Cheat sheet (Linux)
 
-This is a collection of commands I'm using on my linux machine as a python developer. 
+This is a collection of commands I'm using on my linux machine as a python developer. It is a structured documentation of the commands I'm using throughout interactive shell sessions.
 
 # Contents
 
-1. [Shell Expansions, Logical Operators](#shell-expansions-logical-operators)
+1. [Shell Expansions, shell Operators](#shell-expansions-shell-operators)
       * [Shell Expansions](#shell-expansions)
-      * [Logical Operators](#logical-operators)
+      * [Shell Operators](#shell-operators)
 2. [Basic Commands](#basic-commands)
       * [Beginner](#beginner)
       * [Intermediate](#intermediate)
@@ -55,11 +55,11 @@ source ~/.bashrc
 
 ---
 
-# Shell Expansions, Logical Operators
+# Shell Expansions, Shell Operators
 
 ## Shell Expansions
 
-Expansions are performed by the shell before the command is executed. **Tilde** and **filename** **expansion** are used more often when interacting with the shell. **Brace**, **variable** and **arithmetic** **expansion** tend to be used more often while doing shell scripting.
+Expansions are performed by the shell before the command is executed. Tilde and filename expansion are used more frequently when interacting with the shell. Brace, variable and arithmetic expansion tend to be used more often while doing shell scripting.
 
 The tilde `~` expands to the environment variable `$HOME`, which is usually the home directory. If `$HOME` is not defined, tilde `~` expands with the home directory by default.
 
@@ -68,13 +68,13 @@ $ echo ~
 /home/username
 ```
 
-Filename expansion is a way to select easily a number of files or directories from within the current working directory as arguments for a command. A glob pattern containing wildcard characters specifies the set of filenames. 
+Filename expansion is a way to select easily a number of files or directories from within the current working directory as arguments for a command. This is accomplished by pattern matching: A so-called glob pattern containing wildcard characters is used to specify the files or directories. The wildcard characters can represent any of the 128 ASCII characters and can be less specific (`*` or `?`) or more specific (`[0-9]`)
 
-| Wildcard Character | Represents | 
+| Wildcard Character | Description | 
 |--|--|
-| `*` | 1 or more character |
-| `?` | 1 character |
-| `[0-9]` `[a-z]` | 1 specified character |
+| `*` | Matches any number of any characters |
+| `?` | Matches any single character |
+| `[...]` | Matches any one of the enclosed characters |
 
 Examples:
 
@@ -92,25 +92,36 @@ $ ls file[0-3].*
 file1.go  file2.go  file3.py
 ```
 
-Brace, variable and arithmetic expansions are explained within the [Shell Scripting](#shell-scripting) section.
+The lesser known extended globbing (like `*(pattern)`), is used commonly in shell scipts than in interactive shell sessions. Brace, variable and arithmetic expansions are explained within the [Shell Scripting](#shell-scripting) section.
 
 **[⬆ back to top](#contents)**
 
 ---
 
-## Logical Operators
+## Shell Operators
 
-Shell control operators let you expand your possibilities using shell commands. Redirecting the output of a command gives you endless possibilities to improve your workflow. 
+### Redirection Operators
 
-| Symbol | Example | Description | 
-|--|--|--|
-| `&` |  | execute in background |
-| `;` | `com1; com2` | execute always  |
-| `&&` | `com1 && com2` | logical and |
-| `>` or `<` |  | redirection |
-| `>>` or `<<` | `echo 'source x' >> ~/.bashrc` | append |
-| `|` | `history | grep 'patt'`  | pipelining |
-| `||` |  | logical or |
+Shell control operators let you combine commands and thus expand your toolbelt.
+
+### Control Operators
+
+
+Control oprators
+&   &&   (   )   ;   ;;   <newline>   |   ||
+
+redirection operators
+<     >     >|     <<     >>     <&     >&     <<-     <>
+
+| Symbol | Type | Example | Description | 
+|--|--|--|--|
+| `&` | | `python myscript.py &` | execute command in background |
+| `;` | | `com1; com2` | execute always  |
+| `&&` | | `com1 && com2` | logical AND, execute command 2 only if command 1 is executed successfully |
+| `>` or `<` | | `echo 'some text' > nohup.out` | redirection |
+| `>>` or `<<` | | `echo 'source x' >> ~/.bashrc` | append |
+| `|` | | `history | grep 'patt'`  | pipelining |
+| `||` | |  | logical OR |
 
 These operators and shell expansions will be found throughout this cheat sheet repeatedly.
 
@@ -146,8 +157,10 @@ pwd
 
 pretty useful combinations:
 
+If you wanna sort your command history to see which commands you use most often:
+
 ```bash
-  
+history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 ```
 
 
@@ -271,11 +284,17 @@ Terminal Shortcuts on Linux
 
 # Shell Scripting
 
+For Shell scripting I can only recommend the excellent cheat sheet of [devhints.io](https://devhints.io/bash). 
+
+In the following I will just explain the most important things, I also I more regurlarly.
+
 important shebang lines: what is a shebang line and why do they exist?
 
 `#!/bin/bash`
 `#!/bin/sh`
 `#!/usr/bin/env python`
+
+
 
 **[⬆ back to top](#contents)**
 
