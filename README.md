@@ -59,13 +59,9 @@ source ~/.bashrc
 
 ## Shell Expansions
 
-<p align="justify">
 Expansions are performed by the shell before the command is executed. Tilde and filename expansion are used more frequently when interacting with the shell. Brace, variable and arithmetic expansion tend to be used more often while doing shell scripting.
-</p>
 
-<p align="justify">
 The tilde `~` expands to the environment variable `$HOME`, which is usually the home directory. If `$HOME` is not defined, tilde `~` expands with the home directory by default.
-</p>
 
 ```bash
 $ echo ~
