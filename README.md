@@ -20,7 +20,7 @@ This is a collection of commands I'm using on my linux machine as a python devel
 
 # Contents
 
-1. [Shell Expansions, shell Operators](#shell-expansions-shell-operators)
+1. [Shell Expansions, Shell Operators](#shell-expansions-shell-operators)
       * [Shell Expansions](#shell-expansions)
       * [Shell Operators](#shell-operators)
 2. [Basic Commands](#basic-commands)
@@ -53,22 +53,26 @@ echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet'" >>
 source ~/.bashrc
 ```
 
-<!-- --- -->
+---
 
 # Shell Expansions, Shell Operators
 
 ## Shell Expansions
 
+<p align="justify">
 Expansions are performed by the shell before the command is executed. Tilde and filename expansion are used more frequently when interacting with the shell. Brace, variable and arithmetic expansion tend to be used more often while doing shell scripting.
+</p>
 
+<p align="justify">
 The tilde `~` expands to the environment variable `$HOME`, which is usually the home directory. If `$HOME` is not defined, tilde `~` expands with the home directory by default.
+</p>
 
 ```bash
 $ echo ~
 /home/username
 ```
 
-Filename expansion is a way to select easily a number of files or directories from within the current working directory as arguments for a command. This is accomplished by pattern matching: A so-called glob pattern containing wildcard characters is used to specify the files or directories. The wildcard characters can represent any of the 128 ASCII characters and can be less specific (`*` or `?`) or more specific (`[0-9]`)
+Filename expansion is a way to select easily a number of files or directories from within the current working directory as arguments for a command. This is accomplished by pattern matching: A so-called glob pattern containing wildcard characters is used to specify the files or directories. The wildcard characters can represent any of the 128 ASCII characters and can be less specific (`*` or `?`) or more specific (`[...]`)
 
 | Wildcard Character | Description | 
 |--|--|
@@ -92,17 +96,19 @@ $ ls file[0-3].*
 file1.go  file2.go  file3.py
 ```
 
-The lesser known extended globbing (like `*(pattern)`), is used commonly in shell scipts than in interactive shell sessions. Brace, variable and arithmetic expansions are explained within the [Shell Scripting](#shell-scripting) section.
+The lesser known extended globbing (like `*(pattern)`), is used more commonly in shell scipting than in interactive shell sessions. The same applied for brace, variable and arithmetic expansions which are explained within the [Shell Scripting](#shell-scripting) section.
 
 **[⬆ back to top](#contents)**
 
-<!-- --- -->
+---
 
 ## Shell Operators
 
 ### Redirection Operators
 
-Shell control operators let you combine commands and thus expand your toolbelt.
+Shell operators let you combine commands. This expands your toolbelt .
+
+The shell 
 
 ### Control Operators
 
