@@ -53,7 +53,7 @@ echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet'" >>
 source ~/.bashrc
 ```
 
----
+<!-- --- -->
 
 # Shell Expansions, Shell Operators
 
@@ -96,7 +96,7 @@ The lesser known extended globbing (like `*(pattern)`), is used commonly in shel
 
 **[⬆ back to top](#contents)**
 
----
+<!-- --- -->
 
 ## Shell Operators
 
