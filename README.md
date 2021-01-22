@@ -1,14 +1,7 @@
 <!-- translation
 [English](README.md) | [Tiếng Việt](README-vn.md) -->
 
-![video](./rec.svg)
-
-<p align="center">
-  <img  align="center" height="240" src="rec.svg" />
-   <h3 align="center">File and Directory Renaming Command Line Tool</h3>
-<p>
-
-# Cheat sheet (Linux)
+# Cheat Sheet (Linux)
 
 This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 LTS) as a python developer. It is a structured documentation of the commands I'm using throughout interactive shell sessions. Caution, this abstract is highly opinionated :wink:
 
@@ -21,7 +14,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Filesystem Navigation](#filesystem-navigation)
    - [Filesystem Exploration](#filesystem-exploration)
    - [Create, Delete, Copy, and Link](#create-delete-copy-and-link)
-   - [](#)
+   - [Working with File Contents](#working-with-file-contents)
    - [](#)
    - [](#)
 3. [Command Line Tools](#command-line-tools)
@@ -164,7 +157,6 @@ pwd               # print working directory
 
 Since most people (like me) don't have a photographic memory, it's always a good choice to use the machines memory.
 
-
 ```bash
 
 history           # prints a list of all historically used commands
@@ -203,27 +195,28 @@ Some basic operations when working with files and directories.
 
 ```bash
 
-touch <file>            # creates a empty, new file
+touch <file>            # creates an empty file
 
-rm <file_name>          # removes a file from current
-rm -rf                  # forces to remove a directory with all its content
+rm <file_name>          # removes a file
+rm -rf                  # forces to remove a directory with content recursively
 
-mkdir <folder_name>     # in current directory
+mkdir <folder_name>     # create directory
 mkdir -p a/b/c          # creates a directory tree
-mkdir file{1...5}
+mkdir file{1...5}       # creates 5 enumrated files
 ```
 
-copy and link
+files or directories can be copied or linked. Hard links point to the files in memory directly whereas soft links point to the file which references to the place in memory.
 
 ```bash
-cp <file> <path>/<new_filename>  # copies a file to advised path
+cp <file> <path/new_filename>  # copies a file to the advised path
 
-ln <target> <new_link>           # creates a hard link to a file (hard links show to the actual bytes in memory)
-ln -s <target> <new_link>        # creates a soft link to a file (soft links point to the file which references to the place in memory)
+ln <target> <new_link>         # creates a hard link to a file
+ln -s <target> <new_link>      # creates a soft link to a file
 ```
 
 ### Working with File Contents
 
+There are several commands to see the content of a file without opening it with an editor.
 
 ```bash
 
@@ -237,6 +230,7 @@ wc <file>          # word count, gives number of lines, words and characters of 
 cat <fi1> <fi2>    # concatenates files and sends them to the standard output stream (usually the terminal)
 ```
 
+When changing the content of a file, it's best to use an editor. Nano is an into the terminal integrated file editor
 editing with editor nano
 
 ```bash
@@ -262,7 +256,7 @@ sudo apt-get autoremove
 
 ### Compress and Decompress
 
-decompress:
+collecting many files into one archive file, often referred to as a tarball
 
 ```bash
 tar 
