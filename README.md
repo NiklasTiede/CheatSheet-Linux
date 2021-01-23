@@ -94,7 +94,7 @@ Shell operators let you combine commands which expands your toolbelt vastly. The
 
 | Token | Example | Description |
 |-----|----|-------|
-| \| | `history | grep "patt"` | Pipelining: direct output of com1 to com2 |
+| `\|` | `history \| grep "patt"` | Pipelining: direct output of com1 to com2 |
 | `&` | `python myscript.py &`  | Execute command in background |
 | `&&`  | `com1 && com2` | Execute com2 only if com1 is executed  |
 | `;`   | `com1; com2`  | Execute both commands always  |
