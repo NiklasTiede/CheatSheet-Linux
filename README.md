@@ -97,12 +97,12 @@ The lesser known extended globbing (like `*(pattern)`), is used more commonly in
 
 Shell operators let you combine commands which expands your toolbelt vastly. They can be divided into two categories: redirection and control operators. Control operators allow for coupling commands.
 
-| Token | Example                  | Description                               |
-|-------|--------------------------|-------------------------------------------|
-| `\|`  | `history \| grep "patt"` | Pipelining: direct output of com1 to com2 |
-| `&`   | `python myscript.py &`   | Execute command in background             |
-| `&&`  | `com1 && com2`           | Execute com2 only if com1 is executed     |
-| `;`   | `com1; com2`             | Execute both commands always              |
+| Token | Example                  | Description                                 |
+|-------|--------------------------|---------------------------------------------|
+| `\|`  | `history \| grep "patt"` | Pipelining: direct output of com1 to com2   |
+| `&`   | `python myscript.py &`   | start child process (execute in background) |
+| `&&`  | `com1 && com2`           | Execute com2 only if com1 is executed       |
+| `;`   | `com1; com2`             | Execute both commands always                |
 
 
 Especially the pipe operator `|` here shines. Any output printed by command1 is passed as input to command2.
@@ -147,7 +147,7 @@ Linux distributions contain a plethora of powerful built-in commands. The presen
 <command> --version
 ```
 
-### Filesystem Navigation
+## Filesystem Navigation
 
 Navigation on the file system is the first step towards learning how to utilize the power of a Linux system. Notice: <kbd>Tab</kbd> enables auto completion of file-/dirnames and saves valuable time!
 
@@ -173,7 +173,7 @@ clear             # clears the terminal
 
 Pressing arrow keys <kbd>⬆️</kbd> <kbd>⬇️</kbd> or <kbd>Ctrl</kbd> <kbd>R</kbd> (search bar) is my preferred choice. BTW: I geared the shell towards my needs (see [configuration](#configuration)) so everything looks pretty satisfying.
 
-### Filesystem Exploration
+## Filesystem Exploration
 
 Wanna get more information about a commands features? Look into the manual pages or use `whatis` if time is tight. `which` can clear things up about a commands origin on the filesystem.
 
@@ -195,7 +195,7 @@ sudo du -sh *           # shows the size of all files/folders
 df -h                   # shows all memory usage on filesystem
 ```
 
-### Create, Delete, Copy, and Link
+## Create, Delete, Copy, and Link
 
 Some basic operations when working with files and directories.
 
@@ -223,7 +223,7 @@ ln <target> <new_link>         # creates a hard link to a file
 ln -s <target> <new_link>      # creates a soft link to a file
 ```
 
-### Working with File Content
+## Working with File Content
 
 There are several commands to see the content of a file without opening it with an editor.
 
@@ -245,7 +245,7 @@ nano <file>      # opens the file (nano is a terminal application for text editi
 code <file>      # open file in VSCode
 ```
 
-### System Updates
+## System Updates
 
 Always keep your system up to date :wink:
 
@@ -256,7 +256,18 @@ sudo apt upgrade
 sudo apt autoremove
 ```
 
-### Data Compression
+```bash
+
+sudo 
+ctrl
+reboot, shutdown
+
+
+```
+
+
+
+## Data Compression
 
 Compression is always a space-time complexity tradeoff. On linux systems many files are collected usually into one archive file, referred to as a tarball. `tar` is the tool of choice for compression and decompression.
 
@@ -269,19 +280,25 @@ tar -zxvf filename.tar.gz <path>  # decompressed into target  folder
 tar -cvzf filename.tar.gz <path>   # compression of a folder, returns filename.tar.gz
 ```
 
-### Ownership and Permissions
 
-Changing a files permissions is sometimes crucial when working on a linux system.
+## Ownership and Permissions
+
+Changing a files permissions is sometimes crucial when working on a linux system.These access permissions control who can access what files, and provides a fundamental level of security to the files
+
+3 permission groups
+1 owner
+2 group
+3 other
 
 ```bash
+ls -l           # 
 
 sudo chown user:group <file.txt>     # changes the file permissions of a file
 
 chmod +x <ba_scr.sh>                 # makes the bash-script executable
-
 ```
 
-### Environment Variables
+## Environment Variables
 
 Environment variables are key-value pairs on the system that can be retrieved by applications. They're used to ensure separation of concerns. Important default Environment variables are `$HOME`, `$SHELL` and `$PATH`. HOME defines the systems home directory. PATH tells the shell which directories to search for executable files. Multiple values assigned to a variable must be separated by a colon `:`. By convention, environment variables should have UPPER CASE names.
 
@@ -300,7 +317,7 @@ echo 'export VARNAME="value"' >> ~/.bashrc     # set permanently in all bash ses
 sudo -H nano /etc/environment                  # set system wide, no export-keyword used
 ```
 
-### cut grep find etc
+## cut grep find etc
 
 cut
 grep
@@ -335,8 +352,10 @@ awk
 pretty useful combinations:
 
 If you wanna sort your command history to see which commands you use most often:
+sort can be nicely used!
 
 ```bash
+
 history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 ```
 
@@ -370,7 +389,7 @@ grep -rnw -e 'patt' --include=*.py
 
 package managemtn tools, see in the [command line tools]() section
 
-### jobs, processes
+## jobs, processes
 
 ```bash
 date
@@ -379,9 +398,24 @@ kill %N
 ps
 ```
 
+If you start a script (shell, python etc.) and you logout then the process is killed. Nohup helps to continue the script in the background, even after shell logout
+
+```bash
+
+commandname &              # executes command in the background 
+nohup commandname &        # command is executed even if shell session is finished
+nohup python myscript.py & # example
+
+tee               # read from stdin and writes to stdout and a file
+tee -a     # append
+python myscript.py | tee ~/myscript_output.txt & # 
+python myscript.py | tee ~/myscript_output.txt > /dev/null & # if dont want tee to write to stdout -> write it to dev/null !
+
+```
 
 
-### Cron jobs
+
+## Cron jobs
 
 ```bash
 
@@ -391,7 +425,7 @@ ps
 
 ```
 
-### check cpu, gpu
+## check cpu, gpu
 
 ```bash
 cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu core
@@ -408,7 +442,7 @@ text
       #
 ```
 
-### ssh
+## ssh
 
 text
 
