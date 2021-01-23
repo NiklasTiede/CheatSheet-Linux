@@ -200,14 +200,17 @@ touch <file>            # creates an empty file
 rm <file_name>          # removes a file
 rm -rf                  # forces to remove a directory with content recursively
 
-mkdir <folder_name>     # create directory
+mkdir <dir_name>        # create directory
 mkdir -p a/b/c          # creates a directory tree
 mkdir file{1...5}       # creates 5 enumrated files
+
+rmdir <dir_name>        # removes a directory
 ```
 
-files or directories can be copied or linked. Hard links point to the files in memory directly whereas soft links point to the file which references to the place in memory.
+Files oand directories can be copied or linked. Hard links point to the files in memory directly whereas soft links point to the file which references to the place in memory.
 
 ```bash
+
 cp <file> <path/new_filename>  # copies a file to the advised path
 
 ln <target> <new_link>         # creates a hard link to a file
