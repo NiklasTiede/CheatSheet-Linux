@@ -92,12 +92,12 @@ The lesser known extended globbing (like `*(pattern)`), is used more commonly in
 
 Shell operators let you combine commands which expands your toolbelt vastly. They can be divided into two categories: redirection and control operators. Control operators allow for coupling commands.
 
-| Token | Example | Description |
-| --- | --- | --- | --- | --- |
-| `|` | `history | grep "patt"` | Pipelining: direct output of com1 to com2 |
-| `&` | `python myscript.py &` | Execute command in background |
-| `&&` | `com1 && com2` | Execute com2 only if com1 is executed |
-| `;` | `com1; com2` | Execute both commands always |
+| Token | Example                 | Description                               |
+| ----- | ----------------------- | ----------------------------------------- |
+| `|`   | `history | grep "patt"` | Pipelining: direct output of com1 to com2 |
+| `&`   | `python myscript.py &`  | Execute command in background             |
+| `&&`  | `com1 && com2`          | Execute com2 only if com1 is executed     |
+| `;`   | `com1; com2`            | Execute both commands always              |
 
 Especially the pipe operator `|` here shines. Any output printed by command1 is passed as input to command2.
 
@@ -137,8 +137,8 @@ These operators and shell expansions will be found throughout this cheat sheet r
 Linux distributions contain a plethora of powerful built-in commands. The presented commands are sorted by topic. If you're not aware of a commands capabilities you can add the `--help` or `-h` flag to display all options. The `--version` or `-v` flag returns the version number and is commonly used right after installation to check a programs version.
 
 ```bash
-<command> --help        
-<command> --version   
+<command> --help
+<command> --version
 ```
 
 ### Filesystem Navigation
@@ -165,11 +165,11 @@ history | tail    # prints 10 recently used commands
 clear             # clears the terminal
 ```
 
-Pressing arrow keys <kbd>⬆️</kbd> <kbd>⬇️</kbd> or <kbd>Ctrl</kbd> <kbd>R</kbd> (search bar) is my preferred choice. BTW: I geared the shell towards my needs (see [configuration](#configuration)) so everything looks pretty satisfying. 
+Pressing arrow keys <kbd>⬆️</kbd> <kbd>⬇️</kbd> or <kbd>Ctrl</kbd> <kbd>R</kbd> (search bar) is my preferred choice. BTW: I geared the shell towards my needs (see [configuration](#configuration)) so everything looks pretty satisfying.
 
 ### Filesystem Exploration
 
-Wanna get more information about a commands features? Look into the manual pages or use `whatis` if time is tight. `which` can clear things up about a commands origin on the filesystem. 
+Wanna get more information about a commands features? Look into the manual pages or use `whatis` if time is tight. `which` can clear things up about a commands origin on the filesystem.
 
 ```bash
 
@@ -189,9 +189,9 @@ sudo du -sh *           # shows the size of all files/folders
 df -h                   # shows all memory usage on filesystem
 ```
 
-### Create, Delete, Copy, and Link 
+### Create, Delete, Copy, and Link
 
-Some basic operations when working with files and directories. 
+Some basic operations when working with files and directories.
 
 ```bash
 
@@ -262,7 +262,7 @@ sudo apt-get autoremove
 collecting many files into one archive file, often referred to as a tarball
 
 ```bash
-tar 
+tar
 
 
 ```
@@ -325,7 +325,6 @@ jobs
 kill %N
 ps
 ```
-
 
 environment variables:
 
@@ -417,10 +416,8 @@ apt-cache search <program_name>*     # search for everything containing the word
 
 ## tree, Tokei, misc
 
-
-tree -L 2               # visualized directories as tree's. -L restricts the tree to two levels (default: complete tree)
-ls --tree               # recurses into every dir
-
+tree -L 2 # visualized directories as tree's. -L restricts the tree to two levels (default: complete tree)
+ls --tree # recurses into every dir
 
 **[⬆ back to top](#contents)**
 
@@ -445,46 +442,43 @@ unalias lc
 
 Terminal Shortcuts
 
-| Shortcut | Meaning |
-|---|---|
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd> | open terminal |  
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd> | close terminal |
-| <kbd>Tab</kbd> | autocomplete, navigation |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd> | scrolling up, down |
-| <kbd>Ctrl</kbd> <kbd>R</kbd> | search history bar |
-| | |
-| | |
-| | |
+| Shortcut                                                        | Meaning                  |
+| --------------------------------------------------------------- | ------------------------ |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | open terminal            |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | close terminal           |
+| <kbd>Tab</kbd>                                                  | autocomplete, navigation |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd> | scrolling up, down       |
+| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | search history bar       |
+|                                                                 |                          |
+|                                                                 |                          |
+|                                                                 |                          |
 
 Chromium Shortcuts
 
-| Shortcut | Meaning |
-|---|---|
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd> | open terminal |  
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd> | close terminal |
-| <kbd>Tab</kbd> | autocomplete, navigation |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd> | scrolling up, down |
-| <kbd>Ctrl</kbd> <kbd>R</kbd> | search history bar |
-| | |
-| | |
-| | |
-
+| Shortcut                                                        | Meaning                  |
+| --------------------------------------------------------------- | ------------------------ |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | open terminal            |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | close terminal           |
+| <kbd>Tab</kbd>                                                  | autocomplete, navigation |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd> | scrolling up, down       |
+| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | search history bar       |
+|                                                                 |                          |
+|                                                                 |                          |
+|                                                                 |                          |
 
 **[⬆ back to top](#contents)**
 
 ---
 
-
 # Configuration
 
-I'm using the Z-shell instead of bash as my default shell and some plugins to colorize my terminal. It's not increasing the productivity like 10 times but as a human being with an aesthetic demand it's more satisfying 
+I'm using the Z-shell instead of bash as my default shell and some plugins to colorize my terminal. It's not increasing the productivity like 10 times but as a human being with an aesthetic demand it's more satisfying
 
- don't make you much more productive but more pleasant to look at a nicely looking 
+don't make you much more productive but more pleasant to look at a nicely looking
 
 [LSDeluxe](https://github.com/Peltoche/lsd) | nicer looking ls command
-[Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) | 
+[Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) |
 [Powerlevel10k](https://github.com/romkatv/powerlevel10k) | layout looks nicer, syntax highlighting
- 
 
 **[⬆ back to top](#contents)**
 
