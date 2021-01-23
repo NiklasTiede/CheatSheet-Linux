@@ -14,7 +14,12 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Filesystem Navigation](#filesystem-navigation)
    - [Filesystem Exploration](#filesystem-exploration)
    - [Create, Delete, Copy, and Link](#create-delete-copy-and-link)
-   - [Working with File Contents](#working-with-file-contents)
+   - [Working with File Content](#working-with-file-content)
+   - [System Updates](#system-updates)
+   - [Data Compression](#data-comrpession)
+   - [](#)
+   - [](#)
+   - [](#)
    - [](#)
    - [](#)
 3. [Command Line Tools](#command-line-tools)
@@ -232,24 +237,12 @@ cat <file>        # prints content of a file
 wc <file>         # word count, returns number of lines, words and characters
 ```
 
-When changing the content of a file, it's best to use an editor. Nano is an into the terminal integrated file editor I'm using when surfing between files and making minor changes. For writing code I'm using VSCode as my IDE. I'm improve productivity of editing by using [shortcuts](#shortcuts).
-
+When changing the content of a file, it's best to use an editor. Nano is an into the terminal integrated file editor. I'm using it when surfing between files and making minor changes. For writing bigger pieces of code I'm using VSCode as my IDE. Efficiency of editing is improved by usage of [shortcuts](#shortcuts).
 
 ```bash
 
 nano <file>      # opens the file (nano is a terminal application for text editing)
-ctrl + O           # saves the file
-ctrl + x           # leaves file
-ctrl + c           # terminates the current process
-ctrl + d           # terminates shell-like sessions (mongo, sql, python etc)
-ctrl + w           # search file for pattern
-```
-
-Many people prefer vim or emacs over nano and IDEs like VSCode or Pycharm. Nevertheless I'm using VSCode for code editing
-
-```bash
-
-code <filename>    # opens the file in VSCode
+code <file>      # open file in VSCode
 ```
 
 ### System Updates
@@ -258,9 +251,9 @@ Always keep your system up to date :wink:
 
 ```bash
 
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get autoremove
+sudo apt update
+sudo apt upgrade
+sudo apt autoremove
 ```
 
 ### Data Compression
@@ -278,18 +271,33 @@ tar -cvzf filename.tar.gz <path>   # compression of a folder, returns filename.t
 
 ### Ownership and Permissions
 
+Changing a files permissions is sometimes crucial when working on a linux system.
+
 ```bash
+
 sudo chown user:group <file.txt>     # changes the file permissions of a file
+
 chmod +x <ba_scr.sh>                 # makes the bash-script executable
+
 ```
 
 ### Environment Variables
 
-```bash
-printenv
-printenv HOME
-echo $HOME
+Environment variables are key-value pairs on the system that can be retrieved by applications. They're used to ensure separation of concerns. Important default Environment variables are `$HOME`, `$SHELL` and `$PATH`. HOME defines the systems home directory. PATH tells the shell which directories to search for executable files. Multiple values assigned to a variable must be separated by a colon `:`. By convention, environment variables should have UPPER CASE names.
 
+```bash
+printenv           # prints all environment variables
+printenv HOME      # prints the value of a specified env var
+echo $HOME         # same as above
+```
+
+For instance credentials can be separated from code as environment variables (or within files). The creation of new env vars can be achieved by the `export` command. To set a env var for the current user permanently it has to be appended to your .bashrc or .zshrc file.
+
+```bash
+
+export VARNAME="value"                         # set in current shell
+echo 'export VARNAME="value"' >> ~/.bashrc     # set permanently in all bash sessions
+sudo -H nano /etc/environment                  # set system wide, no export-keyword used
 ```
 
 ### cut grep find etc
@@ -322,39 +330,6 @@ awk
 
 ```bash
 
-```
-
-package managemtn tools, see in the [command line tools]() section
-
-### jobs
-
-```bash
-date
-jobs
-kill %N
-ps
-```
-
-environment variables:
-
-```bash
-printenv      #
-echo $PATH      #
-      #
-      #
-      #
-```
-
-cron jobs
-
-```bash
-
-```
-
-check cpu, gpu
-
-```bash
-cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu core
 ```
 
 pretty useful combinations:
@@ -390,6 +365,39 @@ grep -rnw -e 'patt' --include=*.py
 --include only certain files included
 ```
 
+
+
+
+package managemtn tools, see in the [command line tools]() section
+
+### jobs, processes
+
+```bash
+date
+jobs
+kill %N
+ps
+```
+
+
+
+### Cron jobs
+
+```bash
+
+```
+
+```bash
+
+```
+
+### check cpu, gpu
+
+```bash
+cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu core
+```
+
+
 text
 
 ```bash
@@ -399,6 +407,10 @@ text
       #
       #
 ```
+
+### ssh
+
+text
 
 **[⬆ back to top](#contents)**
 
@@ -425,6 +437,12 @@ apt-cache search <program_name>*     # search for everything containing the word
 
 ## tree, Tokei, misc
 
+
+wanna generate a password? use openssl! the cryptographers tool
+```bash
+openssl rand -hex 12
+```
+
 tree -L 2 # visualized directories as tree's. -L restricts the tree to two levels (default: complete tree)
 ls --tree # recurses into every dir
 
@@ -441,6 +459,16 @@ alias name="command flags"
 
 
 unalias lc
+
+# list all commands
+echo -n $PATH | xargs -d : -I {} find {} -maxdepth 1 \
+        -executable -type f -printf '%P\n' | sort -u
+# list all aliases:
+ALIASES=`alias | cut -d '=' -f 1`
+    echo "$COMMANDS"$'\n'"$ALIASES" | sort -u
+
+
+
 ```
 
 **[⬆ back to top](#contents)**
@@ -449,18 +477,43 @@ unalias lc
 
 # Shortcuts
 
+terminal, nano, chromium, vscode
+
 Terminal Shortcuts
+
+| Shortcut                                                        | Meaning                  |
+| --------------------------------------------------------------- | ------------------------ |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | Open terminal            |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | Close terminal           |
+| <kbd>Tab</kbd>                                                  | autocomplete, navigation |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd>   | Ccrolling up, down       |
+| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | Search history bar       |
+|                                                                 |                          |
+|                                                                 |                          |
+|                                                                 |                          |
+
+```bash
+
+nano <file>      # opens the file (nano is a terminal application for text editing)
+ctrl + O           # saves the file
+ctrl + x           # leaves file
+ctrl + c           # terminates the current process
+ctrl + d           # terminates shell-like sessions (mongo, sql, python etc)
+ctrl + w           # search file for pattern
+```
 
 | Shortcut                                                        | Meaning                  |
 | --------------------------------------------------------------- | ------------------------ |
 | <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | open terminal            |
 | <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | close terminal           |
 | <kbd>Tab</kbd>                                                  | autocomplete, navigation |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd> | scrolling up, down       |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd>   | scrolling up, down       |
 | <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | search history bar       |
 |                                                                 |                          |
 |                                                                 |                          |
 |                                                                 |                          |
+
+
 
 Chromium Shortcuts
 
@@ -469,11 +522,21 @@ Chromium Shortcuts
 | <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | open terminal            |
 | <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | close terminal           |
 | <kbd>Tab</kbd>                                                  | autocomplete, navigation |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd> | scrolling up, down       |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd>   | scrolling up, down       |
 | <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | search history bar       |
 |                                                                 |                          |
 |                                                                 |                          |
 |                                                                 |                          |
+
+VSCode
+
+| Shortcut                                                        | Meaning                  |
+| --------------------------------------------------------------- | ------------------------ |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | open terminal            |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | close terminal           |
+| <kbd>Tab</kbd>                                                  | autocomplete, navigation |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd>   | scrolling up, down       |
+| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | search history bar       |
 
 **[⬆ back to top](#contents)**
 
