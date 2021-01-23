@@ -94,11 +94,11 @@ Shell operators let you combine commands which expands your toolbelt vastly. The
 
 | Token | Example | Description |
 |-----|----|-------|
-| `|` | `history | grep "patt"` | Pipelining: direct output of com1 to com2 |
+| \| | `history | grep "patt"` | Pipelining: direct output of com1 to com2 |
 | `&` | `python myscript.py &`  | Execute command in background |
 | `&&`  | `com1 && com2` | Execute com2 only if com1 is executed  |
 | `;`   | `com1; com2`  | Execute both commands always  |
-| `|`   | `history | grep "patt"`  | Execute both commands always  |
+
 
 Especially the pipe operator `|` here shines. Any output printed by command1 is passed as input to command2.
 
