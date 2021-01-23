@@ -92,12 +92,12 @@ The lesser known extended globbing (like `*(pattern)`), is used more commonly in
 
 Shell operators let you combine commands which expands your toolbelt vastly. They can be divided into two categories: redirection and control operators. Control operators allow for coupling commands.
 
-| Token | Example | Description |
-|-----|----|-------|
-| `\|` | `history \| grep "patt"` | Pipelining: direct output of com1 to com2 |
-| `&` | `python myscript.py &`  | Execute command in background |
-| `&&`  | `com1 && com2` | Execute com2 only if com1 is executed  |
-| `;`   | `com1; com2`  | Execute both commands always  |
+| Token | Example                  | Description                               |
+|-------|--------------------------|-------------------------------------------|
+| `\|`  | `history \| grep "patt"` | Pipelining: direct output of com1 to com2 |
+| `&`   | `python myscript.py &`   | Execute command in background             |
+| `&&`  | `com1 && com2`           | Execute com2 only if com1 is executed     |
+| `;`   | `com1; com2`             | Execute both commands always              |
 
 
 Especially the pipe operator `|` here shines. Any output printed by command1 is passed as input to command2.
@@ -203,7 +203,7 @@ rm -rf                  # forces to remove a directory with content recursively
 
 mkdir <dir_name>        # create directory
 mkdir -p a/b/c          # creates a directory tree
-mkdir file{1...5}       # creates 5 enumrated files
+mkdir file{1..5}       # creates 5 enumrated files
 
 rmdir <dir_name>        # removes a directory
 ```
@@ -218,38 +218,43 @@ ln <target> <new_link>         # creates a hard link to a file
 ln -s <target> <new_link>      # creates a soft link to a file
 ```
 
-### Working with File Contents
+### Working with File Content
 
 There are several commands to see the content of a file without opening it with an editor.
 
 ```bash
 
-head <file>        # prints the first 10 lines of a file
-head -n 5 <file>   # prints first 5 lines
-tail <file>        # shows last 10 lines
-cat <fi1>
+head <file>       # prints the first 10 lines of a file
+head -n 5 <file>  # prints the first 5 lines
+tail <file>       # shows last 10 lines
+cat <file>        # prints content of a file
 
-wc <file>          # word count, gives number of lines, words and characters of the file
-
-cat <fi1> <fi2>    # concatenates files and sends them to the standard output stream (usually the terminal)
+wc <file>         # word count, returns number of lines, words and characters
 ```
 
-When changing the content of a file, it's best to use an editor. Nano is an into the terminal integrated file editor
-editing with editor nano
+When changing the content of a file, it's best to use an editor. Nano is an into the terminal integrated file editor I'm using when surfing between files and making minor changes. For writing code I'm using VSCode as my IDE. I'm improve productivity of editing by using [shortcuts](#shortcuts).
+
 
 ```bash
 
 nano <file>      # opens the file (nano is a terminal application for text editing)
 ctrl + O           # saves the file
-ctrl + X           # leaves file
+ctrl + x           # leaves file
 ctrl + c           # terminates the current process
 ctrl + d           # terminates shell-like sessions (mongo, sql, python etc)
-less -S <file>     # less (editor) prevents wrapping around, better representation
+ctrl + w           # search file for pattern
+```
+
+Many people prefer vim or emacs over nano and IDEs like VSCode or Pycharm. Nevertheless I'm using VSCode for code editing
+
+```bash
+
+code <filename>    # opens the file in VSCode
 ```
 
 ### System Updates
 
-updating the system
+Always keep your system up to date :wink:
 
 ```bash
 
@@ -258,14 +263,17 @@ sudo apt-get upgrade
 sudo apt-get autoremove
 ```
 
-### Compress and Decompress
+### Data Compression
 
-collecting many files into one archive file, often referred to as a tarball
+Compression is always a space-time complexity tradeoff. On linux systems many files are collected usually into one archive file, referred to as a tarball. `tar` is the tool of choice for compression and decompression.
 
 ```bash
-tar
+tar -ztvf filename.tar.gz         # list content
 
+tar -zxvf filename.tar.gz         # decompression 
+tar -zxvf filename.tar.gz <path>  # decompressed into target  folder
 
+tar -cvzf filename.tar.gz <path>   # compression of a folder, returns filename.tar.gz
 ```
 
 ### Ownership and Permissions
