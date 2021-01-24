@@ -218,9 +218,11 @@ Files oand directories can be copied or linked. Hard links point to the files in
 ```bash
 
 cp <file> <path/new_filename>  # copies a file to the advised path
+cp -R <source> <destination>   # copies recursively 
 
 ln <target> <new_link>         # creates a hard link to a file
 ln -s <target> <new_link>      # creates a soft link to a file
+rm <new_link>                  # removes the symlink
 ```
 
 ## Working with File Content
@@ -293,9 +295,11 @@ Changing a files permissions is sometimes crucial when working on a linux system
 ```bash
 ls -l           # 
 
-sudo chown user:group <file.txt>     # changes the file permissions of a file
+sudo chown user:group <file.txt>  # changes the file permissions of a file
 
-chmod +x <ba_scr.sh>                 # makes the bash-script executable
+chmod +x <ba_scr.sh>              # makes the bash-script executable
+
+chmod -R 755 <path>               # changes permissions of all files/dirs within folder
 ```
 
 ## Environment Variables
@@ -326,7 +330,7 @@ sed
 awk
 
 ```bash
-
+sed -i 's/foo/bar/g' *   # replace pattern (foo) by bar in multiple files
 ```
 
 ```bash
@@ -365,6 +369,8 @@ searching for string pattern in all files:
 grep, good for pipelining and searching through files
 
 ```bash
+find . -name "foo*"  # prints all filesnames containg the pattern
+
 #  print only names of files containg the pattern from cwd:
 grep -rl 'patt'
 
@@ -396,6 +402,13 @@ date
 jobs
 kill %N
 ps
+
+# if a process should be killed after execution of a script: the PID of the started background process has to be saved, then kill
+foo &
+FOO_PID=$!
+# do other stuff
+kill $FOO_PID
+
 ```
 
 If you start a script (shell, python etc.) and you logout then the process is killed. Nohup helps to continue the script in the background, even after shell logout
@@ -435,7 +448,7 @@ cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu c
 text
 
 ```bash
-      #
+ lscpu      # get inormations about CPU
       #
       #
       #
@@ -445,6 +458,12 @@ text
 ## ssh
 
 text
+
+```bash
+scp your_username@remotehost.edu:foobar.txt /local/dir   # download
+scp username@hostname:/path/to/remote/file /path/to/local/file
+```
+
 
 **[⬆ back to top](#contents)**
 
@@ -475,6 +494,14 @@ apt-cache search <program_name>*     # search for everything containing the word
 wanna generate a password? use openssl! the cryptographers tool
 ```bash
 openssl rand -hex 12
+
+tree        # must be installed via apt sometimes
+tree -L 2   # max depth isn set to 2
+ls --tree   # LSDeluxe
+
+
+# unite pdfs
+pdfunite in1.pdf in2.pdf out.pdf  # 
 ```
 
 tree -L 2 # visualized directories as tree's. -L restricts the tree to two levels (default: complete tree)
@@ -511,66 +538,71 @@ ALIASES=`alias | cut -d '=' -f 1`
 
 # Shortcuts
 
-terminal, nano, chromium, vscode
+Terminal, Nano, Chromium, VSCode
+
 
 Terminal Shortcuts
 
-| Shortcut                                                        | Meaning                  |
-| --------------------------------------------------------------- | ------------------------ |
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | Open terminal            |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | Close terminal           |
-| <kbd>Tab</kbd>                                                  | autocomplete, navigation |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd>   | Ccrolling up, down       |
-| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | Search history bar       |
-|                                                                 |                          |
-|                                                                 |                          |
-|                                                                 |                          |
+| Shortcut                                                      | Description                                   |
+| ------------------------------------------------------------- | --------------------------------------------- |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                   | Open terminal                                 |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                 | Close terminal                                |
+| <kbd>Tab</kbd>                                                | Autocomplete, navigation                      |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd> | Scrolling up or down                          |
+| <kbd>Ctrl</kbd> <kbd>R</kbd>                                  | Search history bar                            |
+| <kbd>Ctrl</kbd> <kbd>C</kbd>                                  | Abort current running process                 |
+| <kbd>Ctrl</kbd> <kbd>D</kbd>                                  | Log out of current shell (SQL, Mongo, Python) |
+| <kbd>Ctrl</kbd> <kbd>L</kbd>                                  | Clear terminal                                |
+| <kbd>Ctrl</kbd> <kbd>U</kbd>                                  | Erase current line                            |
+| <kbd>Ctrl</kbd> <kbd>A</kbd>                                  | Move cursor to beginning of line              |
+| <kbd>Ctrl</kbd> <kbd>E</kbd>                                  | Move cursor to end of line                    |
+| <kbd>Ctrl</kbd> <kbd>left</kbd> or <kbd>right</kbd>           | Move cursor to next word                      |
+| <kbd>Alt</kbd> <kbd>D</kbd>                                   | Delete all characters after the cursor        |
+
+nano editor
 
 ```bash
 
 nano <file>      # opens the file (nano is a terminal application for text editing)
-ctrl + O           # saves the file
-ctrl + x           # leaves file
-ctrl + c           # terminates the current process
-ctrl + d           # terminates shell-like sessions (mongo, sql, python etc)
-ctrl + w           # search file for pattern
 ```
 
-| Shortcut                                                        | Meaning                  |
-| --------------------------------------------------------------- | ------------------------ |
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | open terminal            |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | close terminal           |
-| <kbd>Tab</kbd>                                                  | autocomplete, navigation |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd>   | scrolling up, down       |
-| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | search history bar       |
-|                                                                 |                          |
-|                                                                 |                          |
-|                                                                 |                          |
 
+| Shortcut                                              | Meaning             |
+| ----------------------------------------------------- | ------------------- |
+| <kbd>Ctrl</kbd> <kbd>O</kbd>                          | Save file           |
+| <kbd>Ctrl</kbd> <kbd>X</kbd>                          | Exit                |
+| <kbd>Ctrl</kbd> <kbd>W</kbd>                          | Search for pattern  |
+| <kbd>Shift</kbd> <kbd>right</kbd> or <kbd>left</kbd>  | Select              |
+| <kbd>Ctrl</kbd> <kbd>K</kbd>                          | Cut                 |
+| <kbd>Ctrl</kbd> <kbd>U</kbd>                          | Paste               |
+| <kbd>Ctrl</kbd> <kbd>\</kbd>                          | Replace pattern     |
 
 
 Chromium Shortcuts
 
+| Shortcut                                                        | Description                              |
+| --------------------------------------------------------------- | ---------------------------------------- |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>T</kbd>                   | Reopens recently closed tabs             |
+| <kbd>alt</kbd> <kbd>left</kbd> or <kbd>right</kbd>              | Moves one page back/forward              |
+| <kbd>Ctrl</kbd> <kbd>+</kbd> or <kbd>-</kbd>                    | Zoom in, out                             |
+| <kbd>Ctrl</kbd> <kbd>Tab</kbd>                                  | jumps to the next tab                    |
+| <kbd>Ctrl</kbd> <kbd>F</kbd>                                    | Find content on web page                 |
+| <kbd>F5</kbd>                                                   | Refresh current webpage                  |
+| <kbd>Ctrl</kbd> <kbd>left-click</kbd>                           | Open link in the background of a new tab |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd>                   | Inspect                                  |
+| <kbd>Ctrl</kbd> <kbd>U</kbd>                                    | View page source                         |
+| <kbd>Spacebar</kbd>                                             | Scrolls down a section of the webpage    |
+| <kbd>Spacebar</kbd> <kbd>Shift</kbd>                            | Scrolls up a section of the webpage      |
+
+VSCode Key Bindings (see into my dotfiles repo)
+
 | Shortcut                                                        | Meaning                  |
 | --------------------------------------------------------------- | ------------------------ |
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | open terminal            |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | close terminal           |
-| <kbd>Tab</kbd>                                                  | autocomplete, navigation |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd>   | scrolling up, down       |
-| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | search history bar       |
-|                                                                 |                          |
-|                                                                 |                          |
-|                                                                 |                          |
-
-VSCode
-
-| Shortcut                                                        | Meaning                  |
-| --------------------------------------------------------------- | ------------------------ |
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | open terminal            |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | close terminal           |
-| <kbd>Tab</kbd>                                                  | autocomplete, navigation |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd>   | scrolling up, down       |
-| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | search history bar       |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>      |            |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>     |        |
+| <kbd>Tab</kbd>                               | |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd>   | scrolling up, down       |
+| <kbd>Ctrl</kbd> <kbd>R</kbd>               |     |
 
 **[⬆ back to top](#contents)**
 
@@ -601,6 +633,18 @@ important shebang lines: what is a shebang line and why do they exist?
 `#!/bin/bash`
 `#!/bin/sh`
 `#!/usr/bin/env python`
+
+
+check if a file exists
+```bash
+if [ -d "$DIRECTORY" ]; then
+  # Control will enter here if $DIRECTORY exists.
+fi
+
+if [ ! -d "$DIRECTORY" ]; then
+  # Control will enter here if $DIRECTORY doesn't exist.
+fi
+```
 
 **[⬆ back to top](#contents)**
 
