@@ -1,7 +1,7 @@
 <!-- translation
 [English](README.md) | [Tiếng Việt](README-vn.md) -->
 
-# Cheat Sheet (Linux)
+# Cheat Sheet - Linux
 
 This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 LTS) as a python developer. It is a structured documentation of the commands I'm using throughout interactive shell sessions. Caution, this abstract is highly opinionated :wink:
 
@@ -16,10 +16,10 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Create, Delete, Copy, and Link](#create-delete-copy-and-link)
    - [Working with File Content](#working-with-file-content)
    - [System Updates](#system-updates)
-   - [Data Compression](#data-comrpession)
-   - [](#)
-   - [](#)
-   - [](#)
+   - [Data Compression](#data-compression)
+   - [Ownership and Permissions](#ownership-and-permissions)
+   - [Environment Variables](#environment-variables)
+   - [Finding patterns: grep, find, sed and awk](#finding-patterns-grep-find-sed-and-awk)
    - [](#)
    - [](#)
 3. [Command Line Tools](#command-line-tools)
@@ -27,6 +27,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Anaconda](#anaconda)
    - [Docker](#docker)
    - [LSDeluxe](#lsdeluxe)
+   - [Misc - Tokei, ](#)
 4. [Aliases](#aliases)
 5. [Shortcuts](#shortcuts)
    - [Terminal](#terminal)
@@ -39,7 +40,12 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Loops](#loops)
    - [Functions](#functions)
    - [Condtionals](#conditionals)
-8. [Raspberry Pi](#raspberry-pi)
+8. [Raspberry Pi related](#raspberry-pi)
+8. [Databases](#databases)
+   - [SQLite](#sqlite)
+   - [MongoDB](#mongodb)
+   - [PostgreSQL](#postgresql)
+   - [Redis](#redis)
 
 I use the alias `marcopolo` to reach this cheat sheet faster:
 
@@ -321,13 +327,12 @@ echo 'export VARNAME="value"' >> ~/.bashrc     # set permanently in all bash ses
 sudo -H nano /etc/environment                  # set system wide, no export-keyword used
 ```
 
-## cut grep find etc
+## Finding patterns: grep, find, sed and awk
 
-cut
-grep
-find
-sed
-awk
+grep - print lines matching a pattern
+find - search for files in a directory hierarchy
+sed - stream editor for filtering and transforming text
+awk - pattern scanning and text processing language
 
 ```bash
 sed -i 's/foo/bar/g' *   # replace pattern (foo) by bar in multiple files
@@ -395,7 +400,11 @@ grep -rnw -e 'patt' --include=*.py
 
 package managemtn tools, see in the [command line tools]() section
 
-## jobs, processes
+## Processes and Jobs
+
+at service and cron service
+
+mor advanced stuff: apache airflow
 
 ```bash
 date
@@ -428,7 +437,7 @@ python myscript.py | tee ~/myscript_output.txt > /dev/null & # if dont want tee 
 
 
 
-## Cron jobs
+## Cron Jobs
 
 ```bash
 
@@ -438,7 +447,7 @@ python myscript.py | tee ~/myscript_output.txt > /dev/null & # if dont want tee 
 
 ```
 
-## check cpu, gpu
+## CPU, GPU and Display
 
 ```bash
 cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu core
@@ -455,9 +464,16 @@ text
       #
 ```
 
-## ssh
+## Secure Shell (SSH)
 
-text
+cryptographic network protocol, generate ssh keys. o
+I'm using the SSH protocol within my local network (raspberry pi) and for remote servers.
+deploying something
+ssh into database?
+
+When deploying something on my Raspberry Pi I connect via SSH.  
+
+scp secure copy protocol
 
 ```bash
 scp your_username@remotehost.edu:foobar.txt /local/dir   # download
@@ -482,14 +498,168 @@ sudo apt-get remove <program_name>   # removes the program
 apt-cache search <program_name>*     # search for everything containing the word in the rep. example: apt-cache search gimp*
 ```
 
+
+
+snap
+
+```bash
+-- snap
+snap help --all                      #  shows all args
+snap list                            # lists installed packages
+snap install <package_name>          # installs a package
+snap remove <package_name>           # uninstalls the package
+snap find <package_name>             # searches within the repo
+```
+
+
+
 ## Git
 
+
+https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git
+https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely
+https://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pull-and-git-fetch
+https://stackoverflow.com/questions/348170/how-do-i-undo-git-add-before-commit
+https://stackoverflow.com/questions/6591213/how-do-i-rename-a-local-git-branch
+https://stackoverflow.com/questions/1125968/how-do-i-force-git-pull-to-overwrite-local-files
+https://stackoverflow.com/questions/61212/how-to-remove-local-untracked-files-from-the-current-git-working-tree
+https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit
+https://stackoverflow.com/questions/1783405/how-do-i-check-out-a-remote-git-branch
+https://stackoverflow.com/questions/630453/put-vs-post-in-rest
+https://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication
+https://stackoverflow.com/questions/161813/how-to-resolve-merge-conflicts-in-git-repository
+https://stackoverflow.com/questions/1783405/how-do-i-check-out-a-remote-git-branch/1783426#1783426
+https://stackoverflow.com/questions/16717930/how-to-run-crontab-job-every-week-on-sunday
+https://stackoverflow.com/questions/584770/how-would-i-get-a-cron-job-to-run-every-30-minutes
+https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-crontab-file
+
+
+```bash
+
+
+```
+
+```bash
+
+
+```
+
+
 ## Anaconda
+
+
+python distro for scientific computing, simplifying package management
+
+installation of anaconda:
+
+```bash
+# install conda (https://docs.anaconda.com/anaconda/install/linux/)
+1. download file from anaconda.com                        # file for install
+2. bash ~/Downloads/Anaconda3-2020.02-Linux-x86_64.sh
+3. conda config --set auto_activate_base False or True    # checks if base-version is running in each terminal session
+```
+
+getting information about conda and environments
+
+```bash
+conda --help                                       # shows all options
+conda info -e                                      # shows all conda environments
+conda info                                         # gives information about version, env's etc.
+conda info --envs                                  # list all the conda environment available
+conda env list                                     # shows all environments
+conda update -n base conda                         # updates conda
+```
+
+creating new environments
+
+```bash
+# working with environments
+conda create --name <env_name> python=3.6          # creating a new conda env with a specific python-version
+conda create -c rdkit -n <env_name> rdkit          # creating a new conda env with a specific package
+conda create -n <env_name> python=3.9 rdkit        # creating a specific env
+conda install -c rdkit rdkit-postgresql            # installing PostgreSQL as client for rdkit-postgreSQL cartridge (https://rdkit.org/docs/Cartridge.html)
+conda activate <env_name>                          # activates a certain conda env
+conda deactivate                                   # deactivates the current conda env
+```
+
+modifying packages from envs
+
+```bash
+conda list                                         # lists all packages/versions of the active conda env
+conda list --name <env_name>                       # lists all packages of a certain conda env
+conda list --revisions                             # lists all revisions made in active conda env
+conda remove --name <package_name>                 # deletes a specified list of packages from spec. conda env
+conda env remove --name <env_name>                 # deletes an specified environment
+
+conda clean -h                                     # in the 'pkgs'-folder a lot of waste if collected (its the download cache)
+```
+
+sharing envs: creating yamls
+
+```bash
+# sharing environments
+conda create --clone <env_name> --name <new_env>   # make a copy of an env
+conda env export --name <env_name> > envname.yml   # export env to YAML file
+pip freeze > requirements.txt                      # (do this from the activated conda env!) insert these into the conda .yml ! test the conda/pip env (sometimes both in combination can cause problems)
+--> pip is automatically added, so this is not necessary!
+conda env create --file envname.yml                # creates env from YAML file
+conda env create                                   # create an env from the file named environment.yml in current dir
+conda list --explicit > pkgs.txt                   # export env with exact package versions for one OS (the URLs)
+conda create --name <new_env> --file pkgs.txt      # create env based on exact package versions
+```
+
+channels
+
+```bash
+# using packages and channels
+anaconda-navigator                                 # opens the anaconda navigator
+anaconda search <package_name>                     # search for a package on all channels (not only default)
+conda install conda-forge::PKGNAME                 # installs a package from a specific channel
+conda config --add channels <channel_name>         # add a channel to your conda configuration
+
+# additional useful hints
+conda update --all --name <env_name>               # updates all packages within a specified env
+conda config --show                                # shows all configurations
+
+# manage anaconda account
+conda install anaconda-client
+anaconda -h
+
+# upload packages to anaconda:
+anaconda login
+anaconda upload PACKAGE
+https://<your-anaconda-repo>/USERNAME/PACKAGE
+anaconda download USERNAME/PACKAGE
+
+```
+
+tutorial: how to upload a package to anaconda (my own channel)
+
+
+
+## pip
+
+```bash
+-- pip
+pip --help                           # all
+pip search <package_name>            # search pip repo
+pip install <package_name>           # installing something from pypi.org repo
+pip uninstall <package_name>         # uninstalls a specific package
+pip list                             # lists all pip-packages within the current env
+pip freeze > requirements.txt        # lists all dependencies within the current environment (should be added to exported conda .yml)
+pip check                            # verify installed packages have compatible dependencies
+
+```
+
 
 ## LSDeluxe
 
 ## tree, Tokei, misc
 
+```bash
+
+
+```
 
 wanna generate a password? use openssl! the cryptographers tool
 ```bash
@@ -499,6 +669,9 @@ tree        # must be installed via apt sometimes
 tree -L 2   # max depth isn set to 2
 ls --tree   # LSDeluxe
 
+
+locate <pattern> # searches through whole system for name           
+sudo updatedb    # updates cache of locate 
 
 # unite pdfs
 pdfunite in1.pdf in2.pdf out.pdf  # 
@@ -653,3 +826,13 @@ fi
 # Raspberry Pi
 
 **[⬆ back to top](#contents)**
+
+# Databases
+
+applications need databases, to serve data. theyre implemented into web apps, mobile apps and it's good to ssh into them
+
+## SQLite
+## MOngoDB
+## POstgreSQL
+## Redis
+
