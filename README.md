@@ -287,7 +287,7 @@ tar -cvzf filename.tar.gz <path>   # compression of a folder, returns filename.t
 
 ## Ownership and Permissions
 
-Linux is a multi-user OS and thus implements concepts like users and groups
+Linux is a multi-user OS and therefore implements concepts like users and groups to ensure proper security.
 
 system users and regular users
 
@@ -308,10 +308,11 @@ access modes
 | 6              | rw-           | Read and write permissions          |
 | 7              | rwx           | Read, write and execute permissions |
 
-3 permission groups
-1 owner
-2 group
-3 other
+3 permission groups:
+
+- owner
+- group
+- other
 
 ```bash
 ls -l           #
