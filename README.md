@@ -295,7 +295,7 @@ system users and regular users
 
 <p id="website" align="center">
   <a href="https://the-coding-lab.com" alt="My-Blog" >
-    <img src="docs/ownership_permissions.png" width=500px/>
+    <img src="docs/ownership_permissions.png" width=600px/>
   </a>
 </p>
 
