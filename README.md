@@ -449,21 +449,37 @@ history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 
 ## Processes and Jobs
 
-at service and cron service
+A programs stucks? Locate the process and kill it. :wink: `ps aux` will return a list of all running processes.
 
-mor advanced stuff: apache airflow
+```bash
+
+ps aux                   # list of all processes
+ps aux | grep 'program'  # find a process and it's ID (PID)
+
+kill <SIGNAL> <PID>      # killing a process
+killall -9 firefox       # if the exact name of the process is known
+```
+
+Depending on the signal value you can kill the process (value 9) or do other things.
+
+| Signal Name | Value      | Effect                  |
+| ----------- | ---------- | ----------------------- |
+| SIGHUP      | 1          | Hangup                  |
+| SIGINT      | 2          | Interrupt from keyboard |
+| SIGKILL     | 9          | Kill signal             |
+| SIGTERM     | 15         | Termination signal      |
+| SIGSTOP     | 17, 19, 23 | Stop the process        |
+
+BTW: there are some interesting 3rd party tools to monitor your system (see [](#))
+
+---
+
+wanna do some jobs? use amperesand and nohup !
+
+If you started a script and used ampersand to let it run in the background `jobs` will show you any number of running processes.
 
 ```bash
 jobs
-kill %N
-ps
-
-# if a process should be killed after execution of a script: the PID of the started background process has to be saved, then kill
-foo &
-FOO_PID=$!
-# do other stuff
-kill $FOO_PID
-
 ```
 
 If you start a script (shell, python etc.) and you logout then the process is killed. Nohup helps to continue the script in the background, even after shell logout
@@ -478,10 +494,11 @@ tee               # read from stdin and writes to stdout and a file
 tee -a     # append
 python myscript.py | tee ~/myscript_output.txt & #
 python myscript.py | tee ~/myscript_output.txt > /dev/null & # if dont want tee to write to stdout -> write it to dev/null !
-
 ```
 
 ## Cron Jobs
+
+If you want to execute certain script repeatedly, then doing cron jobs is your friend.
 
 ```bash
 
@@ -768,21 +785,21 @@ Terminal, Nano, Chromium, VSCode
 
 Terminal Shortcuts
 
-| Shortcut                                                        | Description                                   |
-| --------------------------------------------------------------- | --------------------------------------------- |
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | Open terminal                                 |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | Close terminal                                |
-| <kbd>Tab</kbd>                                                  | Autocomplete, navigation                      |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd> | Scrolling up or down                          |
-| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | Search history bar                            |
-| <kbd>Ctrl</kbd> <kbd>C</kbd>                                    | Abort current running process                 |
-| <kbd>Ctrl</kbd> <kbd>D</kbd>                                    | Log out of current shell (SQL, Mongo, Python) |
-| <kbd>Ctrl</kbd> <kbd>L</kbd>                                    | Clear terminal                                |
-| <kbd>Ctrl</kbd> <kbd>U</kbd>                                    | Erase current line                            |
-| <kbd>Ctrl</kbd> <kbd>A</kbd>                                    | Move cursor to beginning of line              |
-| <kbd>Ctrl</kbd> <kbd>E</kbd>                                    | Move cursor to end of line                    |
-| <kbd>Ctrl</kbd> <kbd>left</kbd> or <kbd>right</kbd>             | Move cursor to next word                      |
-| <kbd>Alt</kbd> <kbd>D</kbd>                                     | Delete all characters after the cursor        |
+| Shortcut                                                          | Effect                                        |
+| ----------------------------------------------------------------- | --------------------------------------------- |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                       | Open terminal                                 |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                     | Close terminal                                |
+| <kbd>Tab</kbd>                                                    | Autocomplete, navigation                      |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>up</kbd> or <kbd>down</kbd> | Scrolling up or down                          |
+| <kbd>Ctrl</kbd> <kbd>R</kbd>                                      | Search history bar                            |
+| <kbd>Ctrl</kbd> <kbd>C</kbd>                                      | Abort current running process                 |
+| <kbd>Ctrl</kbd> <kbd>D</kbd>                                      | Log out of current shell (SQL, Mongo, Python) |
+| <kbd>Ctrl</kbd> <kbd>L</kbd>                                      | Clear terminal                                |
+| <kbd>Ctrl</kbd> <kbd>U</kbd>                                      | Erase current line                            |
+| <kbd>Ctrl</kbd> <kbd>A</kbd>                                      | Move cursor to beginning of line              |
+| <kbd>Ctrl</kbd> <kbd>E</kbd>                                      | Move cursor to end of line                    |
+| <kbd>Ctrl</kbd> <kbd>left</kbd> or <kbd>right</kbd>               | Move cursor to next word                      |
+| <kbd>Alt</kbd> <kbd>D</kbd>                                       | Delete all characters after the cursor        |
 
 nano editor
 
@@ -791,7 +808,7 @@ nano editor
 nano <file>      # opens the file (nano is a terminal application for text editing)
 ```
 
-| Shortcut                                             | Meaning            |
+| Shortcut                                             | Effect             |
 | ---------------------------------------------------- | ------------------ |
 | <kbd>Ctrl</kbd> <kbd>O</kbd>                         | Save file          |
 | <kbd>Ctrl</kbd> <kbd>X</kbd>                         | Exit               |
@@ -803,7 +820,7 @@ nano <file>      # opens the file (nano is a terminal application for text editi
 
 Chromium Shortcuts
 
-| Shortcut                                           | Description                              |
+| Shortcut                                           | Effect                                   |
 | -------------------------------------------------- | ---------------------------------------- |
 | <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>T</kbd>      | Reopens recently closed tabs             |
 | <kbd>alt</kbd> <kbd>left</kbd> or <kbd>right</kbd> | Moves one page back/forward              |
@@ -819,7 +836,7 @@ Chromium Shortcuts
 
 VSCode Key Bindings (see into my dotfiles repo)
 
-| Shortcut                                      | Meaning            |
+| Shortcut                                      | Effect             |
 | --------------------------------------------- | ------------------ |
 | <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>   |                    |
 | <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd> |                    |
