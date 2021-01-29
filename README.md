@@ -452,10 +452,6 @@ history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 Python makes it easy to automate processes by just writing and running it. But how to we achive this without having to let a terminal opened? Using ampersand `&` and `nohup`! The Amperesend sends the process in the background and nohup assures that the process continues even if you logged out from the current shell session. `jobs` will show you each of these running processes.
 
 ```bash
-jobs
-```
-
-```bash
 
 <command> &                # executes command in the background
 nohup <command> &          # command is executed even if shell session ends
