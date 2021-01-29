@@ -293,6 +293,12 @@ system users and regular users
 
 ![Ownership and Permissions Scheme](docs/ownership_permissions.png)
 
+<p id="website" align="center">
+  <a href="https://the-coding-lab.com" alt="My-Blog" >
+    <img src="docs/ownership_permissions.png" width=500px/>
+  </a>
+</p>
+
 Changing a files permissions is sometimes crucial when working on a linux system.These access permissions control who can access what files, and provides a fundamental level of security to the files
 
 access modes
