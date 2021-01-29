@@ -7,10 +7,10 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
 
 # Contents
 
-1. [Shell Expansions, Shell Operators](#shell-expansions-shell-operators)
+1. [Shell Expansions, Shell Operators](#1-shell-expansions-shell-operators)
    - [Shell Expansions](#shell-expansions)
    - [Shell Operators](#shell-operators)
-2. [Built-in Commands](#built-in-commands)
+2. [Built-in Commands](#2-built-in-commands)
    - [Filesystem Navigation](#filesystem-navigation)
    - [Filesystem Exploration](#filesystem-exploration)
    - [Create, Delete, Copy, and Link](#create-delete-copy-and-link)
@@ -23,26 +23,26 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Processes and Jobs](#processes-and-jobs)
    - [Secure Shell](#secure-shell)
    - [Hardware: CPU, GPU and Monitor](#hardware-cpu-gpu-and-monitor)
-3. [Third Party Tools](#third-party-tools)
+3. [Third Party Tools](#3-third-party-tools)
    - [Git](#git)
    - [Anaconda](#anaconda)
    - [Docker](#docker)
    - [LSDeluxe](#lsdeluxe)
    - [Misc - Tokei, ](#)
-4. [Aliases](#aliases)
-5. [Shortcuts](#shortcuts)
+4. [Aliases](#4-aliases)
+5. [Shortcuts](#5-shortcuts)
    - [Terminal](#terminal)
    - [Chromium Browser](#chromium-browser)
    - [VSCode](#vscode)
-6. [Shell Configuration](#shell-configuration)
-7. [Shell Scripting](#shell-scripting)
+6. [Shell Configuration](#6-shell-configuration)
+7. [Shell Scripting](#7-shell-scripting)
    - [Bash in a Nutshell](#bash-in-a-nutshell)
    - [Variables](#variables)
    - [Loops](#loops)
    - [Functions](#functions)
    - [Condtionals](#conditionals)
-8. [Raspberry Pi related](#raspberry-pi)
-9. [Databases](#databases)
+8. [Raspberry Pi related](#8-raspberry-pi)
+9. [Databases](#9-databases)
    - [SQLite](#sqlite)
    - [MongoDB](#mongodb)
    - [PostgreSQL](#postgresql)
@@ -57,7 +57,7 @@ source ~/.zshrc
 
 ---
 
-# Shell Expansions, Shell Operators
+# 1. Shell Expansions, Shell Operators
 
 ## Shell Expansions
 
@@ -144,7 +144,7 @@ These operators and shell expansions will be found throughout this cheat sheet r
 
 ---
 
-# Built-in Commands
+# 2. Built-in Commands
 
 Linux distributions contain a plethora of powerful built-in commands. The presented commands are sorted by topic. If you're not aware of a commands capabilities you can add the `--help` or `-h` flag to display all options. The `--version` or `-v` flag returns the version number and is commonly used right after installation to check a programs version.
 
@@ -534,7 +534,7 @@ text
 
 ---
 
-# Third Party Tools
+# 3. Third Party Tools
 
 Before we can use a tool, we have to use a package managagent system to install these tools. Linux distributions use different package managers, I use Ubuntu 20.04 LT so I'm using `apt` `snap` and `homebrew` to install packages.
 
@@ -737,7 +737,7 @@ ls --tree # recurses into every dir
 
 ---
 
-# Aliases
+# 4. Aliases
 
 Aliases save time and work wonders on lengthy commands. Here's a list of my aliases.
 
@@ -762,7 +762,7 @@ ALIASES=`alias | cut -d '=' -f 1`
 
 ---
 
-# Shortcuts
+# 5. Shortcuts
 
 Terminal, Nano, Chromium, VSCode
 
@@ -831,7 +831,7 @@ VSCode Key Bindings (see into my dotfiles repo)
 
 ---
 
-# Shell Configuration
+# 6. Shell Configuration
 
 I'm using the Z-shell instead of bash as my default shell and some plugins to colorize my terminal. It's not increasing the productivity like 10 times but as a human being with an aesthetic demand it's more satisfying
 
@@ -845,7 +845,7 @@ don't make you much more productive but more pleasant to look at a nicely lookin
 
 ---
 
-# Shell Scripting
+# 7. Shell Scripting
 
 For Shell scripting I can only recommend the excellent cheat sheet of [devhints.io](https://devhints.io/bash).
 
@@ -873,11 +873,11 @@ fi
 
 ---
 
-# Raspberry Pi
+# 8. Raspberry Pi
 
 **[⬆ back to top](#contents)**
 
-# Databases
+# 9. Databases
 
 applications need databases, to serve data. theyre implemented into web apps, mobile apps and it's good to ssh into them
 
