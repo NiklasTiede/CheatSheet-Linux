@@ -177,7 +177,11 @@ history | tail    # prints 10 recently used commands
 clear             # clears the terminal
 ```
 
-Pressing arrow keys <kbd>⬆️</kbd> <kbd>⬇️</kbd> or <kbd>Ctrl</kbd> <kbd>R</kbd> (search bar) is my preferred choice. BTW: I geared the shell towards my needs (see [configuration](#configuration)) so everything looks pretty satisfying.
+Pressing arrow keys <kbd>Up</kbd> <kbd>Down</kbd> or <kbd>Ctrl</kbd> <kbd>R</kbd> (search bar) is my preferred choice. BTW: I geared the shell towards my needs (see [configuration](#configuration)) so everything looks pretty satisfying.
+
+**[⬆ back to top](#contents)**
+
+---
 
 ## Filesystem Exploration
 
@@ -201,6 +205,10 @@ sudo du -sh *           # shows the size of all files/folders
 df -h                   # shows all memory usage on filesystem
 ```
 
+**[⬆ back to top](#contents)**
+
+---
+
 ## Create, Delete, Copy, and Link
 
 Some basic operations when working with files and directories.
@@ -219,7 +227,7 @@ mkdir file{1..5}        # creates 5 enumrated files
 rmdir <dir_name>        # removes a directory
 ```
 
-Files oand directories can be copied or linked. Hard links point to the files in memory directly whereas soft links point to the file which references to the place in memory.
+Files and directories can be copied or linked. Hard links point to the files in memory directly whereas soft links point to the file which references to the place in memory.
 
 ```bash
 
@@ -230,6 +238,10 @@ ln <target> <new_link>         # creates a hard link to a file
 ln -s <target> <new_link>      # creates a soft link to a file
 rm <new_link>                  # removes the symlink
 ```
+
+**[⬆ back to top](#contents)**
+
+---
 
 ## Working with File Content
 
@@ -253,6 +265,10 @@ nano <file>      # opens the file (nano is a terminal application for text editi
 code <file>      # open file in VSCode
 ```
 
+**[⬆ back to top](#contents)**
+
+---
+
 ## System Updates
 
 Always keep your system up to date :wink:
@@ -273,6 +289,10 @@ reboot, shutdown
 
 ```
 
+**[⬆ back to top](#contents)**
+
+---
+
 ## Data Compression
 
 Compression is always a space-time complexity tradeoff. On linux systems many files are collected usually into one archive file, referred to as a tarball. `tar` is the tool of choice for compression and decompression.
@@ -285,6 +305,10 @@ tar -zxvf filename.tar.gz <path>  # decompressed into target  folder
 
 tar -cvzf filename.tar.gz <path>   # compression of a folder, returns filename.tar.gz
 ```
+
+**[⬆ back to top](#contents)**
+
+---
 
 ## Ownership and Permissions
 
@@ -334,6 +358,10 @@ To modify ownership (Owner and Group above image) `chown` is used.
 chown user:group <file/dir>  # changes the ownership
 ```
 
+**[⬆ back to top](#contents)**
+
+---
+
 ## Environment Variables
 
 Environment variables are key-value pairs on the system that can be retrieved by applications. They're used to ensure separation of concerns. Important default Environment variables are `$HOME`, `$SHELL` and `$PATH`. HOME defines the systems home directory. PATH tells the shell which directories to search for executable files. Multiple values assigned to a variable must be separated by a colon `:`. By convention, environment variables should have UPPER CASE names.
@@ -352,6 +380,10 @@ export VARNAME="value"                         # set in current shell
 echo 'export VARNAME="value"' >> ~/.bashrc     # set permanently in all bash sessions
 sudo -H nano /etc/environment                  # set system wide, no export-keyword used
 ```
+
+**[⬆ back to top](#contents)**
+
+---
 
 ## Finding Patterns: grep, find, sed and awk
 
@@ -426,6 +458,10 @@ using filename expansion, globbing, shell expansion, wildcard characters
 searching for string pattern in all files:
 grep, good for pipelining and searching through files
 
+**[⬆ back to top](#contents)**
+
+---
+
 ## Processes and Jobs
 
 at service and cron service
@@ -489,6 +525,8 @@ scp username@hostname:/path/to/remote/file /path/to/local/file
 
 **[⬆ back to top](#contents)**
 
+---
+
 ## Hardware: CPU, GPU and Monitor
 
 GPU is sometimes necessary when training a neural network or other things with intensive computational workload.
@@ -507,6 +545,8 @@ text
       #
       #
 ```
+
+**[⬆ back to top](#contents)**
 
 ---
 
@@ -533,6 +573,8 @@ snap install <package_name>          # installs a package
 snap remove <package_name>           # uninstalls the package
 snap find <package_name>             # searches within the repo
 ```
+
+homebrew
 
 ## Git
 
@@ -562,6 +604,10 @@ https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-cron
 
 
 ```
+
+**[⬆ back to top](#contents)**
+
+---
 
 ## Anaconda
 
@@ -652,6 +698,10 @@ anaconda download USERNAME/PACKAGE
 
 tutorial: how to upload a package to anaconda (my own channel)
 
+**[⬆ back to top](#contents)**
+
+---
+
 ## pip
 
 ```bash
@@ -665,6 +715,10 @@ pip freeze > requirements.txt        # lists all dependencies within the current
 pip check                            # verify installed packages have compatible dependencies
 
 ```
+
+**[⬆ back to top](#contents)**
+
+---
 
 ## LSDeluxe
 
@@ -850,3 +904,5 @@ applications need databases, to serve data. theyre implemented into web apps, mo
 ## POstgreSQL
 
 ## Redis
+
+**[⬆ back to top](#contents)**
