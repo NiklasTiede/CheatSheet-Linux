@@ -20,8 +20,9 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Ownership and Permissions](#ownership-and-permissions)
    - [Environment Variables](#environment-variables)
    - [Finding patterns: grep, find, sed and awk](#finding-patterns-grep-find-sed-and-awk)
-   - [](#)
-   - [](#)
+   - [Processes and Jobs](#processes-and-jobs)
+   - [Secure Shell](#secure-shell)
+   - [Hardware: CPU, GPU and Monitor](#hardware-cpu-gpu-and-monitor)
 3. [Command Line Tools](#command-line-tools)
    - [Git](#git)
    - [Anaconda](#anaconda)
@@ -354,30 +355,57 @@ sudo -H nano /etc/environment                  # set system wide, no export-keyw
 
 ## Finding Patterns: grep, find, sed and awk
 
-grep - print lines matching a pattern
+Several tools to search for files and file-content exist. This can speed up things. `grep` prints lines matching a pattern. The table below shows some important flags I use on a daily basis.
+
+| Flag        | Description                 |
+| ----------- | --------------------------- |
+| `-r`        | Recursive                   |
+| `-l`        | Only filenames              |
+| `-n`        | Number of line within file  |
+| `-w`        | Only whole words            |
+| `--include` | Only certain files included |
+
+Sometimes I search through a folder of files for a pattern. For replacing the pattern, `sed` can be used. When I refactor code I prefer use VSCode's search-and-replace capabilities. Most commonly I use `grep -rnw 'patt' .` to know how much times the pattern is reoccuring.
+
+```bash
+grep -rnw 'patt' .               # searchs through cwd for pattern
+
+grep -rl 'patt' .                # print names of files containing pattern
+
+grep -rnw 'patt' --include=*.py  # searches only specified files for pattern
+```
+
+---
+
+sed is a stream editor for filtering and transforming text. `tail` and `head` return top and bottom of a file. Wanna see parts in the middle? Use `sed`!
+
+```bash
+
+sed -n '5,10p' <file>    # returns line 5 to 10
+```
+
+It's also useful for replacing patterns within one or more files.
+
+```bash
+
+sed -i 's/foo/bar/g' *    # replace pattern (foo) by bar in multiple files
+```
+
+---
+
 find - search for files in a directory hierarchy
-sed - stream editor for filtering and transforming text
+
+```bash
+
+find . -name <file>  # prints all filesnames containg the exact pattern in cwd
+
+find . -type f -name "*.py"   # prints all
+
+```
+
+---
+
 awk - pattern scanning and text processing language
-
-```bash
-sed -i 's/foo/bar/g' *   # replace pattern (foo) by bar in multiple files
-```
-
-```bash
-
-```
-
-```bash
-
-```
-
-```bash
-
-```
-
-```bash
-
-```
 
 ```bash
 
@@ -397,30 +425,6 @@ using filename expansion, globbing, shell expansion, wildcard characters
 
 searching for string pattern in all files:
 grep, good for pipelining and searching through files
-
-```bash
-find . -name "foo*"  # prints all filesnames containg the pattern
-
-#  print only names of files containg the pattern from cwd:
-grep -rl 'patt'
-
-# shows also each line where pattern is occuring:
-grep -rnw '/path/' -e 'patt'
-
-# search through all files recursively
-grep -rnw 'patt'
-
-# searches only certain files for the search pattern
-grep -rnw -e 'patt' --include=*.py
-
--r recursive
--l only filenames
--n numbber of line within file
--w only whole word
---include only certain files included
-```
-
-package managemtn tools, see in the [command line tools]() section
 
 ## Processes and Jobs
 
@@ -467,7 +471,25 @@ python myscript.py | tee ~/myscript_output.txt > /dev/null & # if dont want tee 
 
 ```
 
-## CPU, GPU and Display
+## Secure Shell
+
+cryptographic network protocol, generate ssh keys. o
+I'm using the SSH protocol within my local network (raspberry pi) and for remote servers.
+deploying something
+ssh into database?
+
+When deploying something on my Raspberry Pi I connect via SSH.
+
+scp secure copy protocol
+
+```bash
+scp your_username@remotehost.edu:foobar.txt /local/dir   # download
+scp username@hostname:/path/to/remote/file /path/to/local/file
+```
+
+**[⬆ back to top](#contents)**
+
+## Hardware: CPU, GPU and Monitor
 
 GPU is sometimes necessary when training a neural network or other things with intensive computational workload.
 If connected a monitor as well.
@@ -486,31 +508,13 @@ text
       #
 ```
 
-## Secure Shell (SSH)
-
-cryptographic network protocol, generate ssh keys. o
-I'm using the SSH protocol within my local network (raspberry pi) and for remote servers.
-deploying something
-ssh into database?
-
-When deploying something on my Raspberry Pi I connect via SSH.
-
-scp secure copy protocol
-
-```bash
-scp your_username@remotehost.edu:foobar.txt /local/dir   # download
-scp username@hostname:/path/to/remote/file /path/to/local/file
-```
-
-**[⬆ back to top](#contents)**
-
 ---
 
 # Command Line Tools
 
 Before we can use a tool, we have to use a package managagent system to install these tools. Linux distributions use different package managers, I use Ubuntu 20.04 LT so I'm using `apt` `snap` and `homebrew` to install packages.
 
-apt - package managemtn tool
+apt - package management tool
 
 ```bash
 apt-get install <tool>            # package management tool
