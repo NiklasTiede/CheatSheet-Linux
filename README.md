@@ -23,7 +23,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Processes and Jobs](#processes-and-jobs)
    - [Secure Shell](#secure-shell)
    - [Hardware: CPU, GPU and Monitor](#hardware-cpu-gpu-and-monitor)
-3. [Command Line Tools](#command-line-tools)
+3. [Third Party Tools](#third-party-tools)
    - [Git](#git)
    - [Anaconda](#anaconda)
    - [Docker](#docker)
@@ -165,6 +165,7 @@ cd <directory>    # change directory
 cd ..             # goes on folder up
 
 pwd               # print working directory
+date              # to navigate yourself also in time ;-)
 ```
 
 Since most people (like me) don't have a photographic memory, it's always a good choice to use the machines memory.
@@ -280,13 +281,14 @@ sudo apt upgrade
 sudo apt autoremove
 ```
 
+Some commands to shut system on/off etc.
+
 ```bash
 
-sudo
-ctrl
-reboot, shutdown
-
-
+reboot
+sudo reboot   # when ssh into system
+shutdown
+logout        # logout from current users session
 ```
 
 **[⬆ back to top](#contents)**
@@ -385,7 +387,7 @@ sudo -H nano /etc/environment                  # set system wide, no export-keyw
 
 ---
 
-## Finding Patterns: grep, find, sed and awk
+## Finding Patterns: grep, sed and find
 
 Several tools to search for files and file-content exist. This can speed up things. `grep` prints lines matching a pattern. The table below shows some important flags I use on a daily basis.
 
@@ -425,38 +427,21 @@ sed -i 's/foo/bar/g' *    # replace pattern (foo) by bar in multiple files
 
 ---
 
-find - search for files in a directory hierarchy
+`find` searchs for files in a directory hierarchy.
 
 ```bash
 
-find . -name <file>  # prints all filesnames containg the exact pattern in cwd
+find . -name <file>           # prints all filenames containg the exact pattern
 
-find . -type f -name "*.py"   # prints all
-
+find . -type f -name "*.py"   # prints rel. path of specified files
 ```
 
----
-
-awk - pattern scanning and text processing language
-
-```bash
-
-```
-
-pretty useful combinations:
-
-If you wanna sort your command history to see which commands you use most often:
-sort can be nicely used!
+When pipelining these commands you can be pretty creative. For instance if you would like to see your 10 most used commands, then try this:
 
 ```bash
 
 history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 ```
-
-using filename expansion, globbing, shell expansion, wildcard characters
-
-searching for string pattern in all files:
-grep, good for pipelining and searching through files
 
 **[⬆ back to top](#contents)**
 
@@ -469,7 +454,6 @@ at service and cron service
 mor advanced stuff: apache airflow
 
 ```bash
-date
 jobs
 kill %N
 ps
@@ -550,7 +534,7 @@ text
 
 ---
 
-# Command Line Tools
+# Third Party Tools
 
 Before we can use a tool, we have to use a package managagent system to install these tools. Linux distributions use different package managers, I use Ubuntu 20.04 LT so I'm using `apt` `snap` and `homebrew` to install packages.
 
@@ -896,6 +880,10 @@ fi
 # Databases
 
 applications need databases, to serve data. theyre implemented into web apps, mobile apps and it's good to ssh into them
+
+```bash
+exit          # exits any kind of shell
+```
 
 ## SQLite
 
