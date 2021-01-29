@@ -287,30 +287,33 @@ tar -cvzf filename.tar.gz <path>   # compression of a folder, returns filename.t
 
 ## Ownership and Permissions
 
-Linux is a multi-user OS and therefore implements concepts like users and groups to ensure proper security.
+Linux is a multi-user OS and therefore implements concepts like users and groups to ensure proper security. There are 3 types of owners:
 
-system users and regular users
+- **User** | _A user is the one who created the file_
+- **Group** | _A group can contain multiple users sharing the same permissions. By default the group is the same as the user_
+- Other | _Any one who has access to the file other than user and group falls int this category. Other has neither created the file nor is a group member_
 
-<p id="website" align="center">
+Each files/dirs access mode can be displayed when using the `ls -l` command. Each filessytem entry can have read, write and execute permissions.
+
+<p align="center">
   <a href="https://the-coding-lab.com" alt="My-Blog" >
     <img src="docs/ownership_permissions.png" width=600px/>
   </a>
 </p>
 
-Changing a files permissions is sometimes crucial when working on a linux system.These access permissions control who can access what files, and provides a fundamental level of security to the files
+Modify these permissions is often crucial when working on a linux system.
+chmod
 
-access modes
-
-| Octal Notation | Symbolic Repr | Permissions                         |
-| -------------- | ------------- | ----------------------------------- |
-| 0              | ---           | No permissions                      |
-| 1              | --x           | Execute permissions only            |
-| 2              | -w-           | Write permissions only              |
-| 3              | -wx           | Write and execute permissions       |
-| 4              | r--           | Read permissions only               |
-| 5              | r-x           | Read and execute permissions        |
-| 6              | rw-           | Read and write permissions          |
-| 7              | rwx           | Read, write and execute permissions |
+| Octal Notation | Symbolic Repr | Permissions             |
+| -------------- | ------------- | ----------------------- |
+| 0              | ---           | No permissions          |
+| 1              | --x           | Execute only            |
+| 2              | -w-           | Write only              |
+| 3              | -wx           | Write and execute       |
+| 4              | r--           | Read only               |
+| 5              | r-x           | Read and execute        |
+| 6              | rw-           | Read and write          |
+| 7              | rwx           | Read, write and execute |
 
 3 permission groups:
 
@@ -318,8 +321,11 @@ access modes
 - group
 - other
 
+to change permissions use `chmod`
+to modfy ownership use `chown`
+
 ```bash
-ls -l           #
+ls -l           # lists permissions/ownership
 
 sudo chown user:group <file.txt>  # changes the file permissions of a file
 
