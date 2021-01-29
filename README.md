@@ -449,12 +449,44 @@ history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 
 ## Processes and Jobs
 
-A programs stucks? Locate the process and kill it. :wink: `ps aux` will return a list of all running processes.
+Python makes it easy to automate processes by just writing and running it. But how to we achive this without having to let a terminal opened? Using ampersand `&` and `nohup`! The Amperesend sends the process in the background and nohup assures that the process continues even if you logged out from the current shell session. `jobs` will show you each of these running processes.
+
+```bash
+jobs
+```
+
+```bash
+
+<command> &                # executes command in the background
+nohup <command> &          # command is executed even if shell session ends
+
+nohup python myscript.py & # examples
+nohup ./myscript.py        # script is executable and has shebang line
+
+jobs                       # shows each running job
+```
+
+If your script prints messages to the terminal and you want to save the output in a file: use the `tee` command! It will redirect the script output also to a file. And if you'd like to continue working within the shell redirect the terminal output to /dev/null.
+
+```bash
+
+tee                                                      # read from stdin and writes to stdout and a file
+tee -a                                                   # append
+./myscript.py | tee ~/myscript_output.txt &              # save script output
+./myscript.py | tee ~/myscript_output.txt > /dev/null &  # and continue working within shell
+```
+
+---
+
+But when starting a process it's always nice to know how to stop it. So how do we locate processes in linux and kill it? `ps aux` is your freind for listing all running processes.
 
 ```bash
 
 ps aux                   # list of all processes
 ps aux | grep 'program'  # find a process and it's ID (PID)
+pgrep 'program'          # returns only the PID
+
+pstree                   # shows processes as tree
 
 kill <SIGNAL> <PID>      # killing a process
 killall -9 firefox       # if the exact name of the process is known
@@ -471,30 +503,6 @@ Depending on the signal value you can kill the process (value 9) or do other thi
 | SIGSTOP     | 17, 19, 23 | Stop the process        |
 
 BTW: there are some interesting 3rd party tools to monitor your system (see [](#))
-
----
-
-wanna do some jobs? use amperesand and nohup !
-
-If you started a script and used ampersand to let it run in the background `jobs` will show you any number of running processes.
-
-```bash
-jobs
-```
-
-If you start a script (shell, python etc.) and you logout then the process is killed. Nohup helps to continue the script in the background, even after shell logout
-
-```bash
-
-commandname &              # executes command in the background
-nohup commandname &        # command is executed even if shell session is finished
-nohup python myscript.py & # example
-
-tee               # read from stdin and writes to stdout and a file
-tee -a     # append
-python myscript.py | tee ~/myscript_output.txt & #
-python myscript.py | tee ~/myscript_output.txt > /dev/null & # if dont want tee to write to stdout -> write it to dev/null !
-```
 
 ## Cron Jobs
 
