@@ -291,8 +291,6 @@ Linux is a multi-user OS and therefore implements concepts like users and groups
 
 system users and regular users
 
-![Ownership and Permissions Scheme](docs/ownership_permissions.png)
-
 <p id="website" align="center">
   <a href="https://the-coding-lab.com" alt="My-Blog" >
     <img src="docs/ownership_permissions.png" width=600px/>
