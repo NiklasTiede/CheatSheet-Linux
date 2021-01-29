@@ -289,9 +289,9 @@ tar -cvzf filename.tar.gz <path>   # compression of a folder, returns filename.t
 
 Linux is a multi-user OS and therefore implements concepts like users and groups to ensure proper security. There are 3 types of owners:
 
-- **User** | _A user is the one who created the file_
-- **Group** | _A group can contain multiple users sharing the same permissions. By default the group is the same as the user_
-- Other | _Any one who has access to the file other than user and group falls int this category. Other has neither created the file nor is a group member_
+- **User** | _A user is the one who created the file._
+- **Group** | _A group can contain multiple users sharing the same permissions. By default the group is the same as the user._
+- **Other** | _Any one who has access to the file other than user and group falls int this category. Other has neither created the file nor is a group member._
 
 Each files/dirs access mode can be displayed when using the `ls -l` command. Each filessytem entry can have read, write and execute permissions.
 
@@ -301,8 +301,19 @@ Each files/dirs access mode can be displayed when using the `ls -l` command. Eac
   </a>
 </p>
 
-Modify these permissions is often crucial when working on a linux system.
-chmod
+The access modes (Owner, Group, Other below image) can be modified using the `chmod` command. I prefer to use the octal notation over the symbolic notation when changing permissions.
+
+```bash
+chmod <octal> <file/dir>  # change permissions of a file/dir
+
+chmod 777 <file/dir>      # full permissions
+chmod 644 <file/dir>      # default permissions when creating new file
+
+chmod +x <script.sh>      # makes a script executable
+chmod -R 755 <path>       # changes permissions recursively
+```
+
+The following table displays the octal notation and it's representation.
 
 | Octal Notation | Symbolic Repr | Permissions             |
 | -------------- | ------------- | ----------------------- |
@@ -315,23 +326,11 @@ chmod
 | 6              | rw-           | Read and write          |
 | 7              | rwx           | Read, write and execute |
 
-3 permission groups:
-
-- owner
-- group
-- other
-
-to change permissions use `chmod`
-to modfy ownership use `chown`
+To modify ownership (Owner and Group above image) `chown` is used.
 
 ```bash
-ls -l           # lists permissions/ownership
 
-sudo chown user:group <file.txt>  # changes the file permissions of a file
-
-chmod +x <ba_scr.sh>              # makes the bash-script executable
-
-chmod -R 755 <path>               # changes permissions of all files/dirs within folder
+chown user:group <file/dir>  # changes the ownership
 ```
 
 ## Environment Variables
