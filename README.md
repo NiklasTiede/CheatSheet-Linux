@@ -33,7 +33,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Terminal](#terminal)
    - [Chromium Browser](#chromium-browser)
    - [VSCode](#vscode)
-6. [Configuration](#configuration)
+6. [Shell Configuration](#shell-configuration)
 7. [Shell Scripting](#shell-scripting)
    - [Bash in a Nutshell](#bash-in-a-nutshell)
    - [Variables](#variables)
@@ -41,7 +41,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Functions](#functions)
    - [Condtionals](#conditionals)
 8. [Raspberry Pi related](#raspberry-pi)
-8. [Databases](#databases)
+9. [Databases](#databases)
    - [SQLite](#sqlite)
    - [MongoDB](#mongodb)
    - [PostgreSQL](#postgresql)
@@ -104,12 +104,11 @@ The lesser known extended globbing (like `*(pattern)`), is used more commonly in
 Shell operators let you combine commands which expands your toolbelt vastly. They can be divided into two categories: redirection and control operators. Control operators allow for coupling commands.
 
 | Token | Example                  | Description                                 |
-|-------|--------------------------|---------------------------------------------|
+| ----- | ------------------------ | ------------------------------------------- |
 | `\|`  | `history \| grep "patt"` | Pipelining: direct output of com1 to com2   |
 | `&`   | `python myscript.py &`   | start child process (execute in background) |
 | `&&`  | `com1 && com2`           | Execute com2 only if com1 is executed       |
 | `;`   | `com1; com2`             | Execute both commands always                |
-
 
 Especially the pipe operator `|` here shines. Any output printed by command1 is passed as input to command2.
 
@@ -214,7 +213,7 @@ rm -rf                  # forces to remove a directory with content recursively
 
 mkdir <dir_name>        # create directory
 mkdir -p a/b/c          # creates a directory tree
-mkdir file{1..5}       # creates 5 enumrated files
+mkdir file{1..5}        # creates 5 enumrated files
 
 rmdir <dir_name>        # removes a directory
 ```
@@ -224,7 +223,7 @@ Files oand directories can be copied or linked. Hard links point to the files in
 ```bash
 
 cp <file> <path/new_filename>  # copies a file to the advised path
-cp -R <source> <destination>   # copies recursively 
+cp -R <source> <destination>   # copies recursively
 
 ln <target> <new_link>         # creates a hard link to a file
 ln -s <target> <new_link>      # creates a soft link to a file
@@ -266,14 +265,12 @@ sudo apt autoremove
 
 ```bash
 
-sudo 
+sudo
 ctrl
 reboot, shutdown
 
 
 ```
-
-
 
 ## Data Compression
 
@@ -282,16 +279,34 @@ Compression is always a space-time complexity tradeoff. On linux systems many fi
 ```bash
 tar -ztvf filename.tar.gz         # list content
 
-tar -zxvf filename.tar.gz         # decompression 
+tar -zxvf filename.tar.gz         # decompression
 tar -zxvf filename.tar.gz <path>  # decompressed into target  folder
 
 tar -cvzf filename.tar.gz <path>   # compression of a folder, returns filename.tar.gz
 ```
 
-
 ## Ownership and Permissions
 
+Linux is a multi-user OS and thus implements concepts like users and groups
+
+system users and regular users
+
+![Ownership and Permissions Scheme](docs/ownership_permissions.png)
+
 Changing a files permissions is sometimes crucial when working on a linux system.These access permissions control who can access what files, and provides a fundamental level of security to the files
+
+access modes
+
+| Octal Notation | Symbolic Repr | Permissions                         |
+| -------------- | ------------- | ----------------------------------- |
+| 0              | ---           | No permissions                      |
+| 1              | --x           | Execute permissions only            |
+| 2              | -w-           | Write permissions only              |
+| 3              | -wx           | Write and execute permissions       |
+| 4              | r--           | Read permissions only               |
+| 5              | r-x           | Read and execute permissions        |
+| 6              | rw-           | Read and write permissions          |
+| 7              | rwx           | Read, write and execute permissions |
 
 3 permission groups
 1 owner
@@ -299,7 +314,7 @@ Changing a files permissions is sometimes crucial when working on a linux system
 3 other
 
 ```bash
-ls -l           # 
+ls -l           #
 
 sudo chown user:group <file.txt>  # changes the file permissions of a file
 
@@ -327,7 +342,7 @@ echo 'export VARNAME="value"' >> ~/.bashrc     # set permanently in all bash ses
 sudo -H nano /etc/environment                  # set system wide, no export-keyword used
 ```
 
-## Finding patterns: grep, find, sed and awk
+## Finding Patterns: grep, find, sed and awk
 
 grep - print lines matching a pattern
 find - search for files in a directory hierarchy
@@ -395,9 +410,6 @@ grep -rnw -e 'patt' --include=*.py
 --include only certain files included
 ```
 
-
-
-
 package managemtn tools, see in the [command line tools]() section
 
 ## Processes and Jobs
@@ -424,18 +436,16 @@ If you start a script (shell, python etc.) and you logout then the process is ki
 
 ```bash
 
-commandname &              # executes command in the background 
+commandname &              # executes command in the background
 nohup commandname &        # command is executed even if shell session is finished
 nohup python myscript.py & # example
 
 tee               # read from stdin and writes to stdout and a file
 tee -a     # append
-python myscript.py | tee ~/myscript_output.txt & # 
+python myscript.py | tee ~/myscript_output.txt & #
 python myscript.py | tee ~/myscript_output.txt > /dev/null & # if dont want tee to write to stdout -> write it to dev/null !
 
 ```
-
-
 
 ## Cron Jobs
 
@@ -449,10 +459,12 @@ python myscript.py | tee ~/myscript_output.txt > /dev/null & # if dont want tee 
 
 ## CPU, GPU and Display
 
+GPU is sometimes necessary when training a neural network or other things with intensive computational workload.
+If connected a monitor as well.
+
 ```bash
 cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu core
 ```
-
 
 text
 
@@ -471,7 +483,7 @@ I'm using the SSH protocol within my local network (raspberry pi) and for remote
 deploying something
 ssh into database?
 
-When deploying something on my Raspberry Pi I connect via SSH.  
+When deploying something on my Raspberry Pi I connect via SSH.
 
 scp secure copy protocol
 
@@ -479,7 +491,6 @@ scp secure copy protocol
 scp your_username@remotehost.edu:foobar.txt /local/dir   # download
 scp username@hostname:/path/to/remote/file /path/to/local/file
 ```
-
 
 **[⬆ back to top](#contents)**
 
@@ -498,8 +509,6 @@ sudo apt-get remove <program_name>   # removes the program
 apt-cache search <program_name>*     # search for everything containing the word in the rep. example: apt-cache search gimp*
 ```
 
-
-
 snap
 
 ```bash
@@ -511,10 +520,7 @@ snap remove <package_name>           # uninstalls the package
 snap find <package_name>             # searches within the repo
 ```
 
-
-
 ## Git
-
 
 https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git
 https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely
@@ -533,7 +539,6 @@ https://stackoverflow.com/questions/16717930/how-to-run-crontab-job-every-week-o
 https://stackoverflow.com/questions/584770/how-would-i-get-a-cron-job-to-run-every-30-minutes
 https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-crontab-file
 
-
 ```bash
 
 
@@ -543,10 +548,8 @@ https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-cron
 
 
 ```
-
 
 ## Anaconda
-
 
 python distro for scientific computing, simplifying package management
 
@@ -635,8 +638,6 @@ anaconda download USERNAME/PACKAGE
 
 tutorial: how to upload a package to anaconda (my own channel)
 
-
-
 ## pip
 
 ```bash
@@ -651,7 +652,6 @@ pip check                            # verify installed packages have compatible
 
 ```
 
-
 ## LSDeluxe
 
 ## tree, Tokei, misc
@@ -662,6 +662,7 @@ pip check                            # verify installed packages have compatible
 ```
 
 wanna generate a password? use openssl! the cryptographers tool
+
 ```bash
 openssl rand -hex 12
 
@@ -670,11 +671,11 @@ tree -L 2   # max depth isn set to 2
 ls --tree   # LSDeluxe
 
 
-locate <pattern> # searches through whole system for name           
-sudo updatedb    # updates cache of locate 
+locate <pattern> # searches through whole system for name
+sudo updatedb    # updates cache of locate
 
 # unite pdfs
-pdfunite in1.pdf in2.pdf out.pdf  # 
+pdfunite in1.pdf in2.pdf out.pdf  #
 ```
 
 tree -L 2 # visualized directories as tree's. -L restricts the tree to two levels (default: complete tree)
@@ -713,24 +714,23 @@ ALIASES=`alias | cut -d '=' -f 1`
 
 Terminal, Nano, Chromium, VSCode
 
-
 Terminal Shortcuts
 
-| Shortcut                                                      | Description                                   |
-| ------------------------------------------------------------- | --------------------------------------------- |
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                   | Open terminal                                 |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                 | Close terminal                                |
-| <kbd>Tab</kbd>                                                | Autocomplete, navigation                      |
+| Shortcut                                                        | Description                                   |
+| --------------------------------------------------------------- | --------------------------------------------- |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | Open terminal                                 |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | Close terminal                                |
+| <kbd>Tab</kbd>                                                  | Autocomplete, navigation                      |
 | <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>⬆️</kbd> or <kbd>⬇️</kbd> | Scrolling up or down                          |
-| <kbd>Ctrl</kbd> <kbd>R</kbd>                                  | Search history bar                            |
-| <kbd>Ctrl</kbd> <kbd>C</kbd>                                  | Abort current running process                 |
-| <kbd>Ctrl</kbd> <kbd>D</kbd>                                  | Log out of current shell (SQL, Mongo, Python) |
-| <kbd>Ctrl</kbd> <kbd>L</kbd>                                  | Clear terminal                                |
-| <kbd>Ctrl</kbd> <kbd>U</kbd>                                  | Erase current line                            |
-| <kbd>Ctrl</kbd> <kbd>A</kbd>                                  | Move cursor to beginning of line              |
-| <kbd>Ctrl</kbd> <kbd>E</kbd>                                  | Move cursor to end of line                    |
-| <kbd>Ctrl</kbd> <kbd>left</kbd> or <kbd>right</kbd>           | Move cursor to next word                      |
-| <kbd>Alt</kbd> <kbd>D</kbd>                                   | Delete all characters after the cursor        |
+| <kbd>Ctrl</kbd> <kbd>R</kbd>                                    | Search history bar                            |
+| <kbd>Ctrl</kbd> <kbd>C</kbd>                                    | Abort current running process                 |
+| <kbd>Ctrl</kbd> <kbd>D</kbd>                                    | Log out of current shell (SQL, Mongo, Python) |
+| <kbd>Ctrl</kbd> <kbd>L</kbd>                                    | Clear terminal                                |
+| <kbd>Ctrl</kbd> <kbd>U</kbd>                                    | Erase current line                            |
+| <kbd>Ctrl</kbd> <kbd>A</kbd>                                    | Move cursor to beginning of line              |
+| <kbd>Ctrl</kbd> <kbd>E</kbd>                                    | Move cursor to end of line                    |
+| <kbd>Ctrl</kbd> <kbd>left</kbd> or <kbd>right</kbd>             | Move cursor to next word                      |
+| <kbd>Alt</kbd> <kbd>D</kbd>                                     | Delete all characters after the cursor        |
 
 nano editor
 
@@ -739,49 +739,47 @@ nano editor
 nano <file>      # opens the file (nano is a terminal application for text editing)
 ```
 
-
-| Shortcut                                              | Meaning             |
-| ----------------------------------------------------- | ------------------- |
-| <kbd>Ctrl</kbd> <kbd>O</kbd>                          | Save file           |
-| <kbd>Ctrl</kbd> <kbd>X</kbd>                          | Exit                |
-| <kbd>Ctrl</kbd> <kbd>W</kbd>                          | Search for pattern  |
-| <kbd>Shift</kbd> <kbd>right</kbd> or <kbd>left</kbd>  | Select              |
-| <kbd>Ctrl</kbd> <kbd>K</kbd>                          | Cut                 |
-| <kbd>Ctrl</kbd> <kbd>U</kbd>                          | Paste               |
-| <kbd>Ctrl</kbd> <kbd>\</kbd>                          | Replace pattern     |
-
+| Shortcut                                             | Meaning            |
+| ---------------------------------------------------- | ------------------ |
+| <kbd>Ctrl</kbd> <kbd>O</kbd>                         | Save file          |
+| <kbd>Ctrl</kbd> <kbd>X</kbd>                         | Exit               |
+| <kbd>Ctrl</kbd> <kbd>W</kbd>                         | Search for pattern |
+| <kbd>Shift</kbd> <kbd>right</kbd> or <kbd>left</kbd> | Select             |
+| <kbd>Ctrl</kbd> <kbd>K</kbd>                         | Cut                |
+| <kbd>Ctrl</kbd> <kbd>U</kbd>                         | Paste              |
+| <kbd>Ctrl</kbd> <kbd>\</kbd>                         | Replace pattern    |
 
 Chromium Shortcuts
 
-| Shortcut                                                        | Description                              |
-| --------------------------------------------------------------- | ---------------------------------------- |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>T</kbd>                   | Reopens recently closed tabs             |
-| <kbd>alt</kbd> <kbd>left</kbd> or <kbd>right</kbd>              | Moves one page back/forward              |
-| <kbd>Ctrl</kbd> <kbd>+</kbd> or <kbd>-</kbd>                    | Zoom in, out                             |
-| <kbd>Ctrl</kbd> <kbd>Tab</kbd>                                  | jumps to the next tab                    |
-| <kbd>Ctrl</kbd> <kbd>F</kbd>                                    | Find content on web page                 |
-| <kbd>F5</kbd>                                                   | Refresh current webpage                  |
-| <kbd>Ctrl</kbd> <kbd>left-click</kbd>                           | Open link in the background of a new tab |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd>                   | Inspect                                  |
-| <kbd>Ctrl</kbd> <kbd>U</kbd>                                    | View page source                         |
-| <kbd>Spacebar</kbd>                                             | Scrolls down a section of the webpage    |
-| <kbd>Spacebar</kbd> <kbd>Shift</kbd>                            | Scrolls up a section of the webpage      |
+| Shortcut                                           | Description                              |
+| -------------------------------------------------- | ---------------------------------------- |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>T</kbd>      | Reopens recently closed tabs             |
+| <kbd>alt</kbd> <kbd>left</kbd> or <kbd>right</kbd> | Moves one page back/forward              |
+| <kbd>Ctrl</kbd> <kbd>+</kbd> or <kbd>-</kbd>       | Zoom in, out                             |
+| <kbd>Ctrl</kbd> <kbd>Tab</kbd>                     | jumps to the next tab                    |
+| <kbd>Ctrl</kbd> <kbd>F</kbd>                       | Find content on web page                 |
+| <kbd>F5</kbd>                                      | Refresh current webpage                  |
+| <kbd>Ctrl</kbd> <kbd>left-click</kbd>              | Open link in the background of a new tab |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd>      | Inspect                                  |
+| <kbd>Ctrl</kbd> <kbd>U</kbd>                       | View page source                         |
+| <kbd>Spacebar</kbd>                                | Scrolls down a section of the webpage    |
+| <kbd>Spacebar</kbd> <kbd>Shift</kbd>               | Scrolls up a section of the webpage      |
 
 VSCode Key Bindings (see into my dotfiles repo)
 
-| Shortcut                                                        | Meaning                  |
-| --------------------------------------------------------------- | ------------------------ |
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>      |            |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>     |        |
-| <kbd>Tab</kbd>                               | |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd>   | scrolling up, down       |
-| <kbd>Ctrl</kbd> <kbd>R</kbd>               |     |
+| Shortcut                                      | Meaning            |
+| --------------------------------------------- | ------------------ |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>   |                    |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd> |                    |
+| <kbd>Tab</kbd>                                |                    |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd>              | scrolling up, down |
+| <kbd>Ctrl</kbd> <kbd>R</kbd>                  |                    |
 
 **[⬆ back to top](#contents)**
 
 ---
 
-# Configuration
+# Shell Configuration
 
 I'm using the Z-shell instead of bash as my default shell and some plugins to colorize my terminal. It's not increasing the productivity like 10 times but as a human being with an aesthetic demand it's more satisfying
 
@@ -807,8 +805,8 @@ important shebang lines: what is a shebang line and why do they exist?
 `#!/bin/sh`
 `#!/usr/bin/env python`
 
-
 check if a file exists
+
 ```bash
 if [ -d "$DIRECTORY" ]; then
   # Control will enter here if $DIRECTORY exists.
@@ -832,7 +830,9 @@ fi
 applications need databases, to serve data. theyre implemented into web apps, mobile apps and it's good to ssh into them
 
 ## SQLite
-## MOngoDB
-## POstgreSQL
-## Redis
 
+## MOngoDB
+
+## POstgreSQL
+
+## Redis
