@@ -525,7 +525,7 @@ The fields `a` to `e` are used to set up the time at which the script is trigger
 
 The output of the job can be send to an email address when configured. It's also possible to send emails from within your scripts. Alternatively you can redirect the output to a log-file or to `/dev/null`.
 
-```bash
+```console
 
 * * * * * ~/myscript.py                     # runs every minute
 
