@@ -125,10 +125,11 @@ $ cat filename | grep 'pattern'
 
 Whereas redirection operators direct the output of a command to another command.
 
-| Token        | Example                           | Description                                 |
-| ------------ | --------------------------------- | ------------------------------------------- |
-| `>` or `<`   | `echo '#projectname' > README.md` | Direct output of com1 to com2 or vice versa |
-| `>>` or `<<` | `echo 'source x' >> ~/.bashrc`    | append output                               |
+| Token        | Example                           | Description                                      |
+| ------------ | --------------------------------- | ------------------------------------------------ |
+| `>` or `<`   | `echo '#projectname' > README.md` | Direct output of com1 to com2 or vice versa      |
+| `>>` or `<<` | `echo 'source x' >> ~/.bashrc`    | append output                                    |
+| `>&`         |                                   | Redirect both standard error and standard output |
 
 Examples:
 
@@ -449,7 +450,7 @@ history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 
 ## Processes and Jobs
 
-Python makes it easy to automate processes by just writing and running it. But how to we achive this without having to let a terminal opened? Using ampersand `&` and `nohup`! The Amperesend sends the process in the background and nohup assures that the process continues even if you logged out from the current shell session. `jobs` will show you each of these running processes.
+Python makes it easy to automate processes by just writing and running it. But how to we achive this without having to let a terminal opened? Using ampersand `&` and `nohup`! The Amperesend sends the process in the background and nohup assures that the process continues even if you're logged out from the current shell session. `jobs` will show you each of these running processes.
 
 ```bash
 
@@ -502,31 +503,55 @@ BTW: there are some interesting 3rd party tools to monitor your system (see [](#
 
 ## Cron Jobs
 
-If you want to execute certain script repeatedly, then doing cron jobs is your friend.
+Cron daemon is a built-in Linux utility that runs processes on your system at a scheduled time. Cron reads the crontab (cron tables) for predefined commands and scripts. So if you want to execute certain scripts repeatedly, then doing cron jobs is your friend. Add a new line with specified values to the crontab.
 
 ```bash
+crontab -l                                  # List all running cronjobs
+crontab –e                                  # Setting up a new cronjob
 
+a b c d e </directory/command> output       # Standard format for a crontab line
+* * * * * directory/command >/dev/null 2>&1 # output redirected to dev/null
 ```
 
+The fields `a` to `e` are used to set up the time at which the script is triggered. Furthermore, you have to specifiy the scripts path.
+
+| Field           | Possible Values | Syntax        | Description                |
+| --------------- | --------------- | ------------- | -------------------------- |
+| a - min         | 0 - 59          | 7 \* \* \* \* | Every 7th min              |
+| b - hour        | 0 - 23          | 0 7 \* \* \*  | Every 7 am                 |
+| c - day         | 0 - 31          | 0 0 7 \* \*   | Every 7th day of the month |
+| d - month       | 1 - 12          | 0 0 0 7 \*    | Every july                 |
+| e - day of week | 1 - 7           | 0 0 \* \* 7   | Every sunday               |
+
+The output of the job can be send to an email address when configured. It's also possible to send emails from within your scripts. Alternatively you can redirect the output to a log-file or to `/dev/null`.
+
 ```bash
 
+* * * * * ~/myscript.py                     # runs every minute
+
+0 8,17 * * * /usr/bin/send_reminder_mail.py # reminder mail at 8 and 17 o'clock
+
+* 0,11 * * * ~/webscraping.py               # runs every 12 hours
+* * * * * ~/webscr.py >> ~/webscr.out 2>&1  # redirect output to logfile
+
+10 0 * * * ~/neural_network.py              # runs every night at 00:10 a.m.
+
+50 0 * * 2 ~/backup.sh                      # runs every tuesday at 00:50 a.m.
 ```
 
 ## Secure Shell
 
-cryptographic network protocol, generate ssh keys. o
-I'm using the SSH protocol within my local network (raspberry pi) and for remote servers.
-deploying something
-ssh into database?
+Th secure shell is a cryptographic network protocol to work on systems remotely. I'm using the SSH protocol within my local network (raspberry pi) and for remote servers if deploying somthing.
 
-When deploying something on my Raspberry Pi I connect via SSH.
-
+generate ssh keys, create alias, more convient
 scp secure copy protocol
 
 ```bash
 scp your_username@remotehost.edu:foobar.txt /local/dir   # download
 scp username@hostname:/path/to/remote/file /path/to/local/file
 ```
+
+how to ssh into servers?
 
 **[⬆ back to top](#contents)**
 
