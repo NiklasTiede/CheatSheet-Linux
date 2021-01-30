@@ -129,7 +129,7 @@ Whereas redirection operators direct the output of a command to another command.
 | ------------ | --------------------------------- | ------------------------------------------------ |
 | `>` or `<`   | `echo '#projectname' > README.md` | Direct output of com1 to com2 or vice versa      |
 | `>>` or `<<` | `echo 'source x' >> ~/.bashrc`    | append output                                    |
-| `>&`         |                                   | Redirect both standard error and standard output |
+| `>&`         | `./script.py > script.out 2>&1`   | Redirect both standard error and standard output |
 
 Examples:
 
@@ -161,6 +161,7 @@ Navigation on the file system is the first step towards learning how to utilize 
 ```bash
 ls                # list content of current working dir
 ls -la            # Display all files and extended file metadata
+ls -la *.py       # Lists only python files
 
 cd <directory>    # change directory
 cd ..             # goes on folder up
@@ -280,6 +281,14 @@ Always keep your system up to date :wink:
 sudo apt update
 sudo apt upgrade
 sudo apt autoremove
+```
+
+sudo gives you temporary super user privileges. `su` switching to super user (root) and back
+
+```bash
+sudo !!            # runs previous command as sudo
+sudo su            # switchs to root user
+su <username>      # switchs back to the user account
 ```
 
 Some commands to shut system on/off etc.
@@ -454,11 +463,13 @@ Python makes it easy to automate processes by just writing and running it. But h
 
 ```bash
 
-<command> &                # executes command in the background
-nohup <command> &          # command is executed even if shell session ends
+<command> &                   # executes command in the background
+nohup <command> &             # command is executed even if shell session ends
 
-nohup python myscript.py & # examples
-nohup ./myscript.py        # script is executable and has shebang line
+nohup python myscript.py &    # examples
+nohup ./myscript.py           # script is executable and has shebang line
+
+./script.py > script.out 2>&1 # redirect stdout/stderr into script.out file
 
 jobs                       # shows each running job
 ```
@@ -525,7 +536,7 @@ The fields `a` to `e` are used to set up the time at which the script is trigger
 
 The output of the job can be send to an email address when configured. It's also possible to send emails from within your scripts. Alternatively you can redirect the output to a log-file or to `/dev/null`.
 
-```console
+```bash
 
 * * * * * ~/myscript.py                     # runs every minute
 
@@ -547,11 +558,13 @@ generate ssh keys, create alias, more convient
 scp secure copy protocol
 
 ```bash
+ssh ...
+```
+
+```bash
 scp your_username@remotehost.edu:foobar.txt /local/dir   # download
 scp username@hostname:/path/to/remote/file /path/to/local/file
 ```
-
-how to ssh into servers?
 
 **[⬆ back to top](#contents)**
 
@@ -562,6 +575,8 @@ how to ssh into servers?
 GPU is sometimes necessary when training a neural network or other things with intensive computational workload.
 If connected a monitor as well.
 
+cpu
+
 ```bash
 cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu core
 ```
@@ -569,7 +584,7 @@ cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu c
 text
 
 ```bash
- lscpu      # get inormations about CPU
+lscpu      # returns information about CPU
       #
       #
       #
@@ -582,31 +597,32 @@ text
 
 # 3. Third Party Tools
 
-Before we can use a tool, we have to use a package managagent system to install these tools. Linux distributions use different package managers, I use Ubuntu 20.04 LT so I'm using `apt` `snap` and `homebrew` to install packages.
-
-apt - package management tool
+Before we can benefit from any 3rd party tool, we have to install these using a package managagent system. Linux distributions have different package managers to handle dependencies. I'm using Ubuntu 20.04 LTS so `apt` (Advanced Package Tool), `snap` and `homebrew` are my package managers of choice.
 
 ```bash
-apt-get install <tool>            # package management tool
-sudo apt-get remove <program_name>   # removes the program
 
-apt-cache search <program_name>*     # search for everything containing the word in the rep. example: apt-cache search gimp*
+apt search <package>*      # search for package
+apt show <package>         # shows package details
+apt install <package>      # installing package
+apt remove <package>       # removing package
+apt list                   # lists all packages
+
+snap find <package>
+snap info <package>
+snap install <package>
+snap remove <package>
+snap list
+
+brew search <package>
+brew info <package>
+brew install <package>
+brew uninstall <package>
+brew list
 ```
-
-snap
-
-```bash
--- snap
-snap help --all                      #  shows all args
-snap list                            # lists installed packages
-snap install <package_name>          # installs a package
-snap remove <package_name>           # uninstalls the package
-snap find <package_name>             # searches within the repo
-```
-
-homebrew
 
 ## Git
+
+A version control system (VCS) is indispensable and Git is just awesome.
 
 https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git
 https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely
@@ -810,14 +826,23 @@ ALIASES=`alias | cut -d '=' -f 1`
 
 # 5. Shortcuts
 
-Terminal, Nano, Chromium, VSCode
+Linux shortcuts (desktop)
+
+| Shortcut                                                        | Effect                                   |
+| --------------------------------------------------------------- | ---------------------------------------- |
+| <kbd>Print</kbd>                                                | Screenshot of entire screen              |
+| <kbd>alt</kbd> <kbd>Print</kbd>                                 | Screenshot of current window/application |
+| <kbd>Shift</kbd> <kbd>Print</kbd>                               | Screenshot of selected area              |
+| <kbd>Super Key</kbd>                                            | Opens Activities search                  |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>Up</kbd> or <kbd>Down</kbd> | Move between workspaces                  |
+| <kbd>Super Key</kbd> <kbd>L</kbd>                               | Lock screen                              |
+| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | Open terminal                            |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | Close terminal                           |
 
 Terminal Shortcuts
 
 | Shortcut                                                          | Effect                                        |
 | ----------------------------------------------------------------- | --------------------------------------------- |
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                       | Open terminal                                 |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                     | Close terminal                                |
 | <kbd>Tab</kbd>                                                    | Autocomplete, navigation                      |
 | <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>up</kbd> or <kbd>down</kbd> | Scrolling up or down                          |
 | <kbd>Ctrl</kbd> <kbd>R</kbd>                                      | Search history bar                            |
