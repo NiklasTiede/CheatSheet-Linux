@@ -20,6 +20,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Ownership and Permissions](#ownership-and-permissions)
    - [Environment Variables](#environment-variables)
    - [Finding patterns: grep, find, sed and awk](#finding-patterns-grep-find-sed-and-awk)
+   - [Running Scripts](#running-scripts)
    - [Processes and Jobs](#processes-and-jobs)
    - [Secure Shell](#secure-shell)
    - [Hardware: CPU, GPU and Monitor](#hardware-cpu-gpu-and-monitor)
@@ -301,6 +302,19 @@ shutdown
 logout        # logout from current users session
 ```
 
+hibernate/suspend is useful for desktop distros of linux to save energy. But this can interrupt script when running at a specified time. So you can turn hibernation/suspend on/off:
+
+use systems which are 24/7 running, like a raspberry pi or your own x86 linux server.
+
+or you can
+
+```bash
+disable hibernation etc
+xxx
+```
+
+or do cloud hosting (linode, heroku etc) to deploy your applications
+
 **[⬆ back to top](#contents)**
 
 ---
@@ -457,6 +471,43 @@ history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 
 ---
 
+## Running Scripts
+
+add python path to the script file as shebang line
+
+if the script imports only standard lib packages, no venv is required
+if script is simple and no 3rd party packages are required or a specific python version (script is executeable on global python version) you dont need to use a virtual env, and instead use your shells default python version
+
+```bash
+which python
+python myscript.py   # no shebang line
+```
+
+if the script is more complex and/or needs another python interpreter, then you have to add a shebang line from the virtual anv. I use pipenv or anaconda
+
+```bash
+./myscript.py    # contains shebang line
+use python interpreter in isolated env
+conda activate env
+pipenv shell
+which python # use path for creating shebang line
+
+```
+
+pipenv environment
+
+```python
+#!/home/niklas/.local/share/virtualenvs/test_pipenv-KVowtm2h/bin/python   # pipenv environment
+or
+#!/home/niklas/anaconda3/envs/my_env/bin/python # anaconda envirnment
+```
+
+text
+
+**[⬆ back to top](#contents)**
+
+---
+
 ## Processes and Jobs
 
 Python makes it easy to automate processes by just writing and running it. But how to we achive this without having to let a terminal opened? Using ampersand `&` and `nohup`! The Amperesend sends the process in the background and nohup assures that the process continues even if you're logged out from the current shell session. `jobs` will show you each of these running processes.
@@ -539,14 +590,10 @@ The output of the job can be send to an email address when configured. It's also
 ```bash
 
 * * * * * ~/myscript.py                     # runs every minute
-
-0 8,17 * * * /usr/bin/send_reminder_mail.py # reminder mail at 8 and 17 o'clock
-
+0 8,17 * * * ~/send_reminder_mail.py        # runs at 8 and 17 o'clock
 * 0,11 * * * ~/webscraping.py               # runs every 12 hours
-* * * * * ~/webscr.py >> ~/webscr.out 2>&1  # redirect output to logfile
-
+* 0 * * * ~/webscr.py >> ~/webscr.out 2>&1  # redirect output to logfile
 10 0 * * * ~/neural_network.py              # runs every night at 00:10 a.m.
-
 50 0 * * 2 ~/backup.sh                      # runs every tuesday at 00:50 a.m.
 ```
 
@@ -597,7 +644,7 @@ lscpu      # returns information about CPU
 
 # 3. Third Party Tools
 
-Before we can benefit from any 3rd party tool, we have to install these using a package managagent system. Linux distributions have different package managers to handle dependencies. I'm using Ubuntu 20.04 LTS so `apt` (Advanced Package Tool), `snap` and `homebrew` are my package managers of choice.
+Before we can benefit from any 3rd party tool, we have to install these using a package management system. Linux distributions have different package managers to handle dependencies. I'm using Ubuntu 20.04 LTS so `apt` (Advanced Package Tool), `snap` and `homebrew` are my package managers of choice.
 
 ```bash
 
@@ -620,33 +667,30 @@ brew uninstall <package>
 brew list
 ```
 
-## Git
+For managing python packages pip and conda are two quite popular package managers.
 
-A version control system (VCS) is indispensable and Git is just awesome.
+## pip and pipenv
 
-https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git
-https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely
-https://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pull-and-git-fetch
-https://stackoverflow.com/questions/348170/how-do-i-undo-git-add-before-commit
-https://stackoverflow.com/questions/6591213/how-do-i-rename-a-local-git-branch
-https://stackoverflow.com/questions/1125968/how-do-i-force-git-pull-to-overwrite-local-files
-https://stackoverflow.com/questions/61212/how-to-remove-local-untracked-files-from-the-current-git-working-tree
-https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit
-https://stackoverflow.com/questions/1783405/how-do-i-check-out-a-remote-git-branch
-https://stackoverflow.com/questions/630453/put-vs-post-in-rest
-https://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication
-https://stackoverflow.com/questions/161813/how-to-resolve-merge-conflicts-in-git-repository
-https://stackoverflow.com/questions/1783405/how-do-i-check-out-a-remote-git-branch/1783426#1783426
-https://stackoverflow.com/questions/16717930/how-to-run-crontab-job-every-week-on-sunday
-https://stackoverflow.com/questions/584770/how-would-i-get-a-cron-job-to-run-every-30-minutes
-https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-crontab-file
+pip is a package-management system used to install and manage python packages. It's repositories can be found at [pypi.org](https://pypi.org/).
 
 ```bash
 
-
+pip search <package>           # search pypi
+pip install <package>          # installing a package from pypi
+pip uninstall <package>        # uninstalls specified package
+pip list                       # lists all pip-packages within the current env
+pip freeze > requirements.txt  # saves all package-versions of current env
 ```
 
+The package dependencies of each python project should be handled with care. Thus using an isolated virtual environment for each project is best practice. pipenv is a nice dependency manager.
+
 ```bash
+
+pipenv --python 3.8   # creates new env
+pipenv shell         # activate env
+exit                 # deactivate the venv         #
+         #
+         #
 
 
 ```
@@ -657,7 +701,7 @@ https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-cron
 
 ## Anaconda
 
-python distro for scientific computing, simplifying package management
+pip and pipenv are focused around Python, neglecting non-Python library dependencies. This is where Anaconda starts to shine. It is a language-agnostic cross-platform environment manager simplifying the package management of non-python libraries. It's main audience is the scientific community.
 
 installation of anaconda:
 
@@ -748,17 +792,48 @@ tutorial: how to upload a package to anaconda (my own channel)
 
 ---
 
-## pip
+## Git
+
+A version control system (VCS) is indispensable and Git is just awesome.
+
+when to use tokens?
+
+creating a new repo: github.com create new one and then connect local with remote repo.
 
 ```bash
--- pip
-pip --help                           # all
-pip search <package_name>            # search pip repo
-pip install <package_name>           # installing something from pypi.org repo
-pip uninstall <package_name>         # uninstalls a specific package
-pip list                             # lists all pip-packages within the current env
-pip freeze > requirements.txt        # lists all dependencies within the current environment (should be added to exported conda .yml)
-pip check                            # verify installed packages have compatible dependencies
+echo "# projectname" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/NiklasTiede/projectname.git
+git push -u origin main
+```
+
+https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git
+https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely
+https://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pull-and-git-fetch
+https://stackoverflow.com/questions/348170/how-do-i-undo-git-add-before-commit
+https://stackoverflow.com/questions/6591213/how-do-i-rename-a-local-git-branch
+https://stackoverflow.com/questions/1125968/how-do-i-force-git-pull-to-overwrite-local-files
+https://stackoverflow.com/questions/61212/how-to-remove-local-untracked-files-from-the-current-git-working-tree
+https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit
+https://stackoverflow.com/questions/1783405/how-do-i-check-out-a-remote-git-branch
+https://stackoverflow.com/questions/630453/put-vs-post-in-rest
+https://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication
+https://stackoverflow.com/questions/161813/how-to-resolve-merge-conflicts-in-git-repository
+https://stackoverflow.com/questions/1783405/how-do-i-check-out-a-remote-git-branch/1783426#1783426
+https://stackoverflow.com/questions/16717930/how-to-run-crontab-job-every-week-on-sunday
+https://stackoverflow.com/questions/584770/how-would-i-get-a-cron-job-to-run-every-30-minutes
+https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-crontab-file
+
+```bash
+
+
+```
+
+```bash
+
 
 ```
 
@@ -778,6 +853,8 @@ pip check                            # verify installed packages have compatible
 wanna generate a password? use openssl! the cryptographers tool
 
 ```bash
+bpython  # useful for REPL sessions, exploring a package
+
 openssl rand -hex 12
 
 tree        # must be installed via apt sometimes
@@ -794,6 +871,22 @@ pdfunite in1.pdf in2.pdf out.pdf  #
 
 tree -L 2 # visualized directories as tree's. -L restricts the tree to two levels (default: complete tree)
 ls --tree # recurses into every dir
+
+**[⬆ back to top](#contents)**
+
+---
+
+## Docker
+
+explanation
+
+**[⬆ back to top](#contents)**
+
+---
+
+## npm and node, deno, react
+
+explanation
 
 **[⬆ back to top](#contents)**
 
@@ -825,6 +918,8 @@ ALIASES=`alias | cut -d '=' -f 1`
 ---
 
 # 5. Shortcuts
+
+linux desktop, terminal, nano-editor, chromium, VSCode
 
 Linux shortcuts (desktop)
 
@@ -950,11 +1045,7 @@ fi
 
 # 9. Databases
 
-applications need databases, to serve data. theyre implemented into web apps, mobile apps and it's good to ssh into them
-
-```bash
-exit          # exits any kind of shell
-```
+applications need databases, to serve data. They're implemented into web apps, mobile apps and it's good being able to ssh into them. So some basic commands to explore databases is pretty valuable. All of these database shells can be exited using <kbd>Ctrl</kbd> <kbd>D</kbd>
 
 ## SQLite
 
