@@ -484,6 +484,7 @@ python myscript.py   # no shebang line
 ```
 
 if the script is more complex and/or needs another python interpreter, then you have to add a shebang line from the virtual anv. I use pipenv or anaconda
+example: webscraping using 3rd party packages like requests, biautifulsoup etc.
 
 ```bash
 ./myscript.py    # contains shebang line
@@ -500,6 +501,12 @@ pipenv environment
 #!/home/niklas/.local/share/virtualenvs/test_pipenv-KVowtm2h/bin/python   # pipenv environment
 or
 #!/home/niklas/anaconda3/envs/my_env/bin/python # anaconda envirnment
+```
+
+If you have a useful script you wanna use more easily, then make an alias!
+
+```bash
+alias name='~/MyScripts/myscript.py &'
 ```
 
 text
@@ -682,18 +689,21 @@ pip list                       # lists all pip-packages within the current env
 pip freeze > requirements.txt  # saves all package-versions of current env
 ```
 
-The package dependencies of each python project should be handled with care. Thus using an isolated virtual environment for each project is best practice. pipenv is a nice dependency manager.
+The package dependencies of each python project should be managed with care. Therefore using an isolated virtual environment for each project is best practice. pipenv is a nice dependency manager.
 
 ```bash
 
-pipenv --python 3.8   # creates new env
-pipenv shell         # activate env
-exit                 # deactivate the venv         #
-         #
-         #
-
-
+pipenv --python 3.8                 # creates new env with pandas
+pipenv install numpy                # install package (I prefer pip install)
+pipenv shell                        # activate environment
+exit                                # deactivates the venv
+pipenv --rm                         # removes the venv (not the pipfile)
+pipenv install -r requirements.txt  # builds env up from an requirements file
+pipenv graph                        # shows packages and their dependencies
+pipenv --py                         # returns path to python version
 ```
+
+Some packages can only be found at the repository of Anaconda.
 
 **[⬆ back to top](#contents)**
 
@@ -703,39 +713,30 @@ exit                 # deactivate the venv         #
 
 pip and pipenv are focused around Python, neglecting non-Python library dependencies. This is where Anaconda starts to shine. It is a language-agnostic cross-platform environment manager simplifying the package management of non-python libraries. It's main audience is the scientific community.
 
-installation of anaconda:
+How to retrieve information about anaconda and your environments.
 
 ```bash
-# install conda (https://docs.anaconda.com/anaconda/install/linux/)
-1. download file from anaconda.com                        # file for install
-2. bash ~/Downloads/Anaconda3-2020.02-Linux-x86_64.sh
-3. conda config --set auto_activate_base False or True    # checks if base-version is running in each terminal session
-```
-
-getting information about conda and environments
-
-```bash
-conda --help                                       # shows all options
-conda info -e                                      # shows all conda environments
-conda info                                         # gives information about version, env's etc.
-conda info --envs                                  # list all the conda environment available
+conda info                                         # gives information about version, env's
 conda env list                                     # shows all environments
+
 conda update -n base conda                         # updates conda
+conda clean -h                                     # in the 'pkgs'-folder a lot of waste if collected (its the download cache)
 ```
 
-creating new environments
+How to create new environments, activate them and install packages.
 
 ```bash
 # working with environments
 conda create --name <env_name> python=3.6          # creating a new conda env with a specific python-version
 conda create -c rdkit -n <env_name> rdkit          # creating a new conda env with a specific package
+
 conda create -n <env_name> python=3.9 rdkit        # creating a specific env
 conda install -c rdkit rdkit-postgresql            # installing PostgreSQL as client for rdkit-postgreSQL cartridge (https://rdkit.org/docs/Cartridge.html)
 conda activate <env_name>                          # activates a certain conda env
 conda deactivate                                   # deactivates the current conda env
 ```
 
-modifying packages from envs
+How to list packages and remove them.
 
 ```bash
 conda list                                         # lists all packages/versions of the active conda env
@@ -743,11 +744,9 @@ conda list --name <env_name>                       # lists all packages of a cer
 conda list --revisions                             # lists all revisions made in active conda env
 conda remove --name <package_name>                 # deletes a specified list of packages from spec. conda env
 conda env remove --name <env_name>                 # deletes an specified environment
-
-conda clean -h                                     # in the 'pkgs'-folder a lot of waste if collected (its the download cache)
 ```
 
-sharing envs: creating yamls
+How to share environments (export env to and create from a yaml file).
 
 ```bash
 # sharing environments
@@ -761,12 +760,12 @@ conda list --explicit > pkgs.txt                   # export env with exact packa
 conda create --name <new_env> --file pkgs.txt      # create env based on exact package versions
 ```
 
-channels
+How channels work, manage anaconda and upload packages.
 
 ```bash
 # using packages and channels
 anaconda-navigator                                 # opens the anaconda navigator
-anaconda search <package_name>                     # search for a package on all channels (not only default)
+anaconda search <package_name>                     # search for a package on all channels (not only default channel)
 conda install conda-forge::PKGNAME                 # installs a package from a specific channel
 conda config --add channels <channel_name>         # add a channel to your conda configuration
 
@@ -783,10 +782,7 @@ anaconda login
 anaconda upload PACKAGE
 https://<your-anaconda-repo>/USERNAME/PACKAGE
 anaconda download USERNAME/PACKAGE
-
 ```
-
-tutorial: how to upload a package to anaconda (my own channel)
 
 **[⬆ back to top](#contents)**
 
@@ -794,11 +790,16 @@ tutorial: how to upload a package to anaconda (my own channel)
 
 ## Git
 
-A version control system (VCS) is indispensable and Git is just awesome.
+A version control system (VCS) like git is like a developers lab notebook. Making good commit messages and doin' work bit by bit is of uttermost importance.
 
-when to use tokens?
+Running git config globally
 
-creating a new repo: github.com create new one and then connect local with remote repo.
+```bash
+git config --global user.email "my@emailaddress.com"
+git config --global user.name "Brian Kerr"
+```
+
+Connect newly created local repository with remote repository. Go to [github.com](https://github.com/), create a new repo and add it's url to the local repo.
 
 ```bash
 echo "# projectname" >> README.md
@@ -810,31 +811,108 @@ git remote add origin https://github.com/NiklasTiede/projectname.git
 git push -u origin main
 ```
 
-https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git
-https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely
-https://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pull-and-git-fetch
-https://stackoverflow.com/questions/348170/how-do-i-undo-git-add-before-commit
-https://stackoverflow.com/questions/6591213/how-do-i-rename-a-local-git-branch
-https://stackoverflow.com/questions/1125968/how-do-i-force-git-pull-to-overwrite-local-files
-https://stackoverflow.com/questions/61212/how-to-remove-local-untracked-files-from-the-current-git-working-tree
-https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit
-https://stackoverflow.com/questions/1783405/how-do-i-check-out-a-remote-git-branch
-https://stackoverflow.com/questions/630453/put-vs-post-in-rest
-https://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication
-https://stackoverflow.com/questions/161813/how-to-resolve-merge-conflicts-in-git-repository
-https://stackoverflow.com/questions/1783405/how-do-i-check-out-a-remote-git-branch/1783426#1783426
-https://stackoverflow.com/questions/16717930/how-to-run-crontab-job-every-week-on-sunday
-https://stackoverflow.com/questions/584770/how-would-i-get-a-cron-job-to-run-every-30-minutes
-https://stackoverflow.com/questions/10193788/restarting-cron-after-changing-crontab-file
+Or just clone a repo. Build it's dependencies if you wanna run it.
 
 ```bash
-
-
+git clone <https://name-of-the-repository>   # download repo into cwd
 ```
 
+A normal workflow when doing commits.
+
 ```bash
+git status                          # status information
+git diff                            # difference to last commit
+git add <file1> <newfile2>          # adds new/changed files to staging area
+git commit -m 'descr. of commit'    # commit files to the local repo
+git push                            # pushs commit t
+```
 
+If you wanna admire your work.
 
+```bash
+git status                # returns state of working dir and staging area
+git diff                  # view changes you haven't committed yet
+
+git log                   # to see what you've done so far
+git log -n3               # to see the last few commits you've made
+git log --stat --summary  # a complete overview
+```
+
+when doin work on another persons repo or adding a new feature/bug-fix to the project. create a branch and specifiy the branches purpose as good as possible. work on the code and commit changes. lastly push it so that the owner of can decoide
+
+same process is done when your adding new features to you own project. you main branch is always deployable, so your when adding features/fixing bugs your working on a branch and merge it later into the main branch. But it's also possible to crate different branches for different purposes and merge changes into them sperataly
+
+With each new scope of work, aka feature, a developer creates a new branch. Then you're working on the branch, comitting changes and push it to the repository. This process is called pull request. The owner of the repository decides then if the pull request is merged or not.
+
+Fork the repo of choice and then type:
+
+```bash
+git clone <https://name-of-the-repository>
+cd <projectname>
+git checkout -b fix-readme-typo            # create new branch, name it
+[make changes to the project]
+git status
+git diff
+git add README.md
+git commit -m 'fixed typo'
+git push origin fix-readme-typo
+
+on github:
+   - create pull request
+   - repo owner can accept and merge the pull request
+```
+
+Working with branches
+
+```bash
+# working with branches:
+git checkout <branch name>     # change the current working branch
+git branch <branch name>       # makes a branch (both)
+
+git merge <branch name>        # merges branch with master (first checkout to master!) then push
+git branch -d <branch name>    # delete old branch
+```
+
+$ git push -d <remote_name> <branch_name>
+$ git branch -d <branch_name>
+
+git push -d origin <branch_name>
+
+```bash
+# commands list
+git clone <https://name-of-the-repository-link>
+
+git branch <branch-name>              # Creating a new branch locally
+git push -u <remote> <branch-name>    # push into remote
+git branch or git branch --list       # viewing brnahc
+git branch -d <branch-name>           # delete branch
+
+git checkout <name-of-your-branch>    # switch between branches
+git checkout -b <name-of-your-branch> # create and switch at same time
+
+git status                            # gives us all the necessary information about the current branch
+
+git add <file>                        #
+git commit -m "commit message"        #
+
+git push <remote> <branch-name>       #
+git push -u origin <branch_name>      # new branch
+
+git pull <remote>                     #
+
+git checkout dev                      #
+git fetch                             #
+git merge <branch-name>               #
+```
+
+A `.gitignore` file specifies intentionally untracked files that Git should ignore. But if a file was already indexed, how do we remove this file from the index? Add the filename to the `.gitignore` file:
+
+```bash
+git rm -r --cached .         # untracks all files which are within .gitignore
+
+git add .
+git commit -m 'Removing ignored files'
+git push
 ```
 
 **[⬆ back to top](#contents)**
