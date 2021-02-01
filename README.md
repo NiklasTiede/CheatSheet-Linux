@@ -790,16 +790,7 @@ anaconda download USERNAME/PACKAGE
 
 ## Git
 
-A version control system (VCS) like git is like a developers lab notebook. Making good commit messages and doin' work bit by bit is of uttermost importance.
-
-Running git config globally
-
-```bash
-git config --global user.email "my@emailaddress.com"
-git config --global user.name "Brian Kerr"
-```
-
-Connect newly created local repository with remote repository. Go to [github.com](https://github.com/), create a new repo and add it's url to the local repo.
+A version control system (VCS) like git is a developers lab notebook. Don't forget that making good commit messages and doin' work bit by bit is of uttermost importance. Connecting a newly created local repository with a remote repository is easy. Go to [github.com](https://github.com/), create a new repo and add it's URL to the local repo by entering the following commands:
 
 ```bash
 echo "# projectname" >> README.md
@@ -811,23 +802,25 @@ git remote add origin https://github.com/NiklasTiede/projectname.git
 git push -u origin main
 ```
 
-Or just clone a repo. Build it's dependencies if you wanna run it.
+Exploring other peoples projects is easy. Clone it and build its dependencies to run it properly. Python projects which contain a setup.py file or a conda.yml can be installed without cond/pip just by downloading it via git
 
 ```bash
 git clone <https://name-of-the-repository>   # download repo into cwd
+
+
 ```
 
-A normal workflow when doing commits.
+Here's a normal workflow when making commits on a project:
 
 ```bash
-git status                          # status information
-git diff                            # difference to last commit
+git status                          # status information (optional)
+git diff                            # difference to last commit (optional)
 git add <file1> <newfile2>          # adds new/changed files to staging area
 git commit -m 'descr. of commit'    # commit files to the local repo
 git push                            # pushs commit t
 ```
 
-If you wanna admire your work.
+If your would like to look at your work you've done use these:
 
 ```bash
 git status                # returns state of working dir and staging area
@@ -838,74 +831,52 @@ git log -n3               # to see the last few commits you've made
 git log --stat --summary  # a complete overview
 ```
 
-when doin work on another persons repo or adding a new feature/bug-fix to the project. create a branch and specifiy the branches purpose as good as possible. work on the code and commit changes. lastly push it so that the owner of can decoide
+When working on a more sophisticated project, you separate your work (adding features/bug-fixes) from the production-ready main branch by switching to a branch which is named according to it's pupose (like fix-readme-typo). You commit changes and push it to the remote repo. If you're the owner of the repo, you can decide to merge it into your production-ready main branch on your own. If the owner of the project is someone else, you push it and make a pull request. Usually merging bug-fix/feature-branches into the main branch is associated with semantic versioning.
 
-same process is done when your adding new features to you own project. you main branch is always deployable, so your when adding features/fixing bugs your working on a branch and merge it later into the main branch. But it's also possible to crate different branches for different purposes and merge changes into them sperataly
-
-With each new scope of work, aka feature, a developer creates a new branch. Then you're working on the branch, comitting changes and push it to the repository. This process is called pull request. The owner of the repository decides then if the pull request is merged or not.
-
-Fork the repo of choice and then type:
+When working solo on a more sophisticated project I create branches, push them to the remote repo to save them and merge them later locally into the main branch. Then I delete the local and remote side branch. This gives you a nice history at hand about how you work.
 
 ```bash
-git clone <https://name-of-the-repository>
-cd <projectname>
-git checkout -b fix-readme-typo            # create new branch, name it
-[make changes to the project]
-git status
-git diff
-git add README.md
-git commit -m 'fixed typo'
-git push origin fix-readme-typo
+git checkout -b <new-branch>           # create new branch
+git branch --list                      # list all branches
 
-on github:
-   - create pull request
-   - repo owner can accept and merge the pull request
+
+loop:
+   [make changes to project]
+   git add <file>
+   git commit -m 'message'
+   git push                            # save a copy of the branch remotely
+
+
+git checkout main                      # switch to main-branch
+git merge <new-branch>                 # merge <new-branch> into main-branch
+git push                               # push local into remote main
+git branch -d <new-branch>             # delete local <new-branch>
+git push origin --delete <new-branch>  # delete remote <new-branch>
 ```
 
-Working with branches
+Pull requests are the way to contribute on Github. It's workflow is: fork -> clone -> edit -> pull request.
 
 ```bash
-# working with branches:
-git checkout <branch name>     # change the current working branch
-git branch <branch name>       # makes a branch (both)
+on Github:
+   - fork the repository
 
-git merge <branch name>        # merges branch with master (first checkout to master!) then push
-git branch -d <branch name>    # delete old branch
+git clone <https://github.com/your-profile/repo-fork.git>
+cd <repo-fork>
+git checkout -b <branch-name>            # create a new branch
+
+loop:
+   [make changes to the project]
+   git status
+   git diff
+   git add <file>
+   git commit -m 'message'
+   git push origin <branch-name>
+
+on Github:
+   - create pull request                   # add description and title
 ```
 
-$ git push -d <remote_name> <branch_name>
-$ git branch -d <branch_name>
-
-git push -d origin <branch_name>
-
-```bash
-# commands list
-git clone <https://name-of-the-repository-link>
-
-git branch <branch-name>              # Creating a new branch locally
-git push -u <remote> <branch-name>    # push into remote
-git branch or git branch --list       # viewing brnahc
-git branch -d <branch-name>           # delete branch
-
-git checkout <name-of-your-branch>    # switch between branches
-git checkout -b <name-of-your-branch> # create and switch at same time
-
-git status                            # gives us all the necessary information about the current branch
-
-git add <file>                        #
-git commit -m "commit message"        #
-
-git push <remote> <branch-name>       #
-git push -u origin <branch_name>      # new branch
-
-git pull <remote>                     #
-
-git checkout dev                      #
-git fetch                             #
-git merge <branch-name>               #
-```
-
-A `.gitignore` file specifies intentionally untracked files that Git should ignore. But if a file was already indexed, how do we remove this file from the index? Add the filename to the `.gitignore` file:
+A `.gitignore` file specifies intentionally untracked files that Git should ignore. But if a file was already indexed, how do we remove this file from the index? Add the filename to the `.gitignore` file and then type:
 
 ```bash
 git rm -r --cached .         # untracks all files which are within .gitignore
@@ -913,6 +884,13 @@ git rm -r --cached .         # untracks all files which are within .gitignore
 git add .
 git commit -m 'Removing ignored files'
 git push
+```
+
+Git can be configured globally and locally.
+
+```bash
+git config --global user.email "my@emailaddress.com"
+git config --global user.name "first_name last_name"
 ```
 
 **[⬆ back to top](#contents)**
