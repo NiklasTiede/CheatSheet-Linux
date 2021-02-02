@@ -25,14 +25,17 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Secure Shell](#secure-shell)
    - [Hardware: CPU, GPU and Monitor](#hardware-cpu-gpu-and-monitor)
 3. [Third Party Tools](#3-third-party-tools)
-   - [Git](#git)
+   - [pip and pipenv](#pip-and-pipenv)
    - [Anaconda](#anaconda)
+   - [Git](#git)
    - [Docker](#docker)
    - [LSDeluxe](#lsdeluxe)
    - [Misc - Tokei, ](#)
 4. [Aliases](#4-aliases)
 5. [Shortcuts](#5-shortcuts)
+   - [Ubuntu Desktop](#ubuntu-desktop)
    - [Terminal](#terminal)
+   - [Nano Editor](#nano-editor)
    - [Chromium Browser](#chromium-browser)
    - [VSCode](#vscode)
 6. [Shell Configuration](#6-shell-configuration)
@@ -682,14 +685,14 @@ pip is a package-management system used to install and manage python packages. I
 
 ```bash
 
-pip search <package>           # search pypi
-pip install <package>          # installing a package from pypi
-pip uninstall <package>        # uninstalls specified package
-pip list                       # lists all pip-packages within the current env
-pip freeze > requirements.txt  # saves all package-versions of current env
+pip search <package>            # search pypi
+pip install <package>           # installing a package from pypi
+pip uninstall <package>         # uninstalls specified package
+pip list                        # lists all pip-packages within the current env
+pip freeze > requirements.txt   # saves all package-versions of current env
 ```
 
-The package dependencies of each python project should be managed with care. Therefore using an isolated virtual environment for each project is best practice. pipenv is a nice dependency manager.
+The package dependencies of each python project should be managed with care. Therefore using an isolated virtual environment for each project is best practice. pipenv is a nice dependency manager. If you want to see how to run scripts which depend on 3rd party packages see section [Running Scripts](#running-scripts).
 
 ```bash
 
@@ -703,6 +706,19 @@ pipenv graph                        # shows packages and their dependencies
 pipenv --py                         # returns path to python version
 ```
 
+setup.py file
+
+```bash
+pip install .           # install package from stup.py file
+pip install -e .       # package is installed and you can work on it at the same time
+```
+
+How to upload packages to [pypi.org](). A `setup.py` file is created, populated and used to generate files which are uploaded to pypi.
+
+```bash
+
+```
+
 Some packages can only be found at the repository of Anaconda.
 
 **[⬆ back to top](#contents)**
@@ -713,27 +729,25 @@ Some packages can only be found at the repository of Anaconda.
 
 pip and pipenv are focused around Python, neglecting non-Python library dependencies. This is where Anaconda starts to shine. It is a language-agnostic cross-platform environment manager simplifying the package management of non-python libraries. It's main audience is the scientific community.
 
-How to retrieve information about anaconda and your environments.
+How to retrieve information about anaconda, your environments and configurations.
 
 ```bash
-conda info                                         # gives information about version, env's
+conda info                                         # gives information about version, envs
 conda env list                                     # shows all environments
 
 conda update -n base conda                         # updates conda
-conda clean -h                                     # in the 'pkgs'-folder a lot of waste if collected (its the download cache)
+conda clean -h                                     # cleans download cache ('pkgs'-folder)
 ```
 
 How to create new environments, activate them and install packages.
 
 ```bash
-# working with environments
-conda create --name <env_name> python=3.6          # creating a new conda env with a specific python-version
-conda create -c rdkit -n <env_name> rdkit          # creating a new conda env with a specific package
+conda create --name <env_name> python=3.8          # creating conda env with specific python-version
 
-conda create -n <env_name> python=3.9 rdkit        # creating a specific env
-conda install -c rdkit rdkit-postgresql            # installing PostgreSQL as client for rdkit-postgreSQL cartridge (https://rdkit.org/docs/Cartridge.html)
-conda activate <env_name>                          # activates a certain conda env
-conda deactivate                                   # deactivates the current conda env
+conda create -n <env_name> python=3.9 rdkit        # creating conda env with specific package
+conda install -c rdkit rdkit-postgresql            # installing PostgreSQL as client for rdkit-postgreSQL cartridge
+conda activate <env_name>                          # activates conda env
+conda deactivate                                   # deactivates current conda env
 ```
 
 How to list packages and remove them.
@@ -746,42 +760,52 @@ conda remove --name <package_name>                 # deletes a specified list of
 conda env remove --name <env_name>                 # deletes an specified environment
 ```
 
-How to share environments (export env to and create from a yaml file).
+How to share environments (export to/create from YAML-file). `pip` stores dependencies within a `requirements.txt` file.
 
 ```bash
-# sharing environments
-conda create --clone <env_name> --name <new_env>   # make a copy of an env
-conda env export --name <env_name> > envname.yml   # export env to YAML file
-pip freeze > requirements.txt                      # (do this from the activated conda env!) insert these into the conda .yml ! test the conda/pip env (sometimes both in combination can cause problems)
---> pip is automatically added, so this is not necessary!
+conda create --clone <env_name> --name <new_env>   # make copy of an env
+
+conda env export --name <env_name> > <envname.yml> # export env to YAML file
+
 conda env create --file envname.yml                # creates env from YAML file
-conda env create                                   # create an env from the file named environment.yml in current dir
+conda env create                                   # shorter: creates env from the file named environment.yml in cwd
+
 conda list --explicit > pkgs.txt                   # export env with exact package versions for one OS (the URLs)
 conda create --name <new_env> --file pkgs.txt      # create env based on exact package versions
 ```
 
-How channels work, manage anaconda and upload packages.
+How channels work, managing anaconda.
 
 ```bash
 # using packages and channels
 anaconda-navigator                                 # opens the anaconda navigator
-anaconda search <package_name>                     # search for a package on all channels (not only default channel)
-conda install conda-forge::PKGNAME                 # installs a package from a specific channel
-conda config --add channels <channel_name>         # add a channel to your conda configuration
-
-# additional useful hints
-conda update --all --name <env_name>               # updates all packages within a specified env
-conda config --show                                # shows all configurations
+anaconda search <package_name>                     # search for a package on all channels (not only default chan)
+conda install conda-forge::<package_name>          # installs a package from a specific channel
+conda config --add channels <channel_name>         # add a channel to your conda configuration (conda-forge)
 
 # manage anaconda account
-conda install anaconda-client
-anaconda -h
+conda install anaconda-client                      #
+anaconda -h                                        #
 
-# upload packages to anaconda:
-anaconda login
-anaconda upload PACKAGE
+conda update --all --name <env_name>               # updates all packages within a specified env
+conda config --show                                # shows all configurations
+```
+
+How to upload packages. Packaging with conda can be done by setting a meta.yml file. Then `conda build` builds the package with the specified python version. the file can be found within the `conda-bld` folder within the environment. You can upload it on your channel and everyone can easily download your package and it's dependencies.
+
+```bash
+
+conda build --py 3.8 recipe .
+conda install conda-build
+
+anaconda upload /home/niklas/anaconda3/envs/feedingORCAs/conda-bld/linux-64/feedingorcas-0.1.0-py39_0.tar.bz2
+conda install -c niklastiede feedingorcas
+anaconda login                                     #
+anaconda upload PACKAGE                            #
+https://<your-anaconda-repo>/USERNAME/PACKAGE      #
+anaconda download USERNAME/PACKAGE                 #
+
 https://<your-anaconda-repo>/USERNAME/PACKAGE
-anaconda download USERNAME/PACKAGE
 ```
 
 **[⬆ back to top](#contents)**
@@ -823,12 +847,12 @@ git push                            # pushs commit t
 If your would like to look at your work you've done use these:
 
 ```bash
-git status                # returns state of working dir and staging area
-git diff                  # view changes you haven't committed yet
+git status                 # returns state of working dir and staging area
+git diff                   # view changes you haven't committed yet
 
-git log                   # to see what you've done so far
-git log -n3               # to see the last few commits you've made
-git log --stat --summary  # a complete overview
+git log                    # to see what you've done so far
+git log -n3                # to see the last few commits you've made
+git log --stat --summary   # a complete overview
 ```
 
 When working on a more sophisticated project, you separate your work (adding features/bug-fixes) from the production-ready main branch by switching to a branch which is named according to it's pupose (like fix-readme-typo). You commit changes and push it to the remote repo. If you're the owner of the repo, you can decide to merge it into your production-ready main branch on your own. If the owner of the project is someone else, you push it and make a pull request. Usually merging bug-fix/feature-branches into the main branch is associated with semantic versioning.
@@ -839,13 +863,11 @@ When working solo on a project I create branches, push them to the remote repo t
 git checkout -b <new-branch>           # create new branch
 git branch --list                      # list all branches
 
-
 loop:
    [make changes to project]
    git add <file>
    git commit -m 'message'
    git push                            # save a copy of the branch remotely
-
 
 git checkout main                      # switch to main-branch
 git merge <new-branch>                 # merge <new-branch> into main-branch
@@ -886,20 +908,39 @@ git commit -m 'Removing ignored files'
 git push
 ```
 
-Git can be configured globally and locally.
+Git can be configured globally and locally. The `.gifconfig` file is the way to go.
 
 ```bash
 git config --global user.email "my@emailaddress.com"
 git config --global user.name "first_name last_name"
 ```
 
+packages and their dependencies can be installed by pip and conda, but it's also possible to built and install a project on your own by using git:
+
+```bash
+git clone git:...
+```
+
 **[⬆ back to top](#contents)**
 
 ---
 
-## LSDeluxe
+# ReadTheDocs
 
-## tree, Tokei, misc
+Proper documentation is super important when working on larger projects.
+
+```bash
+
+sphinx-quickstart
+```
+
+**[⬆ back to top](#contents)**
+
+---
+
+## tree, Tokei, misc, LSDeluxe
+
+There are plenty of smaller command line tools I use.
 
 ```bash
 
@@ -1062,6 +1103,8 @@ don't make you much more productive but more pleasant to look at a nicely lookin
 [LSDeluxe](https://github.com/Peltoche/lsd) | nicer looking ls command
 [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) |
 [Powerlevel10k](https://github.com/romkatv/powerlevel10k) | layout looks nicer, syntax highlighting
+
+I'm synchronizing all my computers with my [dotfiles](https://github.com/NiklasTiede/Dotfiles) to experience a consistent configuration. Furthermore, it makes buying a new system not such a pain.
 
 **[⬆ back to top](#contents)**
 
