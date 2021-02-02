@@ -833,7 +833,7 @@ git log --stat --summary  # a complete overview
 
 When working on a more sophisticated project, you separate your work (adding features/bug-fixes) from the production-ready main branch by switching to a branch which is named according to it's pupose (like fix-readme-typo). You commit changes and push it to the remote repo. If you're the owner of the repo, you can decide to merge it into your production-ready main branch on your own. If the owner of the project is someone else, you push it and make a pull request. Usually merging bug-fix/feature-branches into the main branch is associated with semantic versioning.
 
-When working solo on a more sophisticated project I create branches, push them to the remote repo to save them and merge them later locally into the main branch. Then I delete the local and remote side branch. This gives you a nice history at hand about how you work.
+When working solo on a project I create branches, push them to the remote repo to save them and merge them later locally into the main branch. Then I delete the local and remote side branch. This gives you a nice history at hand about how you work.
 
 ```bash
 git checkout -b <new-branch>           # create new branch
