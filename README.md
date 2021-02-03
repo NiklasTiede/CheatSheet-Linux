@@ -29,6 +29,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [pip and pipenv](#pip-and-pipenv)
    - [Anaconda](#anaconda)
    - [Git](#git)
+   - [Sphinx - Read the Docs](#sphinx-read-the-docs)
    - [Docker](#docker)
    - [LSDeluxe](#lsdeluxe)
    - [Misc - Tokei, ](#)
@@ -641,7 +642,7 @@ scp username@hostname:/path/to/remote/file /path/to/local/file
 
 ---
 
-# Networking
+## Networking
 
 text
 
@@ -654,6 +655,18 @@ make install  compiling c code
 ifconfig
 myip
 netstat -tulnp | grep ssh
+
+```
+
+curl is a command-line utility for transferring data from or to a server designed to work without user interaction. Curl can be handy for debugging, downloading things etc.
+
+```bash
+curl url
+curl -I --http2 https://www.ubuntu.com/    # returns HTTP headers
+
+
+curl -o vue-v2.6.10.js https://cdn.jsdelivr.net/npm/vue/dist/vue.js    # save output to a file
+
 
 ```
 
@@ -964,7 +977,16 @@ git clone git:...
 
 ---
 
-# ReadTheDocs
+## Docker
+
+explanation
+finished apps have to be containized for proper scaling and easy portability.
+
+**[⬆ back to top](#contents)**
+
+---
+
+# Sphinx - Read the Docs
 
 Proper documentation is super important when working on larger projects.
 
@@ -977,117 +999,178 @@ sphinx-quickstart
 
 ---
 
-## Miscenlous tools (small tools)
+## npm and node, deno, react (javascript/typescript/react)
 
-There are plenty of smaller command line tools I use.
+explanation
 
-### Cookiecutter
+**[⬆ back to top](#contents)**
 
-Setting up a python project is time-consuming so cookiecutter speeds this process up. Jinja templating is used to <>
+---
+
+## Miscellaneous Tools
+
+There's a plethora of smaller command line tools I use. I
+
+### locate
+
+`find` is not fast enough to search for a pattern on the whole system. Locate caches the systems filesnames within a database and searchs the database. The database is regenerated once a week. Optionally you can update is manually by using `updatedb`.
 
 ```bash
-cookiecutter
+locate <pattern>       # searches for pattern on system
+sudo updatedb          # updates the database used by locate
 ```
 
 ---
 
 ### tree
 
-text
+`tree` gives you a nice tree-like overview about a directories content. The `-a` flag includes also hidden files and the `-f` flag displays each file/folders full path.
 
 ```bash
-command
+tree              # tree of cwd
+tree -a           # dotfiles are also shown
+tree -f           # full path
+tree -L 2         # max depth is set to 2
+```
+
+---
+
+### Fuzzyfinder
+
+The fuzzyfinder improves when searching for a path or within your command history. I don't harness it's pull power currently. So I should keep learning this tool!
+
+```bash
+fzf                  # search for path
+```
+
+---
+
+### HTTPie
+
+[HTTPie](https://github.com/httpie/httpie) is designed for testing, debugging, and generally interacting with APIs & HTTP servers. I use it mainly for testing and exploring API's.
+
+```bash
+
+http <url>     # returns response header/body
+flags:
+    -h   # returns only the header
+    -b   # returns only the body
+    -d   # download
+    -F   # following redirects
+```
+
+You can easily test API endpoints which are served on your local machine. Instead of JSON which is not well suited for command line Httpie allows to write key-value pairs like this:
+
+```bash
+http GET localhost:5000/recipes      # GET request
+
+http POST localhost:5000/recipes \   # POST request
+name=Soup \
+description="Asian soups are the best!"
+```
+
+predic8 provides a free testing API:
+
+```bash
+http POST https://api.predic8.de/shop/products/ \      # Post
+category=Fruits \
+name=MyFruit \
+price=0.89 \
+vendor=672
+
+http -b GET https://api.predic8.de/shop/products/148   # get
+```
+
+I Added `"--style=monokai"` to Httpie's default options (`.httpie/config.json`) to get a nicely colored output.
+
+---
+
+### Openssl
+
+Is a genereal-purpose cryptography library. I'm using it only for generating passwords.
+
+```bash
+openssl rand -hex 30     # generate hexadecimal key, 30 characters long
+```
+
+---
+
+### Glances
+
+[Glances](https://github.com/nicolargo/glances) is a monitoring tool which aims to present a large amount of monitoring information.
+
+```bash
+glances
 ```
 
 ---
 
 ### tlp
 
-text
+A tool to optimize laptop battery life.
 
 ```bash
-
-tlp-stat
-watch tlp-stat -t
+sudo tlp-stat -s      # system information
+sudo tlp-stat -d      # disk information
+watch tlp-stat -t     # returns your CPU temperature every 2s
 ```
 
 ---
 
-### tokei
+### Tokei
 
-text
+Tokei is a static code analysis tool. It counts the number of lines code of each file within a selected directory. I use it to get a rough idea of how big a project is and which languages are included. Tokei itself is written in Rust, so it's blazing fast.
 
 ```bash
-
-tokei
+tokei <dir>         # counts the number of lines code per language recursively
 ```
 
 ---
 
-### program
+### bpython
 
-text
-
-```bash
-command
-```
-
----
+A fancier interface than the normal python interpreter. It has syntax highlighting and autocomplete. It will definitly enhance your REPL sessions experience.
 
 ```bash
-locate
-goto
-mysql, postgresql, redis, mongo
-docker
 bpython
-uvicorn pip install
-back, yaph linting
-fzf fuzzyfinder
-jupyter lab
-pytest
-htop
-curl https://sh.rustup.rs -sSf | sh
-
-
 ```
 
-wanna generate a password? use openssl! the cryptographers tool
+---
+
+### Jupyter Lab
+
+I have a background in chemistry, so Python and data science tasks are a natural fit to me. Jupyter notebooks took data science collaboration to another level. Notebooks enable us to share how a set of data is processed and then used for modeling. [Kaggle](https://www.kaggle.com/) is the best place to get a plethora of interesting data sets.
 
 ```bash
-bpython  # useful for REPL sessions, exploring a package
-
-openssl rand -hex 12
-
-tree        # must be installed via apt sometimes
-tree -L 2   # max depth isn set to 2
-ls --tree   # LSDeluxe
-
-
-locate <pattern> # searches through whole system for name
-sudo updatedb    # updates cache of locate
-
-# unite pdfs
-pdfunite in1.pdf in2.pdf out.pdf  #
+conda install jupyter lab
+jupyter lab                   # starts a jupyter lab server
 ```
 
-tree -L 2 # visualized directories as tree's. -L restricts the tree to two levels (default: complete tree)
-ls --tree # recurses into every dir
-
-**[⬆ back to top](#contents)**
+A lot of extensions are available to customize jupyter lab.
 
 ---
 
-## Docker
+### Cookiecutter
 
-explanation
+Setting up a python project can be time-consuming. Cookiecutter speeds this process up. The templating engine Jinja2 is used by cookiecutter. You select a cookiecutter project template you like (search at github `search?q=cookiecutter+YourSearch`) and use its github URL. Then you're entering your settings of choice and voilà: your projects is good to go!
 
-**[⬆ back to top](#contents)**
+```bash
+
+cookiecutter <git-URL>                                    # base command
+cookiecutter https://github.com/Buuntu/fastapi-react.git  # example: fastAPI-react app
+```
+
+As you can see cookiecutter is not only used for python projects but for other languages as well!
 
 ---
 
-## npm and node, deno, react
+### Black
 
-explanation
+Linting tools increase readability and give your project a consistent style. Black is a more common linting tool for python. But there are also others tools like Yapf, flake etc. Some linting tools are only code formatter (like black), some give you also some introspection in your code and can help fixing potential bugs.
+
+```bash
+black <file.py>           # linting performed on file.py
+```
 
 **[⬆ back to top](#contents)**
 
