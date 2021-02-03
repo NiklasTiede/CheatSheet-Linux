@@ -23,6 +23,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Running Scripts](#running-scripts)
    - [Processes and Jobs](#processes-and-jobs)
    - [Secure Shell](#secure-shell)
+   - [Networking](#networking)
    - [Hardware: CPU, GPU and Monitor](#hardware-cpu-gpu-and-monitor)
 3. [Third Party Tools](#3-third-party-tools)
    - [pip and pipenv](#pip-and-pipenv)
@@ -172,6 +173,9 @@ cd ..             # goes on folder up
 
 pwd               # print working directory
 date              # to navigate yourself also in time ;-)
+
+xdg-open .        # opens the Nautilus file manager
+gnome-terminal    # open a terinal window from within a terminal
 ```
 
 Since most people (like me) don't have a photographic memory, it's always a good choice to use the machines memory.
@@ -201,6 +205,8 @@ whatis <command>        # returns a one-line description
 
 which <command>         # returns path to the programs binary
 file *                  # lists the types of all files
+
+type <command>          # discriminates between built-in and 3rd party tools
 ```
 
 File space estimation:
@@ -615,12 +621,40 @@ generate ssh keys, create alias, more convient
 scp secure copy protocol
 
 ```bash
+
+
+ssh
+ssh-keygen
+ssh-copy-id
+
+
+
 ssh ...
 ```
 
 ```bash
 scp your_username@remotehost.edu:foobar.txt /local/dir   # download
 scp username@hostname:/path/to/remote/file /path/to/local/file
+```
+
+**[⬆ back to top](#contents)**
+
+---
+
+# Networking
+
+text
+
+```bash
+sha1sum
+ip
+hostname -I
+sudo mount /dev/sdb1 /media/SSD1
+make install  compiling c code
+ifconfig
+myip
+netstat -tulnp | grep ssh
+
 ```
 
 **[⬆ back to top](#contents)**
@@ -645,6 +679,11 @@ lscpu      # returns information about CPU
       #
       #
       #
+prime-select nvidia or intel
+sudo apt purge nvidia-440 -y
+sudo apt-get install cuda
+
+lightdm
       #
 ```
 
@@ -938,11 +977,76 @@ sphinx-quickstart
 
 ---
 
-## tree, Tokei, misc, LSDeluxe
+## Miscenlous tools (small tools)
 
 There are plenty of smaller command line tools I use.
 
+### Cookiecutter
+
+Setting up a python project is time-consuming so cookiecutter speeds this process up. Jinja templating is used to <>
+
 ```bash
+cookiecutter
+```
+
+---
+
+### tree
+
+text
+
+```bash
+command
+```
+
+---
+
+### tlp
+
+text
+
+```bash
+
+tlp-stat
+watch tlp-stat -t
+```
+
+---
+
+### tokei
+
+text
+
+```bash
+
+tokei
+```
+
+---
+
+### program
+
+text
+
+```bash
+command
+```
+
+---
+
+```bash
+locate
+goto
+mysql, postgresql, redis, mongo
+docker
+bpython
+uvicorn pip install
+back, yaph linting
+fzf fuzzyfinder
+jupyter lab
+pytest
+htop
+curl https://sh.rustup.rs -sSf | sh
 
 
 ```
