@@ -26,14 +26,13 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Networking](#networking)
    - [Hardware: CPU, GPU and Monitor](#hardware-cpu-gpu-and-monitor)
 3. [Third Party Tools](#3-third-party-tools)
-   - [pip and pipenv](#pip-and-pipenv)
+   - [pip and pipenv](#3.1-pip-and-pipenv)
    - [Anaconda](#anaconda)
    - [Git](#git)
    - [Sphinx - Read the Docs](#sphinx-read-the-docs)
    - [Docker](#docker)
-   - [LSDeluxe](#lsdeluxe)
-   - [Misc - Tokei, ](#)
-4. [Aliases](#4-aliases)
+   - [Miscellaneous Tools](#miscellaneous-tools)
+4. [Aliases and Functions](#4-aliases-and-functions)
 5. [Shortcuts](#5-shortcuts)
    - [Ubuntu Desktop](#ubuntu-desktop)
    - [Terminal](#terminal)
@@ -57,7 +56,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
 I use the alias `marcopolo` to reach this cheat sheet faster:
 
 ```bash
-echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet'" >> ~/.zshrc
+echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet' && exit" >> ~/.zshrc
 source ~/.zshrc
 ```
 
@@ -731,7 +730,7 @@ brew list
 
 For managing python packages pip and conda are two quite popular package managers.
 
-## pip and pipenv
+## 3.1 pip and pipenv
 
 pip is a package-management system used to install and manage python packages. It's repositories can be found at [pypi.org](https://pypi.org/).
 
@@ -777,7 +776,7 @@ Some packages can only be found at the repository of Anaconda.
 
 ---
 
-## Anaconda
+## 3.2&nbsp; Anaconda
 
 pip and pipenv are focused around Python, neglecting non-Python library dependencies. This is where Anaconda starts to shine. It is a language-agnostic cross-platform environment manager simplifying the package management of non-python libraries. It's main audience is the scientific community.
 
@@ -979,14 +978,110 @@ git clone git:...
 
 ## Docker
 
-explanation
-finished apps have to be containized for proper scaling and easy portability.
+Containerizing applications is an incredible important part when deploying an application. Docker as containerization technology does the job. It improves an applications portability and scalability by abstracting away the underlying operating system. Thus developing your application within a docker container is common practice. It's just incredible valuable!
+
+This awesome [cheatsheet](https://github.com/wsargent/docker-cheat-sheet) helps me very much. I still got alot to learn so I'm visiting their repo now and then.
+
+```bash
+docker info                     # information about docker
+docker search <image-name>      # search for image in docker registry
+sudo docker pull busybox        # pulling a pre-built image (ID or name?)
+docker run <cont-ID>
+
+docker stop <cont-ID>
+docker restart <cont-ID>
+
+docker stop <cont-ID>
+docker rm <cont-ID>
+
+docker history <cont-ID>        # history of the images
+
+docker commit <cont-ID> <name>  # save the state of the container as image
+docker push <cont-ID>           #  push image to registry
+
+docker container ls             # displays all running container
+docker image ls                 # displays all docker images
+```
+
+working from within an image (using the shell):
+
+```bash
+docker exec -it <ID> bash       #
+# enter database withitn a container
+docker-compose exec db psql -h localhost -U postgres --dbname=postgres
+```
+
+build an image -> make a dockerfile and run:
+
+```bash
+docker build -t myimage:1.0 .   # build image from dockerfile
+```
+
+but first you have to create a dockerfile, which will give docker the specifications of your new docker image!
+
+Dockerfile: instructions to build an image
+
+```dockerfile
+FROM python:3.8.1-alpine  # indicates base image
+WORKDIR /backend
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONBUFFERED 1
+COPY ./requirements.txt /backend/requirements.txt
+RUN
+CMD
+```
+
+if your applications needs multiple container (your app needs a db container) then u need `docker compose`.
+text
+
+```bash
+docker-compose up --build       #
+docker-compose up               #
+
+docker image rm 53efefffaa70   # deletes a specified image
+docker rmi $(docker images -q) -f   # delete ALL docker container
+```
+
+docker-compose.yml: docker compose is a tool for defining and running multi-container Docker applications
+
+```dockerfile
+version: "3.7"
+services:
+  server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/:/backend/
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: uvicorn app.api.server:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    env_file:
+      - ./backend/.env
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./backend/.env
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres_data:
+```
+
+kubernetes manages containerized applications across multiple hosts.
 
 **[⬆ back to top](#contents)**
 
 ---
 
-# Sphinx - Read the Docs
+## Sphinx - Read the Docs
 
 Proper documentation is super important when working on larger projects.
 
@@ -994,14 +1089,6 @@ Proper documentation is super important when working on larger projects.
 
 sphinx-quickstart
 ```
-
-**[⬆ back to top](#contents)**
-
----
-
-## npm and node, deno, react (javascript/typescript/react)
-
-explanation
 
 **[⬆ back to top](#contents)**
 
@@ -1172,11 +1259,38 @@ Linting tools increase readability and give your project a consistent style. Bla
 black <file.py>           # linting performed on file.py
 ```
 
+---
+
+### Spasco
+
+And of course I should not forget to mention [Spasco](https://github.com/NiklasTiede/Spasco) a renaming tool written by myself. :wink: It is listed at the Python Packaging Index (PyPI) and can speed your renaming operations up. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
+
+```console
+❯ ls
+test dir
+test file
+
+❯ spasco
+2 files/directories can be renamed:
+before             after
+'test dir'  --> 'test_dir'
+'test file' --> 'test_file'
+OK to proceed with renaming? [y/n] y
+
+❯ ls
+test_dir
+test_file
+```
+
+Furthermore, `spasco` lets you customize the search-value (default: whitespaces) and the new-value (default: underscores). All renaming operations can be logged, to ensure that a renaming operation doesn't break things.
+
 **[⬆ back to top](#contents)**
 
 ---
 
-# 4. Aliases
+# 4. Aliases and Functions
+
+For aliases and funtions you can also explore my [dotfiles](https://github.com/NiklasTiede/Dotfiles).
 
 Aliases save time and work wonders on lengthy commands. Here's a list of my aliases.
 
