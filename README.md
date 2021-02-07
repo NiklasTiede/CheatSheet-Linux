@@ -277,7 +277,7 @@ sudo apt upgrade
 sudo apt autoremove
 ```
 
-sudo gives you temporary super user privileges. `su` switching to super user (root) and back
+sudo gives super user privileges temporarily. `su` lets you switch to super user (root) and back.
 
 ```bash
 sudo !!            # runs previous command as sudo
@@ -285,28 +285,16 @@ sudo su            # switchs to root user
 su <username>      # switchs back to the user account
 ```
 
-Some commands to shut system on/off etc.
+Some commands to turn local/remote systems on/off.
 
 ```bash
 
-reboot
-sudo reboot   # when ssh into system
-shutdown
-logout        # logout from current users session
+sudo reboot        # reboots system
+sudo poweroff      # powers system off
+logout             # logout from current users session
 ```
 
-hibernate/suspend is useful for desktop distros of linux to save energy. But this can interrupt script when running at a specified time. So you can turn hibernation/suspend on/off:
-
-use systems which are 24/7 running, like a raspberry pi or your own x86 linux server.
-
-or you can
-
-```bash
-disable hibernation etc
-xxx
-```
-
-or do cloud hosting (linode, heroku etc) to deploy your applications
+Hibernate and suspend are useful for desktop distributions of linux to save energy. But this can interrupt running scripts. So turn automatic suspension off (`Settings` -> `Power` -> `Automatic Suspend`). On the other hand it's also a nice idea to run your scripts remotely (x86 server or your own Raspberry Pi).
 
 **[⬆ back to top](#contents)**
 
