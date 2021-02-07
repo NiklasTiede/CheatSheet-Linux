@@ -22,14 +22,10 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Finding patterns: grep, find, sed and awk](#finding-patterns-grep-find-sed-and-awk)
    - [Running Scripts](#running-scripts)
    - [Processes and Jobs](#processes-and-jobs)
-   - [Secure Shell](#secure-shell)
-   - [Networking](#networking)
-   - [Hardware: CPU, GPU and Monitor](#hardware-cpu-gpu-and-monitor)
 3. [Third Party Tools](#3-third-party-tools)
    - [pip and pipenv](#3.1-pip-and-pipenv)
    - [Anaconda](#anaconda)
    - [Git](#git)
-   - [Sphinx - Read the Docs](#sphinx-read-the-docs)
    - [Docker](#docker)
    - [Miscellaneous Tools](#miscellaneous-tools)
 4. [Aliases and Functions](#4-aliases-and-functions)
@@ -40,18 +36,6 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Chromium Browser](#chromium-browser)
    - [VSCode](#vscode)
 6. [Shell Configuration](#6-shell-configuration)
-7. [Shell Scripting](#7-shell-scripting)
-   - [Bash in a Nutshell](#bash-in-a-nutshell)
-   - [Variables](#variables)
-   - [Loops](#loops)
-   - [Functions](#functions)
-   - [Condtionals](#conditionals)
-8. [Raspberry Pi related](#8-raspberry-pi)
-9. [Databases](#9-databases)
-   - [SQLite](#sqlite)
-   - [MongoDB](#mongodb)
-   - [PostgreSQL](#postgresql)
-   - [Redis](#redis)
 
 I use the alias `marcopolo` to reach this cheat sheet faster:
 
@@ -613,92 +597,6 @@ The output of the job can be send to an email address when configured. It's also
 50 0 * * 2 ~/backup.sh                      # runs every tuesday at 00:50 a.m.
 ```
 
-## Secure Shell
-
-Th secure shell is a cryptographic network protocol to work on systems remotely. I'm using the SSH protocol within my local network (raspberry pi) and for remote servers if deploying somthing.
-
-generate ssh keys, create alias, more convient
-scp secure copy protocol
-
-```bash
-
-
-ssh
-ssh-keygen
-ssh-copy-id
-
-
-
-ssh ...
-```
-
-```bash
-scp your_username@remotehost.edu:foobar.txt /local/dir   # download
-scp username@hostname:/path/to/remote/file /path/to/local/file
-```
-
-**[⬆ back to top](#contents)**
-
----
-
-## Networking
-
-text
-
-```bash
-sha1sum
-ip
-hostname -I
-sudo mount /dev/sdb1 /media/SSD1
-make install  compiling c code
-ifconfig
-myip
-netstat -tulnp | grep ssh
-
-```
-
-curl is a command-line utility for transferring data from or to a server designed to work without user interaction. Curl can be handy for debugging, downloading things etc.
-
-```bash
-curl url
-curl -I --http2 https://www.ubuntu.com/    # returns HTTP headers
-
-
-curl -o vue-v2.6.10.js https://cdn.jsdelivr.net/npm/vue/dist/vue.js    # save output to a file
-
-
-```
-
-**[⬆ back to top](#contents)**
-
----
-
-## Hardware: CPU, GPU and Monitor
-
-GPU is sometimes necessary when training a neural network or other things with intensive computational workload.
-If connected a monitor as well.
-
-cpu
-
-```bash
-cat /proc/cpuinfo  # provides all kinds of information toward each virtual cpu core
-```
-
-text
-
-```bash
-lscpu      # returns information about CPU
-      #
-      #
-      #
-prime-select nvidia or intel
-sudo apt purge nvidia-440 -y
-sudo apt-get install cuda
-
-lightdm
-      #
-```
-
 **[⬆ back to top](#contents)**
 
 ---
@@ -913,6 +811,7 @@ When working solo on a project I create branches, push them to the remote repo t
 ```bash
 git checkout -b <new-branch>           # create new branch
 git branch --list                      # list all branches
+git push --set-upstream origin <new-branch>
 
 loop:
    [make changes to project]
@@ -1076,19 +975,6 @@ volumes:
 ```
 
 kubernetes manages containerized applications across multiple hosts.
-
-**[⬆ back to top](#contents)**
-
----
-
-## Sphinx - Read the Docs
-
-Proper documentation is super important when working on larger projects.
-
-```bash
-
-sphinx-quickstart
-```
 
 **[⬆ back to top](#contents)**
 
@@ -1406,53 +1292,5 @@ don't make you much more productive but more pleasant to look at a nicely lookin
 [Powerlevel10k](https://github.com/romkatv/powerlevel10k) | layout looks nicer, syntax highlighting
 
 I'm synchronizing all my computers with my [dotfiles](https://github.com/NiklasTiede/Dotfiles) to experience a consistent configuration. Furthermore, it makes buying a new system not such a pain.
-
-**[⬆ back to top](#contents)**
-
----
-
-# 7. Shell Scripting
-
-For Shell scripting I can only recommend the excellent cheat sheet of [devhints.io](https://devhints.io/bash).
-
-In the following I will just explain the most important things, I also I more regurlarly.
-
-important shebang lines: what is a shebang line and why do they exist?
-
-`#!/bin/bash`
-`#!/bin/sh`
-`#!/usr/bin/env python`
-
-check if a file exists
-
-```bash
-if [ -d "$DIRECTORY" ]; then
-  # Control will enter here if $DIRECTORY exists.
-fi
-
-if [ ! -d "$DIRECTORY" ]; then
-  # Control will enter here if $DIRECTORY doesn't exist.
-fi
-```
-
-**[⬆ back to top](#contents)**
-
----
-
-# 8. Raspberry Pi
-
-**[⬆ back to top](#contents)**
-
-# 9. Databases
-
-applications need databases, to serve data. They're implemented into web apps, mobile apps and it's good being able to ssh into them. So some basic commands to explore databases is pretty valuable. All of these database shells can be exited using <kbd>Ctrl</kbd> <kbd>D</kbd>
-
-## SQLite
-
-## MOngoDB
-
-## POstgreSQL
-
-## Redis
 
 **[⬆ back to top](#contents)**
