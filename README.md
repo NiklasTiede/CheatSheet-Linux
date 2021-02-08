@@ -5,6 +5,8 @@
 
 This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 LTS) as a python developer. It is a structured documentation of the commands I'm using throughout interactive shell sessions. Caution, this abstract is highly opinionated :wink:
 
+<!-- add image: image containing the keywords of topics  of this cheatsheet -->
+
 # Contents
 
 1. [Shell Expansions, Shell Operators](#1-shell-expansions-shell-operators)
@@ -362,7 +364,7 @@ To modify ownership (Owner and Group above image) `chown` is used.
 
 ```bash
 
-chown user:group <file/dir>  # changes the ownership
+chown user:group <file/dir>       # changes the ownership
 ```
 
 **[⬆ back to top](#contents)**
@@ -379,7 +381,7 @@ printenv HOME      # prints the value of a specified env var
 echo $HOME         # same as above
 ```
 
-For instance credentials can be separated from code as environment variables (or within files). The creation of new env vars can be achieved by the `export` command. To set a env var for the current user permanently it has to be appended to your .bashrc or .zshrc file.
+For instance credentials can be separated from code as environment variables (or as a separate file). The creation of new env vars can be achieved by the `export` command. To set a env var for the current user permanently it has to be appended to your .bashrc or .zshrc file.
 
 ```bash
 
@@ -454,15 +456,70 @@ history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 
 ## Running Scripts
 
+### 1. normal python + script
+
+Python makes scripting easy. To execute a python script just add your file as an arguments to the python interpreter.
+
+```bash
+python myscript.py       # execute python script
+```
+
+### 2. make executable
+
+You can make a script executable by adding a shebang line to the script and changing its permissions.
+
+```bash
+chmod +x <script.sh>      # makes a script executable
+```
+
+```python
+#!/usr/bin/env python
+```
+
+Then u can use it by it's name when ur within its folder. The choice of the python interpreter is moved from the shell into the python script.
+
+```bash
+./myscript.py     # script is executed (rel. path is used)
+~/myscripts/myscript.py  # absolute path
+```
+
+### 3. give alias
+
+instead of using the absolute path of your script, use an alias! Add the alias on your bashrc or add it to your .alias folder (if you're a friend of good structured dotfiles).
+
+```bash
+alias myscript=~/myscripts/myscript.py
+```
+
+### 4. incorporate venv
+
+If you're script is using 3rd party libs then it's best practice to isolate these dependencies. I use pipenv to create virtual environments when pure-python libs are used and anaconda if the packages contain other languages.
+
+create a virtual environment (see xxx). search for your python interpreters path
+
+```bash
+which python
+```
+
+then add this path to your scripts shebang line:
+
+```python
+#!/home/niklas/.local/share/virtualenvs/MyScripts-iqhOkNUA/bin/python
+```
+
+When you're not within a virtual environment (conda/pipenv) then
+To find out which python interpreter/version your using type
+
+To make your python file executable add a shebang line
+
 add python path to the script file as shebang line
+
+(see [Anaconda](#anaconda) or [pipenv](#pip-and-pipenv))
 
 if the script imports only standard lib packages, no venv is required
 if script is simple and no 3rd party packages are required or a specific python version (script is executeable on global python version) you dont need to use a virtual env, and instead use your shells default python version
 
-```bash
-which python
-python myscript.py   # no shebang line
-```
+Now your script uses the python interpreter which has access to the 3rd party packages you installed within this environment!
 
 if the script is more complex and/or needs another python interpreter, then you have to add a shebang line from the virtual anv. I use pipenv or anaconda
 example: webscraping using 3rd party packages like requests, biautifulsoup etc.
@@ -484,13 +541,53 @@ or
 #!/home/niklas/anaconda3/envs/my_env/bin/python # anaconda envirnment
 ```
 
-If you have a useful script you wanna use more easily, then make an alias!
+### 5. install via bash script
+
+So your script is so nice, you would like to share it and make it installable by using a bash script. Lets say you have a folder for your scripts and within this folder you're collecting you're scripts.
+Upload your script to github with an environments file. Then add your install.sh script.
+
+process of installing it:
 
 ```bash
-alias name='~/MyScripts/myscript.py &'
+git clone <url>
+cd projectfolder
+./install.sh
 ```
 
-text
+Lets take a look into the installation script:
+
+```bash
+- create virutal env, install all dependencies from requiremnets.txt file
+add alias to bashrc
+alias myscript=~/myscripts/myscript.py
+test functionality, give user message: your package is not wokring!
+```
+
+### 6. packaging pypi
+
+Although its interesting to see that a bash script is capable of installing a python script, nowadays packages are installed not via bash scripts, but via pip, and the pypi.
+
+add a setup.py file
+
+```bash
+
+```
+
+### 7. packaging conda
+
+### 8. make script more professionel: add CLI
+
+when your're packages wants to work with arguments then the sys lib gives you the choice to handle this. If you're
+
+### 9. use cronjobs and/or server infrastructure for deployment
+
+if you want to execute your scripts periodically (webscraping for instance) than cron jobs are very nice!
+
+furthermore, transferring your scripts onto a server or a home owned raspi is very handy. These devices are running constanly and you're scripts will be executed.
+
+```bash
+
+```
 
 **[⬆ back to top](#contents)**
 
@@ -510,7 +607,7 @@ nohup ./myscript.py           # script is executable and has shebang line
 
 ./script.py > script.out 2>&1 # redirect stdout/stderr into script.out file
 
-jobs                       # shows each running job
+jobs                          # shows each running job
 ```
 
 If your script prints messages to the terminal and you want to save the output in a file: use the `tee` command! It will redirect the script output also to a file. And if you'd like to continue working within the shell redirect the terminal output to /dev/null.
@@ -1191,9 +1288,9 @@ ALIASES=`alias | cut -d '=' -f 1`
 
 # 5. Shortcuts
 
-linux desktop, terminal, nano-editor, chromium, VSCode
+Usually I'm jumping between the terminal, my IDE and the browser. Using shortcuts makes everything more convenient.
 
-Linux shortcuts (desktop)
+Ubuntu desktop:
 
 | Shortcut                                                        | Effect                                   |
 | --------------------------------------------------------------- | ---------------------------------------- |
@@ -1206,7 +1303,14 @@ Linux shortcuts (desktop)
 | <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>                     | Open terminal                            |
 | <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                   | Close terminal                           |
 
-Terminal Shortcuts
+---
+
+Terminal:
+
+```bash
+gnome-terminal     # opens a second terminal window
+xdg-open .         # opens cwd with nautilus file manager
+```
 
 | Shortcut                                                          | Effect                                        |
 | ----------------------------------------------------------------- | --------------------------------------------- |
@@ -1222,11 +1326,13 @@ Terminal Shortcuts
 | <kbd>Ctrl</kbd> <kbd>left</kbd> or <kbd>right</kbd>               | Move cursor to next word                      |
 | <kbd>Alt</kbd> <kbd>D</kbd>                                       | Delete all characters after the cursor        |
 
-nano editor
+---
+
+nano editor:
 
 ```bash
 
-nano <file>      # opens the file (nano is a terminal application for text editing)
+nano <file>      # opens a file
 ```
 
 | Shortcut                                             | Effect             |
@@ -1239,7 +1345,13 @@ nano <file>      # opens the file (nano is a terminal application for text editi
 | <kbd>Ctrl</kbd> <kbd>U</kbd>                         | Paste              |
 | <kbd>Ctrl</kbd> <kbd>\</kbd>                         | Replace pattern    |
 
+---
+
 Chromium Shortcuts
+
+```bash
+xdg-open <url>     # open website with default browser (chromium)
+```
 
 | Shortcut                                           | Effect                                   |
 | -------------------------------------------------- | ---------------------------------------- |
@@ -1255,15 +1367,38 @@ Chromium Shortcuts
 | <kbd>Spacebar</kbd>                                | Scrolls down a section of the webpage    |
 | <kbd>Spacebar</kbd> <kbd>Shift</kbd>               | Scrolls up a section of the webpage      |
 
-VSCode Key Bindings (see into my dotfiles repo)
+---
 
-| Shortcut                                      | Effect             |
-| --------------------------------------------- | ------------------ |
-| <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd>   |                    |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Q</kbd> |                    |
-| <kbd>Tab</kbd>                                |                    |
-| <kbd>Ctrl</kbd> <kbd>Shift</kbd>              | scrolling up, down |
-| <kbd>Ctrl</kbd> <kbd>R</kbd>                  |                    |
+VSCode Key Bindings (see into my [dotfiles repo](https://github.com/NiklasTiede/Dotfiles))
+
+```bash
+code <file>        # opens file with VSCode
+```
+
+| Shortcut                                                         | Effect                      |
+| ---------------------------------------------------------------- | --------------------------- |
+| <kbd>F11</kbd>                                                   | Full screen                 |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>P</kbd>                    | Show command palette        |
+| <kbd>Ctrl</kbd> <kbd>,</kbd>                                     | User Settings               |
+| <kbd>Ctrl</kbd> <kbd>K</kbd>, <kbd>Ctrl</kbd> <kbd>S</kbd>       | Keyboard shortcuts          |
+| <kbd>Ctrl</kbd> <kbd>L</kbd>                                     | Line selection              |
+| <kbd>alt</kbd> <kbd>Up</kbd> or <kbd>Down</kbd>                  | Move line up/down           |
+| <kbd>Ctrl</kbd> <kbd>/</kbd>                                     | Toggle line comment         |
+| <kbd>Home</kbd> or <kbd>End</kbd>                                | Go to beginning/end of line |
+| <kbd>Ctrl</kbd> <kbd>Home</kbd> or <kbd>End</kbd>                | Go to beginning/end of file |
+| <kbd>F12</kbd>                                                   | Go to definition            |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd>                    | Format document             |
+| <kbd>Shift</kbd> <kbd>Alt</kbd> <kbd>Up</kbd> or <kbd>Down</kbd> | Add cursor above/below      |
+| <kbd>Alt</kbd> <kbd>Click</kbd>                                  | Add cursor                  |
+| <kbd>Ctrl</kbd> <kbd>+</kbd> or <kbd>-</kbd>                     | Zomm in/out                 |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>F</kbd>                    | Show search                 |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>                    | Open new command terminal   |
+| <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>V</kbd>                    | Open Markdown preview       |
+| <kbd>Ctrl</kbd> <kbd>F</kbd>                                     | Find                        |
+| <kbd>Ctrl</kbd> <kbd>H</kbd>                                     | Replace                     |
+| <kbd>Ctrl</kbd> <kbd>N</kbd>                                     | New file                    |
+| <kbd>Ctrl</kbd> <kbd>S</kbd>                                     | Save                        |
+| <kbd>Alt</kbd> <kbd>Scrolling</kbd>                              | Faster scrolling            |
 
 **[⬆ back to top](#contents)**
 
