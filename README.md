@@ -7,9 +7,9 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
 
 <!-- add image: image containing the keywords of topics  of this cheatsheet -->
 
-<h1 align="center"><img src="docs/ToC.svg" width="50px"> Contents  </h1>
+<h1 id="content" align="left"><img style="position:relative; top:10px; left:0px" src="docs/ToC.svg" width="50px"#>Contents</h1>
 
-# Contents
+<!-- # Contents -->
 
 1. [Shell Expansions, Shell Operators](#1-shell-expansions-shell-operators)
    - [Shell Expansions](#shell-expansions)
@@ -47,6 +47,8 @@ I use the alias `marcopolo` to reach this cheat sheet faster:
 echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet' && exit" >> ~/.zshrc
 source ~/.zshrc
 ```
+
+<a href="#content">Content</a>
 
 ---
 
@@ -90,6 +92,8 @@ file1.go  file2.go  file3.py
 The lesser known extended globbing (like `*(pattern)`), is used more commonly in shell scipting than in interactive shell sessions. The same applies for brace, variable and arithmetic expansions which are explained within the [Shell Scripting](#shell-scripting) section.
 
 **[⬆ back to top](#contents)**
+
+<a href="#content">⬆ back to top</a>
 
 ---
 
