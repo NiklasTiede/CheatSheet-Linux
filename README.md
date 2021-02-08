@@ -7,6 +7,8 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
 
 <!-- add image: image containing the keywords of topics  of this cheatsheet -->
 
+<h1 align="center"><img src="docs/ToC.svg" width="50px"> Contents  </h1>
+
 # Contents
 
 1. [Shell Expansions, Shell Operators](#1-shell-expansions-shell-operators)
@@ -681,6 +683,8 @@ The output of the job can be send to an email address when configured. It's also
 10 0 * * * ~/neural_network.py              # runs every night at 00:10 a.m.
 50 0 * * 2 ~/backup.sh                      # runs every tuesday at 00:50 a.m.
 ```
+
+If you're still not understanding the cronjon syntax, check out the [crontab.guru](https://crontab.guru/)!
 
 **[⬆ back to top](#contents)**
 
@@ -1396,7 +1400,6 @@ code <file>        # opens file with VSCode
 | <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>V</kbd>                    | Open Markdown preview       |
 | <kbd>Ctrl</kbd> <kbd>F</kbd>                                     | Find                        |
 | <kbd>Ctrl</kbd> <kbd>H</kbd>                                     | Replace                     |
-| <kbd>Ctrl</kbd> <kbd>N</kbd>                                     | New file                    |
 | <kbd>Ctrl</kbd> <kbd>S</kbd>                                     | Save                        |
 | <kbd>Alt</kbd> <kbd>Scrolling</kbd>                              | Faster scrolling            |
 
@@ -1406,9 +1409,7 @@ code <file>        # opens file with VSCode
 
 # 6. Shell Configuration
 
-I'm using the Z-shell instead of bash as my default shell and some plugins to colorize my terminal. It's not increasing the productivity like 10 times but as a human being with an aesthetic demand it's more satisfying
-
-don't make you much more productive but more pleasant to look at a nicely looking
+I'm using the Z-shell instead of bash as my default shell and some plugins to colorize my terminal. It's not increasing the productivity like 10 times but as a human being with an aesthetic demand it's more satisfying. I'm using the following
 
 [LSDeluxe](https://github.com/Peltoche/lsd) | nicer looking ls command
 [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) |
