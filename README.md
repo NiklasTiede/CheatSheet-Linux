@@ -7,9 +7,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
 
 <!-- add image: image containing the keywords of topics  of this cheatsheet -->
 
-<h1 id="contents" ><img src="docs/ToC_sym.png" width="30px"#> Contents</h1>
-
-<!-- # Contents -->
+<h1 id="contents" ><img src="docs/contents.png" width="30px"#> Contents</h1>
 
 1. [Shell Expansions, Shell Operators](#1-shell-expansions-shell-operators)
    - [Shell Expansions](#shell-expansions)
@@ -24,7 +22,6 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Ownership and Permissions](#ownership-and-permissions)
    - [Environment Variables](#environment-variables)
    - [Finding patterns: grep, find, sed and awk](#finding-patterns-grep-find-sed-and-awk)
-   - [Running Scripts](#running-scripts)
    - [Processes and Jobs](#processes-and-jobs)
 3. [Third Party Tools](#3-third-party-tools)
    - [pip and pipenv](#3.1-pip-and-pipenv)
@@ -90,8 +87,6 @@ file1.go  file2.go  file3.py
 The lesser known extended globbing (like `*(pattern)`), is used more commonly in shell scipting than in interactive shell sessions. The same applies for brace, variable and arithmetic expansions which are explained within the [Shell Scripting](#shell-scripting) section.
 
 **[⬆ back to top](#contents)**
-
-<a href="#contents">**⬆ back to top**</a>
 
 ---
 
@@ -458,145 +453,6 @@ history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 
 ---
 
-## Running Scripts
-
-### 1. normal python + script
-
-Python makes scripting easy. To execute a python script just add your file as an arguments to the python interpreter.
-
-```bash
-python myscript.py       # execute python script
-```
-
-### 2. make executable
-
-You can make a script executable by adding a shebang line to the script and changing its permissions.
-
-```bash
-chmod +x <script.sh>      # makes a script executable
-```
-
-```python
-#!/usr/bin/env python
-```
-
-Then u can use it by it's name when ur within its folder. The choice of the python interpreter is moved from the shell into the python script.
-
-```bash
-./myscript.py     # script is executed (rel. path is used)
-~/myscripts/myscript.py  # absolute path
-```
-
-### 3. give alias
-
-instead of using the absolute path of your script, use an alias! Add the alias on your bashrc or add it to your .alias folder (if you're a friend of good structured dotfiles).
-
-```bash
-alias myscript=~/myscripts/myscript.py
-```
-
-### 4. incorporate venv
-
-If you're script is using 3rd party libs then it's best practice to isolate these dependencies. I use pipenv to create virtual environments when pure-python libs are used and anaconda if the packages contain other languages.
-
-create a virtual environment (see xxx). search for your python interpreters path
-
-```bash
-which python
-```
-
-then add this path to your scripts shebang line:
-
-```python
-#!/home/niklas/.local/share/virtualenvs/MyScripts-iqhOkNUA/bin/python
-```
-
-When you're not within a virtual environment (conda/pipenv) then
-To find out which python interpreter/version your using type
-
-To make your python file executable add a shebang line
-
-add python path to the script file as shebang line
-
-(see [Anaconda](#anaconda) or [pipenv](#pip-and-pipenv))
-
-if the script imports only standard lib packages, no venv is required
-if script is simple and no 3rd party packages are required or a specific python version (script is executeable on global python version) you dont need to use a virtual env, and instead use your shells default python version
-
-Now your script uses the python interpreter which has access to the 3rd party packages you installed within this environment!
-
-if the script is more complex and/or needs another python interpreter, then you have to add a shebang line from the virtual anv. I use pipenv or anaconda
-example: webscraping using 3rd party packages like requests, biautifulsoup etc.
-
-```bash
-./myscript.py    # contains shebang line
-use python interpreter in isolated env
-conda activate env
-pipenv shell
-which python # use path for creating shebang line
-
-```
-
-pipenv environment
-
-```python
-#!/home/niklas/.local/share/virtualenvs/test_pipenv-KVowtm2h/bin/python   # pipenv environment
-or
-#!/home/niklas/anaconda3/envs/my_env/bin/python # anaconda envirnment
-```
-
-### 5. install via bash script
-
-So your script is so nice, you would like to share it and make it installable by using a bash script. Lets say you have a folder for your scripts and within this folder you're collecting you're scripts.
-Upload your script to github with an environments file. Then add your install.sh script.
-
-process of installing it:
-
-```bash
-git clone <url>
-cd projectfolder
-./install.sh
-```
-
-Lets take a look into the installation script:
-
-```bash
-- create virutal env, install all dependencies from requiremnets.txt file
-add alias to bashrc
-alias myscript=~/myscripts/myscript.py
-test functionality, give user message: your package is not wokring!
-```
-
-### 6. packaging pypi
-
-Although its interesting to see that a bash script is capable of installing a python script, nowadays packages are installed not via bash scripts, but via pip, and the pypi.
-
-add a setup.py file
-
-```bash
-
-```
-
-### 7. packaging conda
-
-### 8. make script more professionel: add CLI
-
-when your're packages wants to work with arguments then the sys lib gives you the choice to handle this. If you're
-
-### 9. use cronjobs and/or server infrastructure for deployment
-
-if you want to execute your scripts periodically (webscraping for instance) than cron jobs are very nice!
-
-furthermore, transferring your scripts onto a server or a home owned raspi is very handy. These devices are running constanly and you're scripts will be executed.
-
-```bash
-
-```
-
-**[⬆ back to top](#contents)**
-
----
-
 ## Processes and Jobs
 
 Python makes it easy to automate processes by just writing and running it. But how to we achive this without having to let a terminal opened? Using ampersand `&` and `nohup`! The Amperesend sends the process in the background and nohup assures that the process continues even if you're logged out from the current shell session. `jobs` will show you each of these running processes.
@@ -746,19 +602,6 @@ pipenv graph                        # shows packages and their dependencies
 pipenv --py                         # returns path to python version
 ```
 
-setup.py file
-
-```bash
-pip install .           # install package from stup.py file
-pip install -e .       # package is installed and you can work on it at the same time
-```
-
-How to upload packages to [pypi.org](). A `setup.py` file is created, populated and used to generate files which are uploaded to pypi.
-
-```bash
-
-```
-
 Some packages can only be found at the repository of Anaconda.
 
 **[⬆ back to top](#contents)**
@@ -831,23 +674,6 @@ conda update --all --name <env_name>               # updates all packages within
 conda config --show                                # shows all configurations
 ```
 
-How to upload packages. Packaging with conda can be done by setting a meta.yml file. Then `conda build` builds the package with the specified python version. the file can be found within the `conda-bld` folder within the environment. You can upload it on your channel and everyone can easily download your package and it's dependencies.
-
-```bash
-
-conda build --py 3.8 recipe .
-conda install conda-build
-
-anaconda upload /home/niklas/anaconda3/envs/feedingORCAs/conda-bld/linux-64/feedingorcas-0.1.0-py39_0.tar.bz2
-conda install -c niklastiede feedingorcas
-anaconda login                                     #
-anaconda upload PACKAGE                            #
-https://<your-anaconda-repo>/USERNAME/PACKAGE      #
-anaconda download USERNAME/PACKAGE                 #
-
-https://<your-anaconda-repo>/USERNAME/PACKAGE
-```
-
 **[⬆ back to top](#contents)**
 
 ---
@@ -866,12 +692,11 @@ git remote add origin https://github.com/NiklasTiede/projectname.git
 git push -u origin main
 ```
 
-Exploring other peoples projects is easy. Clone it and build its dependencies to run it properly. Python projects which contain a setup.py file or a conda.yml can be installed without cond/pip just by downloading it via git
+Exploring other peoples projects is easy. Clone it and build its dependencies to run it properly. Python projects which contain a setup.py file or a conda.yml can be installed without cond/pip just by downloading it via git pip
 
 ```bash
-git clone <https://name-of-the-repository>   # download repo into cwd
-
-
+git clone <https://name-of-the-repository>                  # download repo into cwd
+pip install git+https://github.com/owner/projectname.git    # download, built and install
 ```
 
 Here's a normal workflow when making commits on a project:
@@ -956,85 +781,108 @@ git config --global user.email "my@emailaddress.com"
 git config --global user.name "first_name last_name"
 ```
 
-packages and their dependencies can be installed by pip and conda, but it's also possible to built and install a project on your own by using git:
-
-```bash
-git clone git:...
-```
-
 **[⬆ back to top](#contents)**
 
 ---
 
 ## Docker
 
-Containerizing applications is an incredible important part when deploying an application. Docker as containerization technology does the job. It improves an applications portability and scalability by abstracting away the underlying operating system. Thus developing your application within a docker container is common practice. It's just incredible valuable!
+Containerizing applications is incredible important to improve its portability and scalability. Thus developing your application within a docker container is common practice. This awesome [cheatsheet](https://github.com/wsargent/docker-cheat-sheet) helps me very much when working with docker. I still got alot to learn so I'm visiting their repo now and then.
 
-This awesome [cheatsheet](https://github.com/wsargent/docker-cheat-sheet) helps me very much. I still got alot to learn so I'm visiting their repo now and then.
+Here are some basic commands.
 
 ```bash
 docker info                     # information about docker
+
+docker image ls                 # displays docker images
+docker container ls             # displays running containers
+docker inspect <cont-ID>        # shows all the info of a container
+
 docker search <image-name>      # search for image in docker registry
-sudo docker pull busybox        # pulling a pre-built image (ID or name?)
-docker run <cont-ID>
+docker pull <image-name>        # pulling a pre-built image (ID or name)
+docker rm <cont-ID>             # removes a container
+docker rmi <cont-ID>            # removes an image
 
-docker stop <cont-ID>
-docker restart <cont-ID>
-
-docker stop <cont-ID>
-docker rm <cont-ID>
-
-docker history <cont-ID>        # history of the images
+docker run <cont-ID>            # creates and starts a container in one operation.
+docker stop <cont-ID>           # stopping container
+docker start <cont-ID>          # starts container
 
 docker commit <cont-ID> <name>  # save the state of the container as image
-docker push <cont-ID>           #  push image to registry
+docker history <cont-ID>        # history of the images
+docker push <cont-ID>           # push image to registry
 
-docker container ls             # displays all running container
-docker image ls                 # displays all docker images
+docker exec                     # execute a command in container
+docker exec -it <ID> bash       # enter bash shell of a running container (-it attach newshell process)
+docker-compose exec db psql -h localhost -U postgres --dbname=postgres  # enter database within a container
+
+docker build .                  # creates image from dockerfile
+
+docker save my_image:my_tag | gzip > my_image.tar.gz   # save an image
+docker load < my_image.tar.gz                          # load image from file
+
+docker run <image> env          # returns env vars of image
+
+docker run $(docker ps -a -q)   # deletes all stopped containers
+docker rmi $(docker images -q) -f   # deletes ALL docker images
 ```
 
-working from within an image (using the shell):
+Usually your application is based on a image from the docker registry and it contains several other libraries. You could run the base image and install everything from within the container, but it's much more preferrable to create a dockerfile which advises docker to build up the image. A dockerfile contains a set of instructions. BTW: Docker stores everything within `/var/lib/docker`.
 
-```bash
-docker exec -it <ID> bash       #
-# enter database withitn a container
-docker-compose exec db psql -h localhost -U postgres --dbname=postgres
-```
+| Instruction                                   | Meaning                                                                             |
+| --------------------------------------------- | ----------------------------------------------------------------------------------- |
+| FROM \<image name>                            | Sets base image for subsequent instructions                                         |
+| RUN \<command>                                | Execute any command in a new layer on top of img and commit results                 |
+| CMD                                           | Provide defaults for an executing container.                                        |
+| EXPOSE \<port>                                | Informs Docker that the container listens on the specified network ports at runtime |
+| ENV \<key> \<value>                           | Sets environment variable                                                           |
+| ADD \<src> \<destination>                     | Copies new files, directories or remote file to container                           |
+| COPY \<src> \<destination>                    | Copies new files or directories to container.                                       |
+| ENTRYPOINT ["executable", "param1", "param2"] | Configures a container that will run as an executable                               |
+| VOLUME [‘/data’]                              | Creates a mount point for externally mounted volumes or other containers            |
+| USER \<uid>                                   | Sets the user name for following RUN / CMD / ENTRYPOINT commands                    |
+| WORKDIR /path/to/workdir                      | Sets the working directory                                                          |
+| ARG \<name>[=\<default value>]                | Defines a build-time variable                                                       |
+| ONBUILD \<INSTRUCTION>                        | Adds a trigger instruction when the image is used as the base for another build     |
+| STOPSIGNAL                                    | Sets the system call signal that will be sent to the container to exit              |
+| LABEL                                         | Apply key/value metadata to your images, containers, or daemons                     |
+| SHELL ["executable", "parameters"]            | Override default shell is used by docker to run commands                            |
+| HEALTHCHECK                                   | Tells docker how to test a container to check that it is still working              |
 
-build an image -> make a dockerfile and run:
-
-```bash
-docker build -t myimage:1.0 .   # build image from dockerfile
-```
-
-but first you have to create a dockerfile, which will give docker the specifications of your new docker image!
-
-Dockerfile: instructions to build an image
+The instructions are stored within the `Dockerfile`. Your image is then built from this file using the `docker build .` command. Here's an example Dockerfile for a fastAPI-postgreSQL backend:
 
 ```dockerfile
-FROM python:3.8.1-alpine  # indicates base image
+FROM python:3.8.1-alpine
+
 WORKDIR /backend
+
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
+
 COPY ./requirements.txt /backend/requirements.txt
-RUN
-CMD
+
+RUN set -eux \
+  && apk add --no-cache --virtual .build-deps build-base \
+     libressl-dev libffi-dev gcc musl-dev python3-dev \
+     libc-dev libxslt-dev libxml2-dev bash \
+     postgresql-dev \
+  && pip install --upgrade pip setuptools wheel \
+  && pip install -r /backend/requirements.txt \
+  && rm -rf /root/.cache/pip
+
+COPY . /backend
 ```
 
-if your applications needs multiple container (your app needs a db container) then u need `docker compose`.
-text
+The following `docker build` command:
 
 ```bash
-docker-compose up --build       #
-docker-compose up               #
-
-docker image rm 53efefffaa70   # deletes a specified image
-docker rmi $(docker images -q) -f   # delete ALL docker container
+docker build -t myimage:1.0 .            # build image from dockerfile
 ```
 
-docker-compose.yml: docker compose is a tool for defining and running multi-container Docker applications
+if your applications needs multiple container (your app needs a db container) then you need `docker compose`. It will help you running multi-container applications.
 
-```dockerfile
+Again you need a file for proceeding a set of instructions to docker-compose. The file is called `docker-compose.yml`.
+
+```
 version: "3.7"
 services:
   server:
@@ -1065,7 +913,14 @@ volumes:
   postgres_data:
 ```
 
-kubernetes manages containerized applications across multiple hosts.
+To build and run your multi-container application you need the following commands:
+
+```bash
+docker-compose up --build                # builds
+docker-compose up                        # runs the image
+```
+
+If the application grows further multiple hosts are used to handle the workload. Therefore kubernetes is needed to manage the containerized applications across multiple hosts.
 
 **[⬆ back to top](#contents)**
 
