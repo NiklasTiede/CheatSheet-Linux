@@ -1271,8 +1271,8 @@ code <file>        # opens file with VSCode
 
 I'm using the Z-shell instead of bash as my default shell and some plugins to colorize my terminal. It's not increasing the productivity like 10 times but as a human being with an aesthetic demand I'm feeling more satisfied.
 
-[LSDeluxe](https://github.com/Peltoche/lsd) | _Nicer looking ls command._
-[Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) | _Framework for managing zsh configuration._
+[LSDeluxe](https://github.com/Peltoche/lsd) | _Nicer looking ls command._ <br />
+[Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) | _Framework for managing zsh configuration._ <br />
 [Powerlevel10k](https://github.com/romkatv/powerlevel10k) | _Layout looks nicer, syntax-highlighting._
 
 I'm synchronizing all my computers with my [dotfiles](https://github.com/NiklasTiede/Dotfiles) to experience a consistent configuration. Furthermore, it makes things not such a pain when setting up a new workstation.
