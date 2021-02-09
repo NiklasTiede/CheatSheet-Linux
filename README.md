@@ -35,7 +35,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Terminal](#terminal)
    - [Nano Editor](#nano-editor)
    - [Chromium Browser](#chromium-browser)
-   - [VSCode](#vscode)
+   - [VSCode Keybinding](#vscode-keybindings)
 6. [Shell Configuration](#6-shell-configuration)
 
 I use the alias `marcopolo` to reach this cheat sheet faster:
@@ -1151,7 +1151,7 @@ ALIASES=`alias | cut -d '=' -f 1`
 
 Usually I'm jumping between the terminal, my IDE and the browser. Using shortcuts makes everything more convenient.
 
-Ubuntu desktop:
+## Ubuntu Desktop
 
 | Shortcut                                                        | Effect                                   |
 | --------------------------------------------------------------- | ---------------------------------------- |
@@ -1166,7 +1166,7 @@ Ubuntu desktop:
 
 ---
 
-Terminal:
+## Terminal
 
 ```bash
 gnome-terminal     # opens a second terminal window
@@ -1189,7 +1189,7 @@ xdg-open .         # opens cwd with nautilus file manager
 
 ---
 
-nano editor:
+## Nano Editor
 
 ```bash
 
@@ -1208,7 +1208,7 @@ nano <file>      # opens a file
 
 ---
 
-Chromium Shortcuts
+## Chromium Browser
 
 ```bash
 xdg-open <url>     # open website with default browser (chromium)
@@ -1229,6 +1229,8 @@ xdg-open <url>     # open website with default browser (chromium)
 | <kbd>Spacebar</kbd> <kbd>Shift</kbd>               | Scrolls up a section of the webpage      |
 
 ---
+
+## VSCode Keybindings
 
 VSCode Key Bindings (see into my [dotfiles repo](https://github.com/NiklasTiede/Dotfiles))
 
@@ -1266,12 +1268,12 @@ code <file>        # opens file with VSCode
 
 # 6. Shell Configuration
 
-I'm using the Z-shell instead of bash as my default shell and some plugins to colorize my terminal. It's not increasing the productivity like 10 times but as a human being with an aesthetic demand it's more satisfying. I'm using the following
+I'm using the Z-shell instead of bash as my default shell and some plugins to colorize my terminal. It's not increasing the productivity like 10 times but as a human being with an aesthetic demand I'm feeling more satisfied.
 
-[LSDeluxe](https://github.com/Peltoche/lsd) | nicer looking ls command
-[Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) |
-[Powerlevel10k](https://github.com/romkatv/powerlevel10k) | layout looks nicer, syntax highlighting
+[LSDeluxe](https://github.com/Peltoche/lsd) | _Nicer looking ls command._
+[Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) | _Framework for managing zsh configuration._
+[Powerlevel10k](https://github.com/romkatv/powerlevel10k) | _Layout looks nicer, syntax-highlighting._
 
-I'm synchronizing all my computers with my [dotfiles](https://github.com/NiklasTiede/Dotfiles) to experience a consistent configuration. Furthermore, it makes buying a new system not such a pain.
+I'm synchronizing all my computers with my [dotfiles](https://github.com/NiklasTiede/Dotfiles) to experience a consistent configuration. Furthermore, it makes things not such a pain when setting up a new workstation.
 
 **[⬆ back to top](#contents)**
