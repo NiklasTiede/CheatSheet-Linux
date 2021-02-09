@@ -21,8 +21,9 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Data Compression](#data-compression)
    - [Ownership and Permissions](#ownership-and-permissions)
    - [Environment Variables](#environment-variables)
-   - [Finding patterns: grep, find, sed and awk](#finding-patterns-grep-find-sed-and-awk)
+   - [Finding Patterns: grep, sed and find](#finding-patterns-grep-sed-and-find)
    - [Processes and Jobs](#processes-and-jobs)
+   - [Cron Jobs](#cron-jobs)
 3. [Third Party Tools](#3-third-party-tools)
    - [pip and pipenv](#3.1-pip-and-pipenv)
    - [Anaconda](#anaconda)
@@ -575,7 +576,7 @@ brew list
 
 For managing python packages pip and conda are two quite popular package managers.
 
-## 3.1 pip and pipenv
+## pip and pipenv
 
 pip is a package-management system used to install and manage python packages. It's repositories can be found at [pypi.org](https://pypi.org/).
 
@@ -608,7 +609,7 @@ Some packages can only be found at the repository of Anaconda.
 
 ---
 
-## 3.2&nbsp; Anaconda
+## Anaconda
 
 pip and pipenv are focused around Python, neglecting non-Python library dependencies. This is where Anaconda starts to shine. It is a language-agnostic cross-platform environment manager simplifying the package management of non-python libraries. It's main audience is the scientific community.
 
