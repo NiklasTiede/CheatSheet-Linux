@@ -25,7 +25,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
    - [Processes and Jobs](#processes-and-jobs)
    - [Cron Jobs](#cron-jobs)
 3. [Third Party Tools](#3-third-party-tools)
-   - [pip and pipenv](#3.1-pip-and-pipenv)
+   - [pip and pipenv](#pip-and-pipenv)
    - [Anaconda](#anaconda)
    - [Git](#git)
    - [Docker](#docker)
