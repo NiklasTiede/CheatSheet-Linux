@@ -7,7 +7,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
 
 <!-- add image: image containing the keywords of topics  of this cheatsheet -->
 
-<h1 id="content" align="left"><img style="position:relative; top:10px; left:0px" src="docs/ToC.svg" width="50px"#>Contents</h1>
+<h1 id="content" align="left"><img style="position:relative; top:10px; left:0px" src="docs/ToC.svg" width="30px"#>Contents</h1>
 
 <!-- # Contents -->
 
