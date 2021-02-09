@@ -9,6 +9,28 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
 
 <h1 id="content" ><img src="docs/ToC_sym.png" width="30px"#> Contents</h1>
 
+<h1 id="content" ><img src="docs/blog2.png" width="39px"#> Blog</h1>
+
+<h1 id="content" ><img src="docs/config2.png" width="34px"#> Configuration</h1>
+
+<h1 id="content" ><img src="docs/bash.png" width="34px"#> Example</h1>
+
+<h1 id="content" ><img src="docs/install.png" width="28px"#> Installation</h1>
+
+<h1 id="content" ><img src="docs/features.png" width="31px"#> Features</h1>
+
+<h1 id="content" ><img src="docs/database.png" width="29px"#> Database</h1>
+
+<h1 id="content" ><img src="docs/lab.png" width="29px"#> Lab</h1>
+
+<h1 id="content" ><img src="docs/opensource.png" width="30px"#> Code</h1>
+
+<h1 id="content" ><img src="docs/recipes.png" width="34px"#> Recipes</h1>
+
+<h1 id="content" ><img src="docs/tutorial.png" width="27px"#> How to</h1>
+
+<h1 id="content" ><img src="docs/tutorial2.png" width="29px"#> How to</h1>
+
 <!-- # Contents -->
 
 1. [Shell Expansions, Shell Operators](#1-shell-expansions-shell-operators)
