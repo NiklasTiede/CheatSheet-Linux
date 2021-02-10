@@ -98,7 +98,7 @@ Shell operators let you combine commands which expands your toolbelt vastly. The
 | Token | Example                  | Description                                 |
 | ----- | ------------------------ | ------------------------------------------- |
 | `\|`  | `history \| grep "patt"` | Pipelining: direct output of com1 to com2   |
-| `&`   | `python myscript.py &`   | start child process (execute in background) |
+| `&`   | `python myscript.py &`   | Start child process (execute in background) |
 | `&&`  | `com1 && com2`           | Execute com2 only if com1 is executed       |
 | `;`   | `com1; com2`             | Execute both commands always                |
 
@@ -119,7 +119,7 @@ Whereas redirection operators direct the output of a command to another command.
 | Token        | Example                           | Description                                      |
 | ------------ | --------------------------------- | ------------------------------------------------ |
 | `>` or `<`   | `echo '#projectname' > README.md` | Direct output of com1 to com2 or vice versa      |
-| `>>` or `<<` | `echo 'source x' >> ~/.bashrc`    | append output                                    |
+| `>>` or `<<` | `echo 'source x' >> ~/.bashrc`    | Append output                                    |
 | `>&`         | `./script.py > script.out 2>&1`   | Redirect both standard error and standard output |
 
 Examples:
@@ -138,7 +138,7 @@ These operators and shell expansions will be found throughout this cheat sheet r
 
 # 2. Built-in Commands
 
-Linux distributions contain a plethora of powerful built-in commands. The presented commands are sorted by topic. If you're not aware of a commands capabilities you can add the `--help` or `-h` flag to display all options. The `--version` or `-v` flag returns the version number and is commonly used right after installation to check a programs version.
+Linux distributions contain a plethora of powerful built-in commands. The presented commands are sorted by topic. If you're not aware of a commands capabilities you can add the `--help` or `-h` flag to display all options. The `--version` or `-v` flag returns the version number and is commonly used right after installation to check correct installation.
 
 ```bash
 <command> --help
@@ -151,17 +151,17 @@ Navigation on the file system is the first step towards learning how to utilize 
 
 ```bash
 ls                # list content of current working dir
-ls -la            # Display all files and extended file metadata
-ls -la *.py       # Lists only python files
+ls -la            # display all files and extended file metadata
+ls -la *.py       # lists only python files
 
 cd <directory>    # change directory
 cd ..             # goes on folder up
 
 pwd               # print working directory
-date              # to navigate yourself also in time ;-)
+date              # to navigate yourself in time ;-)
 
 xdg-open .        # opens the Nautilus file manager
-gnome-terminal    # open a terinal window from within a terminal
+gnome-terminal    # open a terminal window from within a terminal
 ```
 
 Since most people (like me) don't have a photographic memory, it's always a good choice to use the machines memory.
@@ -174,7 +174,7 @@ history | tail    # prints 10 recently used commands
 clear             # clears the terminal
 ```
 
-Pressing arrow keys <kbd>Up</kbd> <kbd>Down</kbd> or <kbd>Ctrl</kbd> <kbd>R</kbd> (search bar) is my preferred choice. BTW: I geared the shell towards my needs (see [configuration](#configuration)) so everything looks pretty satisfying.
+Pressing arrow keys <kbd>Up</kbd> <kbd>Down</kbd> or <kbd>Ctrl</kbd> <kbd>R</kbd> (search bar) is my preferred choice. BTW: I geared the shell towards my needs (see [Shell Configuration](#6-shell-configuration)) so everything looks nice and pretty.
 
 **[⬆ back to top](#contents)**
 
@@ -256,12 +256,12 @@ cat <file>        # prints content of a file
 wc <file>         # word count, returns number of lines, words and characters
 ```
 
-When changing the content of a file, it's best to use an editor. Nano is an into the terminal integrated file editor. I'm using it when surfing between files and making minor changes. For writing bigger pieces of code I'm using VSCode as my IDE. Efficiency of editing is improved by usage of [shortcuts](#shortcuts).
+When changing the content of a file, it's best to use an editor. Nano is an into the terminal integrated file editor. I'm using it when surfing between files and making minor changes. For writing bigger pieces of code I'm using VSCode as my IDE. Efficiency of editing is improved by usage of [shortcuts](#5-shortcuts).
 
 ```bash
 
-nano <file>      # opens the file (nano is a terminal application for text editing)
-code <file>      # open file in VSCode
+nano <file>      # file editing with nano
+code <file>      # file editing with VSCode
 ```
 
 **[⬆ back to top](#contents)**
@@ -296,7 +296,7 @@ sudo poweroff      # powers system off
 logout             # logout from current users session
 ```
 
-Hibernate and suspend are useful for desktop distributions of linux to save energy. But this can interrupt running scripts. So turn automatic suspension off (`Settings` -> `Power` -> `Automatic Suspend`). On the other hand it's also a nice idea to run your scripts remotely (x86 server or your own Raspberry Pi).
+Hibernate and suspend are useful for desktop distributions of linux to save energy. But this can interrupt running scripts. So turn automatic suspension off (`Settings` -> `Power` -> `Automatic Suspend`) when running a script. On the other hand it's also a good idea to run your scripts remotely (x86 server or Raspberry Pi).
 
 **[⬆ back to top](#contents)**
 
@@ -307,10 +307,10 @@ Hibernate and suspend are useful for desktop distributions of linux to save ener
 Compression is always a space-time complexity tradeoff. On linux systems many files are collected usually into one archive file, referred to as a tarball. `tar` is the tool of choice for compression and decompression.
 
 ```bash
-tar -ztvf filename.tar.gz         # list content
+tar -ztvf filename.tar.gz          # list content
 
-tar -zxvf filename.tar.gz         # decompression
-tar -zxvf filename.tar.gz <path>  # decompressed into target  folder
+tar -zxvf filename.tar.gz          # decompression
+tar -zxvf filename.tar.gz <path>   # decompressed into target folder
 
 tar -cvzf filename.tar.gz <path>   # compression of a folder, returns filename.tar.gz
 ```
@@ -335,7 +335,7 @@ Each files/dirs access mode can be displayed when using the `ls -l` command. Eac
   </a>
 </p>
 
-The access modes (Owner, Group, Other below image) can be modified using the `chmod` command. I prefer to use the octal notation over the symbolic notation when changing permissions.
+The access modes ('Owner, Group, Other' below the image) can be modified using the `chmod` command. I prefer to use the octal notation over the symbolic notation when changing permissions.
 
 ```bash
 chmod <octal> <file/dir>  # change permissions of a file/dir
@@ -377,7 +377,7 @@ Environment variables are key-value pairs on the system that can be retrieved by
 
 ```bash
 printenv           # prints all environment variables
-printenv HOME      # prints the value of a specified env var
+printenv HOME      # prints the value of a specified environment variable
 echo $HOME         # same as above
 ```
 
@@ -396,7 +396,7 @@ sudo -H nano /etc/environment                  # set system wide, no export-keyw
 
 ## Finding Patterns: grep, sed and find
 
-Several tools to search for files and file-content exist. This can speed up things. `grep` prints lines matching a pattern. The table below shows some important flags I use on a daily basis.
+Several tools to search for files and file-content exist. This can speed up things. `grep` prints lines matching a pattern. The table below shows some important flags of `grep` I use on a daily basis.
 
 | Flag        | Description                 |
 | ----------- | --------------------------- |
@@ -406,7 +406,7 @@ Several tools to search for files and file-content exist. This can speed up thin
 | `-w`        | Only whole words            |
 | `--include` | Only certain files included |
 
-Sometimes I search through a folder of files for a pattern. For replacing the pattern, `sed` can be used. When I refactor code I prefer use VSCode's search-and-replace capabilities. Most commonly I use `grep -rnw 'patt' .` to know how much times the pattern is reoccuring.
+Sometimes I search through a folder filled with files for a pattern. Most commonly I use `grep -rnw 'patt' .` to know how much times the pattern is occuring.
 
 ```bash
 grep -rnw 'patt' .               # searchs through cwd for pattern
@@ -418,19 +418,21 @@ grep -rnw 'patt' --include=*.py  # searches only specified files for pattern
 
 ---
 
-sed is a stream editor for filtering and transforming text. `tail` and `head` return top and bottom of a file. Wanna see parts in the middle? Use `sed`!
+`sed` is a stream editor for filtering and transforming text. `tail` and `head` return top and bottom of a file. Wanna see parts in the middle? Use `sed`!
 
 ```bash
 
-sed -n '5,10p' <file>    # returns line 5 to 10
+sed -n '5,10p' <file>         # returns line 5 to 10
 ```
 
-It's also useful for replacing patterns within one or more files.
+For replacing a pattern `sed` can be used.
 
 ```bash
 
-sed -i 's/foo/bar/g' *    # replace pattern (foo) by bar in multiple files
+sed -i 's/foo/bar/g' *        # replace pattern (foo) by bar in multiple files
 ```
+
+But when I refactor code I prefer to use VSCode's search-and-replace capabilities.
 
 ---
 
@@ -456,14 +458,14 @@ history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 
 ## Processes and Jobs
 
-Python makes it easy to automate processes by just writing and running it. But how to we achive this without having to let a terminal opened? Using ampersand `&` and `nohup`! The Amperesend sends the process in the background and nohup assures that the process continues even if you're logged out from the current shell session. `jobs` will show you each of these running processes.
+Python makes it easy to automate things by just writing a simple script and running it. But how to we achive this without an opened terminal? Using ampersand `&` and `nohup`! The Amperesend sends the process in the background and nohup assures that the process continues even if you're logged out from the current shell session. `jobs` will show you each of these running processes.
 
 ```bash
 
 <command> &                   # executes command in the background
 nohup <command> &             # command is executed even if shell session ends
 
-nohup python myscript.py &    # examples
+nohup python myscript.py &    # example
 nohup ./myscript.py           # script is executable and has shebang line
 
 ./script.py > script.out 2>&1 # redirect stdout/stderr into script.out file
@@ -471,19 +473,19 @@ nohup ./myscript.py           # script is executable and has shebang line
 jobs                          # shows each running job
 ```
 
-If your script prints messages to the terminal and you want to save the output in a file: use the `tee` command! It will redirect the script output also to a file. And if you'd like to continue working within the shell redirect the terminal output to /dev/null.
+If your script prints messages to the terminal and you want to save the output in a file: use the `tee` command! It will redirect the scripts output to a file. And if you like to continue working within your current shell redirect the terminal output to `/dev/null`.
 
 ```bash
 
 tee                                                      # read from stdin and writes to stdout and a file
 tee -a                                                   # append
 ./myscript.py | tee ~/myscript_output.txt &              # save script output
-./myscript.py | tee ~/myscript_output.txt > /dev/null &  # and continue working within shell
+./myscript.py | tee ~/myscript_output.txt > /dev/null &  # continue working within current shell
 ```
 
 ---
 
-But when starting a process it's always nice to know how to stop it. So how do we locate processes in linux and kill it? `ps aux` is your freind for listing all running processes.
+But when starting a process it's also nice to know how to stop it. So how do we locate processes in linux and kill it? `ps aux` is your friend for listing all running processes.
 
 ```bash
 
@@ -507,17 +509,17 @@ Depending on the signal value you can kill the process (value 9) or do other thi
 | SIGTERM     | 15         | Termination signal      |
 | SIGSTOP     | 17, 19, 23 | Stop the process        |
 
-BTW: there are some interesting 3rd party tools to monitor your system (see [](#))
+BTW: there are some interesting 3rd party tools to monitor your system (see [Miscellaneous Tools](#miscellaneous-tools))
 
 ## Cron Jobs
 
-Cron daemon is a built-in Linux utility that runs processes on your system at a scheduled time. Cron reads the crontab (cron tables) for predefined commands and scripts. So if you want to execute certain scripts repeatedly, then doing cron jobs is your friend. Add a new line with specified values to the crontab.
+The cron daemon is a built-in Linux utility that runs processes on your system at a scheduled time. Cron reads the crontab (cron tables) for predefined commands and scripts. So if you want to execute certain scripts repeatedly, then doing cron jobs is the way to do. Add a new line with specified values to the crontab.
 
 ```bash
-crontab -l                                  # List all running cronjobs
-crontab –e                                  # Setting up a new cronjob
+crontab -l                                  # list all running cronjobs
+crontab –e                                  # setting up a new cronjob
 
-a b c d e </directory/command> output       # Standard format for a crontab line
+a b c d e </directory/command> output       # standard format for a crontab line
 * * * * * directory/command >/dev/null 2>&1 # output redirected to dev/null
 ```
 
@@ -574,7 +576,7 @@ brew uninstall <package>
 brew list
 ```
 
-For managing python packages pip and conda are two quite popular package managers.
+For managing python packages `pip` and `conda` are two quite popular package managers.
 
 ## pip and pipenv
 
@@ -589,7 +591,7 @@ pip list                        # lists all pip-packages within the current env
 pip freeze > requirements.txt   # saves all package-versions of current env
 ```
 
-The package dependencies of each python project should be managed with care. Therefore using an isolated virtual environment for each project is best practice. pipenv is a nice dependency manager. If you want to see how to run scripts which depend on 3rd party packages see section [Running Scripts](#running-scripts).
+The package dependencies of each python project should be managed with care. Therefore using an isolated virtual environment for each project is best practice. `pipenv` is a nice dependency manager.
 
 ```bash
 
@@ -611,12 +613,12 @@ Some packages can only be found at the repository of Anaconda.
 
 ## Anaconda
 
-pip and pipenv are focused around Python, neglecting non-Python library dependencies. This is where Anaconda starts to shine. It is a language-agnostic cross-platform environment manager simplifying the package management of non-python libraries. It's main audience is the scientific community.
+`pip` and `pipenv` are focused around Python, neglecting non-Python library dependencies. This is where Anaconda starts to shine. It is a language-agnostic cross-platform environment manager simplifying the package management of non-Python libraries. It's main audience is the scientific community.
 
-How to retrieve information about anaconda, your environments and configurations.
+How to retrieve information about Anaconda, your environments and configurations.
 
 ```bash
-conda info                                         # gives information about version, envs
+conda info                                         # informations about version, virtual env's
 conda env list                                     # shows all environments
 
 conda update -n base conda                         # updates conda
@@ -626,7 +628,7 @@ conda clean -h                                     # cleans download cache ('pkg
 How to create new environments, activate them and install packages.
 
 ```bash
-conda create --name <env_name> python=3.8          # creating conda env with specific python-version
+conda create --name <env_name> python=3.8          # creating conda env with specific Python-version
 
 conda create -n <env_name> python=3.9 rdkit        # creating conda env with specific package
 conda install -c rdkit rdkit-postgresql            # installing PostgreSQL as client for rdkit-postgreSQL cartridge
@@ -644,7 +646,7 @@ conda remove --name <package_name>                 # deletes a specified list of
 conda env remove --name <env_name>                 # deletes an specified environment
 ```
 
-How to share environments (export to/create from YAML-file). `pip` stores dependencies within a `requirements.txt` file.
+How to share environments (export to/create from YAML-file). `pip` stores dependencies within a `requirements.txt` file whereas `conda` uses a `.yml` file.
 
 ```bash
 conda create --clone <env_name> --name <new_env>   # make copy of an env
@@ -668,8 +670,8 @@ conda install conda-forge::<package_name>          # installs a package from a s
 conda config --add channels <channel_name>         # add a channel to your conda configuration (conda-forge)
 
 # manage anaconda account
-conda install anaconda-client                      #
-anaconda -h                                        #
+conda install anaconda-client                      # install client
+anaconda --help                                    # needed when uploading/searching for packages
 
 conda update --all --name <env_name>               # updates all packages within a specified env
 conda config --show                                # shows all configurations
@@ -751,7 +753,7 @@ on Github:
 
 git clone <https://github.com/your-profile/repo-fork.git>
 cd <repo-fork>
-git checkout -b <branch-name>            # create a new branch
+git checkout -b <branch-name>        # create a new branch
 
 loop:
    [make changes to the project]
@@ -762,7 +764,7 @@ loop:
    git push origin <branch-name>
 
 on Github:
-   - create pull request                   # add description and title
+   - create pull request             # add description and title
 ```
 
 A `.gitignore` file specifies intentionally untracked files that Git should ignore. But if a file was already indexed, how do we remove this file from the index? Add the filename to the `.gitignore` file and then type:
@@ -775,7 +777,7 @@ git commit -m 'Removing ignored files'
 git push
 ```
 
-Git can be configured globally and locally. The `.gifconfig` file is the way to go.
+Git can be configured globally and locally. The `.gitconfig` file is the way to go.
 
 ```bash
 git config --global user.email "my@emailaddress.com"
@@ -931,7 +933,7 @@ If the application grows further multiple hosts are used to handle the workload.
 
 There's a plethora of smaller command line tools I use. I
 
-### locate
+### Locate
 
 `find` is not fast enough to search for a pattern on the whole system. Locate caches the systems filesnames within a database and searchs the database. The database is regenerated once a week. Optionally you can update is manually by using `updatedb`.
 
@@ -942,7 +944,7 @@ sudo updatedb          # updates the database used by locate
 
 ---
 
-### tree
+### Tree
 
 `tree` gives you a nice tree-like overview about a directories content. The `-a` flag includes also hidden files and the `-f` flag displays each file/folders full path.
 
@@ -957,7 +959,7 @@ tree -L 2         # max depth is set to 2
 
 ### Fuzzyfinder
 
-The fuzzyfinder improves when searching for a path or within your command history. I don't harness it's pull power currently. So I should keep learning this tool!
+The [fuzzyfinder](https://github.com/junegunn/fzf) improves when searching for a path or within your command history. I don't harness it's pull power currently. So I should keep learning this tool!
 
 ```bash
 fzf                  # search for path
@@ -1025,9 +1027,9 @@ glances
 
 ---
 
-### tlp
+### Tlp
 
-A tool to optimize laptop battery life.
+[Tlp](https://github.com/linrunner/TLP) is a tool to optimize laptop battery life for linux. It will also return some interesting parameters like CPU temperature and information about your disk.
 
 ```bash
 sudo tlp-stat -s      # system information
@@ -1039,7 +1041,7 @@ watch tlp-stat -t     # returns your CPU temperature every 2s
 
 ### Tokei
 
-Tokei is a static code analysis tool. It counts the number of lines code of each file within a selected directory. I use it to get a rough idea of how big a project is and which languages are included. Tokei itself is written in Rust, so it's blazing fast.
+[Tokei](https://github.com/XAMPPRocky/tokei) is a static code analysis tool. It counts the number of lines code of each file within a selected directory. I use it to get a rough idea of how big a project is and which languages are included. Tokei itself is written in Rust, so it's blazing fast.
 
 ```bash
 tokei <dir>         # counts the number of lines code per language recursively
@@ -1047,9 +1049,9 @@ tokei <dir>         # counts the number of lines code per language recursively
 
 ---
 
-### bpython
+### Bpython
 
-A fancier interface than the normal python interpreter. It has syntax highlighting and autocomplete. It will definitly enhance your REPL sessions experience.
+A fancier interface than the normal python interpreter. [Bpython](https://github.com/bpython/bpython) gives your REPL session a nice syntax highlighting and autocomplete. It will definitly enhance REPL session experience.
 
 ```bash
 bpython
@@ -1072,31 +1074,38 @@ A lot of extensions are available to customize jupyter lab.
 
 ### Cookiecutter
 
-Setting up a python project can be time-consuming. Cookiecutter speeds this process up. The templating engine Jinja2 is used by cookiecutter. You select a cookiecutter project template you like (search at github `search?q=cookiecutter+YourSearch`) and use its github URL. Then you're entering your settings of choice and voilà: your projects is good to go!
+Setting up a python project can be time-consuming. [Cookiecutter](https://github.com/cookiecutter/cookiecutter) speeds this process up. The templating engine Jinja2 is used by cookiecutter. You select a cookiecutter project template you like (search at github `search?q=cookiecutter+YourSearch`) and use its github URL. Then you're enter your settings of choice and voilà: you have a good foundation for a new project!
 
 ```bash
-
 cookiecutter <git-URL>                                    # base command
 cookiecutter https://github.com/Buuntu/fastapi-react.git  # example: fastAPI-react app
 ```
 
-As you can see cookiecutter is not only used for python projects but for other languages as well!
+As you can see cookiecutter is not only used for python projects but for other languages as well! Here are some other python-related templates I like:
+
+```bash
+https://github.com/ionelmc/cookiecutter-pylibrary.git   # PyPi package, libary
+https://github.com/conda/cookiecutter-conda-python.git  # conda package
+```
 
 ---
 
-### Black
+### Black & Yapf
 
-Linting tools increase readability and give your project a consistent style. Black is a more common linting tool for python. But there are also others tools like Yapf, flake etc. Some linting tools are only code formatter (like black), some give you also some introspection in your code and can help fixing potential bugs.
+Linting tools increase readability and give your project a consistent style. [Black](https://github.com/psf/black) is a more common linting tool for python. But there are also others tools like [Yapf](https://github.com/google/yapf), flake etc. Some linting tools are only code formatter (like black), some give you also some introspection in your code and can help fixing potential bugs.
 
 ```bash
 black <file.py>           # linting performed on file.py
+yapf -i <file.py>         # --in-place has to be used here to apply linting
 ```
 
 ---
 
 ### Spasco
 
-And of course I should not forget to mention [Spasco](https://github.com/NiklasTiede/Spasco) a renaming tool written by myself. :wink: It is listed at the Python Packaging Index (PyPI) and can speed up your renaming operations. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
+And I should not forget to mention [Spasco](https://github.com/NiklasTiede/Spasco). A nice renaming tool written by myself. :wink: It can be easily installed with `pip install spasco`. It can speed up your renaming operations. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
+
+I'll show you how it substitutes the whitesspaces within the directory `test dir` and the file `test file` by underscores:
 
 ```console
 ❯ ls
@@ -1127,7 +1136,7 @@ Furthermore, `spasco` lets you customize the search-value (default: whitespaces)
 
 Aliases save time and work wonders on lengthy commands. Functions let you create new commands.
 
-Here's a list of my aliases.
+Here's a list of some of my aliases.
 
 ```bash
 alias name="command flags"                      # basic stucture of an alias
@@ -1136,7 +1145,7 @@ echo "alias name='command flags'" >> ~/.bashrc  # gives alias persistency: in ev
 
 alias update='sudo apt-get update && sudo apt-get upgrade'
 
-alias ..='cd ..'                                #  quicker navigation
+alias ..='cd ..'                                # quicker navigation
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
 alias .....='cd ../../../../'
@@ -1144,7 +1153,7 @@ alias .....='cd ../../../../'
 alias dl="cd ~/Downloads"
 ```
 
-When your newly defined command needs arguments: functions are the solution! Here are a few functions of mine.
+When your newly defined command needs arguments: functions are the solution! Here are a few functions.
 
 ```bash
 c() { cd "$@" && ls; }                          # ls right after cd
@@ -1224,7 +1233,7 @@ nano <file>      # opens a file
 ## Chromium Browser
 
 ```bash
-xdg-open <url>     # open website with default browser (chromium)
+xdg-open <url>     # open website with default browser (my default browser is chromium)
 ```
 
 | Shortcut                                           | Effect                                   |
@@ -1232,7 +1241,7 @@ xdg-open <url>     # open website with default browser (chromium)
 | <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>T</kbd>      | Reopens recently closed tabs             |
 | <kbd>alt</kbd> <kbd>left</kbd> or <kbd>right</kbd> | Moves one page back/forward              |
 | <kbd>Ctrl</kbd> <kbd>+</kbd> or <kbd>-</kbd>       | Zoom in, out                             |
-| <kbd>Ctrl</kbd> <kbd>Tab</kbd>                     | jumps to the next tab                    |
+| <kbd>Ctrl</kbd> <kbd>Tab</kbd>                     | Jumps to the next tab                    |
 | <kbd>Ctrl</kbd> <kbd>F</kbd>                       | Find content on web page                 |
 | <kbd>F5</kbd>                                      | Refresh current webpage                  |
 | <kbd>Ctrl</kbd> <kbd>left-click</kbd>              | Open link in the background of a new tab |
@@ -1245,7 +1254,7 @@ xdg-open <url>     # open website with default browser (chromium)
 
 ## VSCode Keybindings
 
-VSCode Key Bindings (see into my [dotfiles repo](https://github.com/NiklasTiede/Dotfiles))
+<!-- VSCode Key Bindings (see into my [dotfiles repo](https://github.com/NiklasTiede/Dotfiles)) -->
 
 ```bash
 code <file>        # opens file with VSCode
@@ -1287,6 +1296,6 @@ I'm using the Z-shell instead of bash as my default shell and some plugins to co
 [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) | _Framework for managing zsh configuration._ <br />
 [Powerlevel10k](https://github.com/romkatv/powerlevel10k) | _Layout looks nicer, syntax-highlighting._
 
-I'm synchronizing all my computers with my [dotfiles](https://github.com/NiklasTiede/Dotfiles) to experience a consistent configuration. Furthermore, it makes things not such a pain when setting up a new workstation.
+I'm synchronizing all my computers with my dotfiles to experience a consistent configuration. Furthermore, it makes things not such a pain when setting up a new workstation.
 
 **[⬆ back to top](#contents)**
