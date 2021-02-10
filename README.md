@@ -147,7 +147,7 @@ Linux distributions contain a plethora of powerful built-in commands. The presen
 
 ## Filesystem Navigation
 
-Navigation on the file system is the first step towards learning how to utilize the power of a Linux system. Notice: <kbd>Tab</kbd> enables auto completion of file-/dirnames and saves valuable time!
+Navigation on the file system is the first step towards learning how to utilize the power of a linux system. Notice: <kbd>Tab</kbd> enables auto completion of file-/dirnames and saves valuable time!
 
 ```bash
 ls                # list content of current working dir
@@ -513,7 +513,7 @@ BTW: there are some interesting 3rd party tools to monitor your system (see [Mis
 
 ## Cron Jobs
 
-The cron daemon is a built-in Linux utility that runs processes on your system at a scheduled time. Cron reads the crontab (cron tables) for predefined commands and scripts. So if you want to execute certain scripts repeatedly, then doing cron jobs is the way to do. Add a new line with specified values to the crontab.
+The cron daemon is a built-in linux utility that runs processes on your system at a scheduled time. Cron reads the crontab (cron tables) for predefined commands and scripts. So if you want to execute certain scripts repeatedly, then doing cron jobs is the way to do. Add a new line with specified values to the crontab.
 
 ```bash
 crontab -l                                  # list all running cronjobs
@@ -613,7 +613,7 @@ Some packages can only be found at the repository of Anaconda.
 
 ## Anaconda
 
-`pip` and `pipenv` are focused around Python, neglecting non-Python library dependencies. This is where Anaconda starts to shine. It is a language-agnostic cross-platform environment manager simplifying the package management of non-Python libraries. It's main audience is the scientific community.
+`pip` and `pipenv` are focused around python, neglecting non-python library dependencies. This is where Anaconda starts to shine. It is a language-agnostic cross-platform environment manager simplifying the package management of non-python libraries. It's main audience is the scientific community.
 
 How to retrieve information about Anaconda, your environments and configurations.
 
@@ -628,7 +628,7 @@ conda clean -h                                     # cleans download cache ('pkg
 How to create new environments, activate them and install packages.
 
 ```bash
-conda create --name <env_name> python=3.8          # creating conda env with specific Python-version
+conda create --name <env_name> python=3.8          # creating conda env with specific python-version
 
 conda create -n <env_name> python=3.9 rdkit        # creating conda env with specific package
 conda install -c rdkit rdkit-postgresql            # installing PostgreSQL as client for rdkit-postgreSQL cartridge
@@ -660,11 +660,11 @@ conda list --explicit > pkgs.txt                   # export env with exact packa
 conda create --name <new_env> --file pkgs.txt      # create env based on exact package versions
 ```
 
-How channels work, managing anaconda.
+How channels work, managing Anaconda.
 
 ```bash
 # using packages and channels
-anaconda-navigator                                 # opens the anaconda navigator
+anaconda-navigator                                 # opens the Anaconda navigator
 anaconda search <package_name>                     # search for a package on all channels (not only default chan)
 conda install conda-forge::<package_name>          # installs a package from a specific channel
 conda config --add channels <channel_name>         # add a channel to your conda configuration (conda-forge)
@@ -683,7 +683,7 @@ conda config --show                                # shows all configurations
 
 ## Git
 
-A version control system (VCS) like git is a developers lab notebook. Don't forget that making good commit messages and doin' work bit by bit is of uttermost importance. Connecting a newly created local repository with a remote repository is easy. Go to [github.com](https://github.com/), create a new repo and add it's URL to the local repo by entering the following commands:
+A version control system (VCS) like Git is a developers lab notebook. Don't forget that making good commit messages and doin' work bit by bit is of uttermost importance. Connecting a newly created local repository with a remote repository is important for sharing things. Go to [github.com](https://github.com/), create a new repo and add it's URL to the local repo by entering the following commands:
 
 ```bash
 echo "# projectname" >> README.md
@@ -695,10 +695,10 @@ git remote add origin https://github.com/NiklasTiede/projectname.git
 git push -u origin main
 ```
 
-Exploring other peoples projects is easy. Clone it and build its dependencies to run it properly. Python projects which contain a setup.py file or a conda.yml can be installed without cond/pip just by downloading it via git pip
+Exploring other peoples projects is also easy. Clone it and build its dependencies to run it properly. Python projects which contain a `setup.py` or a `conda.yml` file can be installed directly from a github repo.
 
 ```bash
-git clone <https://name-of-the-repository>                  # download repo into cwd
+git clone https://github.com/owner/projectname.git          # download repo into cwd
 pip install git+https://github.com/owner/projectname.git    # download, built and install
 ```
 
@@ -712,7 +712,7 @@ git commit -m 'descr. of commit'    # commit files to the local repo
 git push                            # pushs commit t
 ```
 
-If your would like to look at your work you've done use these:
+If your would like to look at the work you've done so far, use these:
 
 ```bash
 git status                 # returns state of working dir and staging area
@@ -725,7 +725,7 @@ git log --stat --summary   # a complete overview
 
 When working on a more sophisticated project, you separate your work (adding features/bug-fixes) from the production-ready main branch by switching to a branch which is named according to it's pupose (like fix-readme-typo). You commit changes and push it to the remote repo. If you're the owner of the repo, you can decide to merge it into your production-ready main branch on your own. If the owner of the project is someone else, you push it and make a pull request. Usually merging bug-fix/feature-branches into the main branch is associated with semantic versioning.
 
-When working solo on a project I create branches, push them to the remote repo to save them and merge them later locally into the main branch. Then I delete the local and remote side branch. This gives you a nice history at hand about how you work.
+When working solo on a project I create branches, push them to the remote repo and merge them later remotely into the main branch. Then I delete the local side branch. This gives you a nice history at hand about how you work.
 
 ```bash
 git checkout -b <new-branch>           # create new branch
@@ -767,7 +767,7 @@ on Github:
    - create pull request             # add description and title
 ```
 
-A `.gitignore` file specifies intentionally untracked files that Git should ignore. But if a file was already indexed, how do we remove this file from the index? Add the filename to the `.gitignore` file and then type:
+A `.gitignore` file specifies intentionally untracked files that `git` should ignore. But if a file was already indexed, how do we remove this file from the index? Add the filename to the `.gitignore` file and then type:
 
 ```bash
 git rm -r --cached .         # untracks all files which are within .gitignore
@@ -829,7 +829,7 @@ docker run $(docker ps -a -q)   # deletes all stopped containers
 docker rmi $(docker images -q) -f   # deletes ALL docker images
 ```
 
-Usually your application is based on a image from the docker registry and it contains several other libraries. You could run the base image and install everything from within the container, but it's much more preferrable to create a dockerfile which advises docker to build up the image. A dockerfile contains a set of instructions. BTW: Docker stores everything within `/var/lib/docker`.
+Usually your application is based on a image from the docker registry and it contains several other libraries. You could run the base image and install everything from within the container, but it's much more preferrable to create a Dockerfile which advises docker to build up the image. BTW: Docker stores everything within `/var/lib/docker`.
 
 | Instruction                                   | Meaning                                                                             |
 | --------------------------------------------- | ----------------------------------------------------------------------------------- |
@@ -883,9 +883,9 @@ docker build -t myimage:1.0 .            # build image from dockerfile
 
 if your applications needs multiple container (your app needs a db container) then you need `docker compose`. It will help you running multi-container applications.
 
-Again you need a file for proceeding a set of instructions to docker-compose. The file is called `docker-compose.yml`.
+Again you need a file which contains a set of instructions to `docker-compose`. The file is called `docker-compose.yml`.
 
-```
+```yaml
 version: "3.7"
 services:
   server:
@@ -957,9 +957,9 @@ tree -L 2         # max depth is set to 2
 
 ---
 
-### Fuzzyfinder
+### [Fuzzyfinder](https://github.com/junegunn/fzf)
 
-The [fuzzyfinder](https://github.com/junegunn/fzf) improves when searching for a path or within your command history. I don't harness it's pull power currently. So I should keep learning this tool!
+The fuzzyfinder improves when searching for a path or within your command history. I don't harness it's pull power currently. So I should keep learning this tool!
 
 ```bash
 fzf                  # search for path
@@ -967,9 +967,9 @@ fzf                  # search for path
 
 ---
 
-### HTTPie
+### [HTTPie](https://github.com/httpie/httpie)
 
-[HTTPie](https://github.com/httpie/httpie) is designed for testing, debugging, and generally interacting with APIs & HTTP servers. I use it mainly for testing and exploring API's.
+HTTPie is designed for testing, debugging, and generally interacting with APIs & HTTP servers. I use it mainly for testing and exploring API's.
 
 ```bash
 
@@ -1007,9 +1007,9 @@ I Added `"--style=monokai"` to Httpie's default options (`.httpie/config.json`) 
 
 ---
 
-### Openssl
+### [Openssl](https://github.com/openssl/openssl)
 
-Is a genereal-purpose cryptography library. I'm using it only for generating passwords.
+Openssl s a general-purpose cryptography library. I'm using it only for generating passwords.
 
 ```bash
 openssl rand -hex 30     # generate hexadecimal key, 30 characters long
@@ -1017,9 +1017,9 @@ openssl rand -hex 30     # generate hexadecimal key, 30 characters long
 
 ---
 
-### Glances
+### [Glances](https://github.com/nicolargo/glances)
 
-[Glances](https://github.com/nicolargo/glances) is a monitoring tool which aims to present a large amount of monitoring information.
+Glances is a monitoring tool which aims to present a large amount of monitoring information.
 
 ```bash
 glances
@@ -1027,9 +1027,9 @@ glances
 
 ---
 
-### Tlp
+### [Tlp](https://github.com/linrunner/TLP)
 
-[Tlp](https://github.com/linrunner/TLP) is a tool to optimize laptop battery life for linux. It will also return some interesting parameters like CPU temperature and information about your disk.
+Tlp is a tool to optimize laptop battery life for linux. It will also return some interesting parameters like CPU temperature and information about your disk.
 
 ```bash
 sudo tlp-stat -s      # system information
@@ -1039,9 +1039,9 @@ watch tlp-stat -t     # returns your CPU temperature every 2s
 
 ---
 
-### Tokei
+### [Tokei](https://github.com/XAMPPRocky/tokei)
 
-[Tokei](https://github.com/XAMPPRocky/tokei) is a static code analysis tool. It counts the number of lines code of each file within a selected directory. I use it to get a rough idea of how big a project is and which languages are included. Tokei itself is written in Rust, so it's blazing fast.
+Tokei is a static code analysis tool. It counts the number of lines code of each file within a selected directory. I use it to get a rough idea of how big a project is and which languages are included. Tokei itself is written in Rust, so it's blazing fast.
 
 ```bash
 tokei <dir>         # counts the number of lines code per language recursively
@@ -1049,9 +1049,9 @@ tokei <dir>         # counts the number of lines code per language recursively
 
 ---
 
-### Bpython
+### [Bpython](https://github.com/bpython/bpython)
 
-A fancier interface than the normal python interpreter. [Bpython](https://github.com/bpython/bpython) gives your REPL session a nice syntax highlighting and autocomplete. It will definitly enhance REPL session experience.
+A fancier interface than the normal python interpreter. Bpython gives your REPL session a nice syntax highlighting and autocomplete. It will definitly enhance REPL session experience.
 
 ```bash
 bpython
@@ -1059,9 +1059,9 @@ bpython
 
 ---
 
-### Jupyter Lab
+### [Jupyter Lab](https://github.com/jupyterlab/jupyterlab)
 
-I have a background in chemistry, so Python and data science tasks are a natural fit to me. Jupyter notebooks took data science collaboration to another level. Notebooks enable us to share how a set of data is processed and then used for modeling. [Kaggle](https://www.kaggle.com/) is the best place to get a plethora of interesting data sets.
+I have a background in chemistry, so python and data science tasks are a natural fit to me. Jupyter notebooks took data science collaboration to another level. Notebooks enable us to share how a set of data is processed and then used for modeling. [Kaggle](https://www.kaggle.com/) is the best place to get a plethora of interesting data sets.
 
 ```bash
 conda install jupyter lab
@@ -1072,9 +1072,9 @@ A lot of extensions are available to customize jupyter lab.
 
 ---
 
-### Cookiecutter
+### [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
 
-Setting up a python project can be time-consuming. [Cookiecutter](https://github.com/cookiecutter/cookiecutter) speeds this process up. The templating engine Jinja2 is used by cookiecutter. You select a cookiecutter project template you like (search at github `search?q=cookiecutter+YourSearch`) and use its github URL. Then you're enter your settings of choice and voilà: you have a good foundation for a new project!
+Setting up a python project can be time-consuming. Cookiecutter speeds this process up. The templating engine Jinja2 is used by cookiecutter. You select a cookiecutter project template you like (search at github `search?q=cookiecutter+YourSearch`) and use its github URL. Then you're enter your settings of choice and voilà: you have a good foundation for a new project!
 
 ```bash
 cookiecutter <git-URL>                                    # base command
@@ -1090,9 +1090,9 @@ https://github.com/conda/cookiecutter-conda-python.git  # conda package
 
 ---
 
-### Black & Yapf
+### [Black](https://github.com/psf/black) & [Yapf](https://github.com/google/yapf)
 
-Linting tools increase readability and give your project a consistent style. [Black](https://github.com/psf/black) is a more common linting tool for python. But there are also others tools like [Yapf](https://github.com/google/yapf), flake etc. Some linting tools are only code formatter (like black), some give you also some introspection in your code and can help fixing potential bugs.
+Linting tools increase readability and give your project a consistent style. Black is a more common linting tool for python. But there are also others tools like Yapf, flake etc. Some linting tools are only code formatter (like black), some give you also some introspection in your code and can help fixing potential bugs.
 
 ```bash
 black <file.py>           # linting performed on file.py
@@ -1101,9 +1101,9 @@ yapf -i <file.py>         # --in-place has to be used here to apply linting
 
 ---
 
-### Spasco
+### [Spasco](https://github.com/NiklasTiede/Spasco)
 
-And I should not forget to mention [Spasco](https://github.com/NiklasTiede/Spasco). A nice renaming tool written by myself. :wink: It can be easily installed with `pip install spasco`. It can speed up your renaming operations. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
+And I should not forget to mention Spasco. A nice renaming tool written by myself. :wink: It can be easily installed with `pip install spasco`. It can speed up your renaming operations. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
 
 I'll show you how it substitutes the whitesspaces within the directory `test dir` and the file `test file` by underscores:
 
