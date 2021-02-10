@@ -1,11 +1,13 @@
 <!-- translation
 [English](README.md) | [Tiếng Việt](README-vn.md) -->
 
+<p align="center">
+  <img  align="center" height="500px" src="docs/wordcloud.png" /> 
+<p>
+
 # Cheat Sheet - Linux
 
 This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 LTS) as a python developer. It is a structured documentation of the commands I'm using throughout interactive shell sessions. Caution, this abstract is highly opinionated :wink:
-
-<!-- add image: image containing the keywords of topics  of this cheatsheet -->
 
 <h1 id="contents" ><img src="docs/contents.png" width="30px"#> Contents</h1>
 
