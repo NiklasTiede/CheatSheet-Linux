@@ -1096,7 +1096,7 @@ black <file.py>           # linting performed on file.py
 
 ### Spasco
 
-And of course I should not forget to mention [Spasco](https://github.com/NiklasTiede/Spasco) a renaming tool written by myself. :wink: It is listed at the Python Packaging Index (PyPI) and can speed your renaming operations up. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
+And of course I should not forget to mention [Spasco](https://github.com/NiklasTiede/Spasco) a renaming tool written by myself. :wink: It is listed at the Python Packaging Index (PyPI) and can speed up your renaming operations. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
 
 ```console
 ❯ ls
@@ -1123,25 +1123,37 @@ Furthermore, `spasco` lets you customize the search-value (default: whitespaces)
 
 # 4. Aliases and Functions
 
-For aliases and funtions you can also explore my [dotfiles](https://github.com/NiklasTiede/Dotfiles).
+<!-- For aliases and funtions you can also explore my [dotfiles](https://github.com/NiklasTiede/Dotfiles). -->
 
-Aliases save time and work wonders on lengthy commands. Here's a list of my aliases.
+Aliases save time and work wonders on lengthy commands. Functions let you create new commands.
+
+Here's a list of my aliases.
 
 ```bash
-alias name="command flags"
+alias name="command flags"                      # basic stucture of an alias
+unalias name                                    # remove alias
+echo "alias name='command flags'" >> ~/.bashrc  # gives alias persistency: in every shell session
 
+alias update='sudo apt-get update && sudo apt-get upgrade'
 
-unalias lc
+alias ..='cd ..'                                #  quicker navigation
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
 
-# list all commands
-echo -n $PATH | xargs -d : -I {} find {} -maxdepth 1 \
-        -executable -type f -printf '%P\n' | sort -u
-# list all aliases:
-ALIASES=`alias | cut -d '=' -f 1`
-    echo "$COMMANDS"$'\n'"$ALIASES" | sort -u
+alias dl="cd ~/Downloads"
+```
 
+When your newly defined command needs arguments: functions are the solution! Here are a few functions of mine.
 
+```bash
+c() { cd "$@" && ls; }                          # ls right after cd
 
+gitcom() {                                      # add/com/push all in one
+    git add .
+    git commit -m $1
+    git push
+}
 ```
 
 **[⬆ back to top](#contents)**
