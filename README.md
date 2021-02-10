@@ -1,11 +1,11 @@
 <!-- translation
 [English](README.md) | [Tiếng Việt](README-vn.md) -->
 
-<p align="center">
-  <img  align="center" height="500px" src="docs/wordcloud.png" /> 
-<p>
-
 # Cheat Sheet - Linux
+
+<p align="center">
+  <img  align="center" height="400px" src="docs/wordcloud.png" /> 
+<p>
 
 This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 LTS) as a python developer. It is a structured documentation of the commands I'm using throughout interactive shell sessions. Caution, this abstract is highly opinionated :wink:
 
