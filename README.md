@@ -87,7 +87,7 @@ $ ls file[0-3].*
 file1.go  file2.go  file3.py
 ```
 
-The lesser known extended globbing (like `*(pattern)`), is used more commonly in shell scipting than in interactive shell sessions. The same applies for brace, variable and arithmetic expansions which are explained within the [Shell Scripting](#shell-scripting) section.
+The lesser known extended globbing (like `*(pattern)`), is used more commonly in shell scripting than in interactive shell sessions. The same applies for brace, variable and arithmetic expansions which are explained within the [Shell Scripting](#shell-scripting) section.
 
 **[⬆ back to top](#contents)**
 
@@ -95,7 +95,7 @@ The lesser known extended globbing (like `*(pattern)`), is used more commonly in
 
 ## Shell Operators
 
-Shell operators let you combine commands which expands your toolbelt vastly. They can be divided into two categories: redirection and control operators. Control operators allow for coupling commands.
+Shell operators let you combine commands which expands your tool belt vastly. They can be divided into two categories: redirection and control operators. Control operators allow for coupling commands.
 
 | Token | Example                  | Description                                 |
 | ----- | ------------------------ | ------------------------------------------- |
@@ -329,7 +329,7 @@ Linux is a multi-user OS and therefore implements concepts like users and groups
 - **Group** | _A group can contain multiple users sharing the same permissions. By default the group is the same as the user._
 - **Other** | _Any one who has access to the file other than user and group falls int this category. Other has neither created the file nor is a group member._
 
-Each files/dirs access mode can be displayed when using the `ls -l` command. Each filessytem entry can have read, write and execute permissions.
+Each files/dirs access mode can be displayed when using the `ls -l` command. Each filesystem entry can have read, write and execute permissions.
 
 <p align="center">
   <a href="https://the-coding-lab.com" alt="My-Blog" >
@@ -408,10 +408,10 @@ Several tools to search for files and file-content exist. This can speed up thin
 | `-w`        | Only whole words            |
 | `--include` | Only certain files included |
 
-Sometimes I search through a folder filled with files for a pattern. Most commonly I use `grep -rnw 'patt' .` to know how much times the pattern is occuring.
+Sometimes I search through a folder filled with files for a pattern. Most commonly I use `grep -rnw 'patt' .` to know how much times the pattern is occurring.
 
 ```bash
-grep -rnw 'patt' .               # searchs through cwd for pattern
+grep -rnw 'patt' .               # search through cwd for pattern
 
 grep -rl 'patt' .                # print names of files containing pattern
 
@@ -442,7 +442,7 @@ But when I refactor code I prefer to use VSCode's search-and-replace capabilitie
 
 ```bash
 
-find . -name <file>           # prints all filenames containg the exact pattern
+find . -name <file>           # prints all filenames containing the exact pattern
 
 find . -type f -name "*.py"   # prints rel. path of specified files
 ```
@@ -460,7 +460,7 @@ history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 
 ## Processes and Jobs
 
-Python makes it easy to automate things by just writing a simple script and running it. But how to we achive this without an opened terminal? Using ampersand `&` and `nohup`! The Amperesend sends the process in the background and nohup assures that the process continues even if you're logged out from the current shell session. `jobs` will show you each of these running processes.
+Python makes it easy to automate things by just writing a simple script and running it. But how to we achieve this without an opened terminal? Using ampersand `&` and `nohup`! The Ampersand sends the process in the background and `nohup` assures that the process continues even if you're logged out from the current shell session. `jobs` will show you each of these running processes.
 
 ```bash
 
@@ -525,7 +525,7 @@ a b c d e </directory/command> output       # standard format for a crontab line
 * * * * * directory/command >/dev/null 2>&1 # output redirected to dev/null
 ```
 
-The fields `a` to `e` are used to set up the time at which the script is triggered. Furthermore, you have to specifiy the scripts path.
+The fields `a` to `e` are used to set up the time at which the script is triggered. Furthermore, you have to specify the scripts path.
 
 | Field           | Possible Values | Syntax        | Description                |
 | --------------- | --------------- | ------------- | -------------------------- |
@@ -547,7 +547,7 @@ The output of the job can be send to an email address when configured. It's also
 50 0 * * 2 ~/backup.sh                      # runs every tuesday at 00:50 a.m.
 ```
 
-If you're still not understanding the cronjon syntax, check out the [crontab.guru](https://crontab.guru/)!
+If you're still not understanding the cronjob syntax, check out the [crontab.guru](https://crontab.guru/)!
 
 **[⬆ back to top](#contents)**
 
@@ -620,7 +620,7 @@ Some packages can only be found at the repository of Anaconda.
 How to retrieve information about Anaconda, your environments and configurations.
 
 ```bash
-conda info                                         # informations about version, virtual env's
+conda info                                         # information about version, virtual envs
 conda env list                                     # shows all environments
 
 conda update -n base conda                         # updates conda
@@ -685,7 +685,7 @@ conda config --show                                # shows all configurations
 
 ## Git
 
-A version control system (VCS) like Git is a developers lab notebook. Don't forget that making good commit messages and doin' work bit by bit is of uttermost importance. Connecting a newly created local repository with a remote repository is important for sharing things. Go to [github.com](https://github.com/), create a new repo and add it's URL to the local repo by entering the following commands:
+A version control system (VCS) like Git is a developers lab notebook. Don't forget that making good commit messages and doing work bit by bit is of uttermost importance. Connecting a newly created local repository with a remote repository is important for sharing things. Go to [github.com](https://github.com/), create a new repo and add it's URL to the local repo by entering the following commands:
 
 ```bash
 echo "# projectname" >> README.md
@@ -725,7 +725,7 @@ git log -n3                # to see the last few commits you've made
 git log --stat --summary   # a complete overview
 ```
 
-When working on a more sophisticated project, you separate your work (adding features/bug-fixes) from the production-ready main branch by switching to a branch which is named according to it's pupose (like fix-readme-typo). You commit changes and push it to the remote repo. If you're the owner of the repo, you can decide to merge it into your production-ready main branch on your own. If the owner of the project is someone else, you push it and make a pull request. Usually merging bug-fix/feature-branches into the main branch is associated with semantic versioning.
+When working on a more sophisticated project, you separate your work (adding features/bug-fixes) from the production-ready main branch by switching to a branch which is named according to it's purpose (like fix-readme-typo). You commit changes and push it to the remote repo. If you're the owner of the repo, you can decide to merge it into your production-ready main branch on your own. If the owner of the project is someone else, you push it and make a pull request. Usually merging bug-fix/feature-branches into the main branch is associated with semantic versioning.
 
 When working solo on a project I create branches, push them to the remote repo and merge them later remotely into the main branch. Then I delete the local side branch. This gives you a nice history at hand about how you work.
 
@@ -792,7 +792,7 @@ git config --global user.name "first_name last_name"
 
 ## Docker
 
-Containerizing applications is incredible important to improve its portability and scalability. Thus developing your application within a docker container is common practice. This awesome [cheatsheet](https://github.com/wsargent/docker-cheat-sheet) helps me very much when working with docker. I still got alot to learn so I'm visiting their repo now and then.
+Containerizing applications is incredible important to improve its portability and scalability. Thus developing your application within a docker container is common practice. This awesome [cheat sheet](https://github.com/wsargent/docker-cheat-sheet) helps me very much when working with docker. I still got a lot to learn so I'm visiting their repo now and then.
 
 Here are some basic commands.
 
@@ -831,7 +831,7 @@ docker run $(docker ps -a -q)   # deletes all stopped containers
 docker rmi $(docker images -q) -f   # deletes ALL docker images
 ```
 
-Usually your application is based on a image from the docker registry and it contains several other libraries. You could run the base image and install everything from within the container, but it's much more preferrable to create a Dockerfile which advises docker to build up the image. BTW: Docker stores everything within `/var/lib/docker`.
+Usually your application is based on a image from the docker registry and it contains several other libraries. You could run the base image and install everything from within the container, but it's much more preferable to create a Dockerfile which advises docker to build up the image. BTW: Docker stores everything within `/var/lib/docker`.
 
 | Instruction                                   | Meaning                                                                             |
 | --------------------------------------------- | ----------------------------------------------------------------------------------- |
