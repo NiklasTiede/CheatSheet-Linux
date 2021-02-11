@@ -44,7 +44,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
 I use the alias `marcopolo` to reach this cheat sheet faster:
 
 ```bash
-echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet' && exit" >> ~/.zshrc
+echo "\nalias marcopolo='xdg-open https://github.com/NiklasTiede/cheatsheet && exit'" >> ~/.zshrc
 source ~/.zshrc
 ```
 
