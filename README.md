@@ -9,6 +9,8 @@
 
 This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 LTS) as a python developer. It is a structured documentation of the commands I'm using throughout interactive shell sessions. Caution, this abstract is highly opinionated :wink:
 
+<!-- [Python Cheat sheet](https://www.pythoncheatsheet.org/) -->
+
 <h1 id="contents" ><img src="docs/contents.png" width="30px"#> Contents</h1>
 
 1. [Shell Expansions, Shell Operators](#1-shell-expansions-shell-operators)
@@ -597,11 +599,13 @@ The package dependencies of each python project should be managed with care. The
 
 ```bash
 
-pipenv --python 3.8                 # creates new env with pandas
+pipenv --python 3.8                 # creates new env 
 pipenv install numpy                # install package (I prefer pip install)
 pipenv shell                        # activate environment
+
 exit                                # deactivates the venv
 pipenv --rm                         # removes the venv (not the pipfile)
+
 pipenv install -r requirements.txt  # builds env up from an requirements file
 pipenv graph                        # shows packages and their dependencies
 pipenv --py                         # returns path to python version
