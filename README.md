@@ -599,7 +599,7 @@ The package dependencies of each python project should be managed with care. The
 
 ```bash
 
-pipenv --python 3.8                 # creates new env 
+pipenv --python 3.8                 # creates new env
 pipenv install numpy                # install package (I prefer pip install)
 pipenv shell                        # activate environment
 
@@ -704,8 +704,11 @@ git push -u origin main
 Exploring other peoples projects is also easy. Clone it and build its dependencies to run it properly. Python projects which contain a `setup.py` or a `conda.yml` file can be installed directly from a github repo.
 
 ```bash
-git clone https://github.com/owner/projectname.git          # download repo into cwd
-pip install git+https://github.com/owner/projectname.git    # download, built and install
+git clone https://github.com/owner/projectname          # download repo into cwd
+
+pip install git+https://github.com/NiklasTiede/Spasco    # download, built and install main branch
+
+pip install https://github.com/NiklasTiede/tinyHTTPie/archive/6-Testing-and-CI.zip # dwn, built, install on side branch
 ```
 
 Here's a normal workflow when making commits on a project:
