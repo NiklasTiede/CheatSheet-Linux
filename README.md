@@ -449,6 +449,12 @@ find . -name <file>           # prints all filenames containing the exact patter
 find . -type f -name "*.py"   # prints rel. path of specified files
 ```
 
+Git also has a nice grep functionality built in.
+
+```bash
+git grep 'pattern'
+```
+
 When pipelining these commands you can be pretty creative. For instance if you would like to see your 10 most used commands, then try this:
 
 ```bash
