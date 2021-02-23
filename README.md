@@ -449,7 +449,7 @@ find . -name <file>           # prints all filenames containing the exact patter
 find . -type f -name "*.py"   # prints rel. path of specified files
 ```
 
-Git also has a nice grep functionality built in.
+Git also has a nice grep functionality.
 
 ```bash
 git grep 'pattern'
