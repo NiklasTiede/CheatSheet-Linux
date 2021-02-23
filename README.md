@@ -147,7 +147,11 @@ Linux distributions contain a plethora of powerful built-in commands. The presen
 ```bash
 <command> --help
 <command> --version
+
+time <command>             # returns time to execute command
 ```
+
+Sometimes it's nice to know how much time the execution of a command or a chain of commands took, here the `time` command does the job!
 
 ## Filesystem Navigation
 
@@ -160,12 +164,13 @@ ls -la *.py       # lists only python files
 
 cd <directory>    # change directory
 cd ..             # goes on folder up
+cd -              # goes back to previous dir
 
 pwd               # print working directory
 date              # to navigate yourself in time ;-)
 
 xdg-open .        # opens the Nautilus file manager
-gnome-terminal    # open a terminal window from within a terminal
+gnome-terminal    # opens a new terminal window
 ```
 
 Since most people (like me) don't have a photographic memory, it's always a good choice to use the machines memory.
@@ -596,6 +601,7 @@ pip is a package-management system used to install and manage python packages. I
 
 pip search <package>            # search pypi
 pip install <package>           # installing a package from pypi
+python -m pip <package>         # recommended over pip install (especially on windows)
 pip uninstall <package>         # uninstalls specified package
 pip list                        # lists all pip-packages within the current env
 pip freeze > requirements.txt   # saves all package-versions of current env
@@ -695,6 +701,8 @@ conda config --show                                # shows all configurations
 
 ## Git
 
+Visit [git-scm.com](https://git-scm.com/book/en/v2), it's a great source for commands!
+
 A version control system (VCS) like Git is a developers lab notebook. Don't forget that making good commit messages and doing work bit by bit is of uttermost importance. Connecting a newly created local repository with a remote repository is important for sharing things. Go to [github.com](https://github.com/), create a new repo and add it's URL to the local repo by entering the following commands:
 
 ```bash
@@ -707,14 +715,16 @@ git remote add origin https://github.com/NiklasTiede/projectname.git
 git push -u origin main
 ```
 
-Exploring other peoples projects is also easy. Clone it and build its dependencies to run it properly. Python projects which contain a `setup.py` or a `conda.yml` file can be installed directly from a github repo.
+Exploring other peoples projects is also easy. Clone it and build its dependencies to run it properly. Python projects which contain a `setup.py` file can be installed directly from a github repo.
 
 ```bash
-git clone https://github.com/owner/projectname          # download repo into cwd
+git clone https://github.com/owner/projectname                                    # download repo into cwd
+git clone -b <branchname> --single-branch git://github.com/owner/projectname.git  # clone only a sidebranch
 
-pip install git+https://github.com/NiklasTiede/Spasco    # download, built and install main branch
+git clone <url> --depth=1                                                         # ignores git history, faster download
 
-pip install https://github.com/NiklasTiede/tinyHTTPie/archive/6-Testing-and-CI.zip # dwn, built, install on side branch
+pip install git+https://github.com/owner/projectname                              # download, built and install main branch
+pip install https://github.com/owner/projectname/archive/branchname.zip           # dwn, built, install on side branch
 ```
 
 Here's a normal workflow when making commits on a project:
