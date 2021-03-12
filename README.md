@@ -13,35 +13,51 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
 
 <h1 id="contents" ><img src="docs/contents.png" width="30px"#> Contents</h1>
 
-1. [Shell Expansions, Shell Operators](#1-shell-expansions-shell-operators)
-   - [Shell Expansions](#shell-expansions)
-   - [Shell Operators](#shell-operators)
-2. [Built-in Commands](#2-built-in-commands)
-   - [Filesystem Navigation](#filesystem-navigation)
-   - [Filesystem Exploration](#filesystem-exploration)
-   - [Create, Delete, Copy, and Link](#create-delete-copy-and-link)
-   - [Working with File Content](#working-with-file-content)
-   - [System Updates](#system-updates)
-   - [Data Compression](#data-compression)
-   - [Ownership and Permissions](#ownership-and-permissions)
-   - [Environment Variables](#environment-variables)
-   - [Finding Patterns: grep, sed and find](#finding-patterns-grep-sed-and-find)
-   - [Processes and Jobs](#processes-and-jobs)
-   - [Cron Jobs](#cron-jobs)
-3. [Third Party Tools](#3-third-party-tools)
-   - [pip and pipenv](#pip-and-pipenv)
-   - [Anaconda](#anaconda)
-   - [Git](#git)
-   - [Docker](#docker)
-   - [Miscellaneous Tools](#miscellaneous-tools)
-4. [Aliases and Functions](#4-aliases-and-functions)
-5. [Shortcuts](#5-shortcuts)
-   - [Ubuntu Desktop](#ubuntu-desktop)
-   - [Terminal](#terminal)
-   - [Nano Editor](#nano-editor)
-   - [Chromium Browser](#chromium-browser)
-   - [VSCode Keybinding](#vscode-keybindings)
-6. [Shell Configuration](#6-shell-configuration)
+- [Cheat Sheet - Linux](#cheat-sheet---linux)
+- [1. Shell Expansions, Shell Operators](#1-shell-expansions-shell-operators)
+  - [Shell Expansions](#shell-expansions)
+  - [Shell Operators](#shell-operators)
+- [2. Built-in Commands](#2-built-in-commands)
+  - [Filesystem Navigation](#filesystem-navigation)
+  - [Filesystem Exploration](#filesystem-exploration)
+  - [Create, Delete, Copy, and Link](#create-delete-copy-and-link)
+  - [Working with File Content](#working-with-file-content)
+  - [System Updates](#system-updates)
+  - [Data Compression](#data-compression)
+  - [Ownership and Permissions](#ownership-and-permissions)
+  - [Environment Variables](#environment-variables)
+  - [Finding Patterns: grep, sed and find](#finding-patterns-grep-sed-and-find)
+  - [Processes and Jobs](#processes-and-jobs)
+  - [Cron Jobs](#cron-jobs)
+- [3. Third Party Tools](#3-third-party-tools)
+  - [pip and pipenv](#pip-and-pipenv)
+  - [Anaconda](#anaconda)
+  - [Git](#git)
+  - [Docker](#docker)
+  - [Miscellaneous Tools](#miscellaneous-tools)
+    - [Locate](#locate)
+    - [Tree](#tree)
+    - [Fuzzyfinder](#fuzzyfinder)
+    - [HTTPie](#httpie)
+    - [Openssl](#openssl)
+    - [Glances](#glances)
+    - [Tlp](#tlp)
+    - [Tokei](#tokei)
+    - [Bpython](#bpython)
+    - [Jupyter Lab](#jupyter-lab)
+    - [Cookiecutter](#cookiecutter)
+    - [Black & [Yapf](https://github.com/google/yapf)](#black--yapf)
+    - [Spasco](#spasco)
+    - [Uvicorn](#uvicorn)
+    - [Heroku](#heroku)
+- [4. Aliases and Functions](#4-aliases-and-functions)
+- [5. Shortcuts](#5-shortcuts)
+  - [Ubuntu Desktop](#ubuntu-desktop)
+  - [Terminal](#terminal)
+  - [Nano Editor](#nano-editor)
+  - [Chromium Browser](#chromium-browser)
+  - [VSCode Keybindings](#vscode-keybindings)
+- [6. Shell Configuration](#6-shell-configuration)
 
 I use the alias `marcopolo` to reach this cheat sheet faster:
 
@@ -802,12 +818,22 @@ git commit -m 'Removing ignored files'
 git push
 ```
 
-Git can be configured globally and locally. The `.gitconfig` file is the way to go.
+To prevent tracking files unintentionally it's useful to use `git add -u` instead of `git add .`! Git can be configured globally and locally. The `.gitconfig` file is the way to go.
 
 ```bash
 git config --global user.email "my@emailaddress.com"
 git config --global user.name "first_name last_name"
 ```
+
+Creating lightweight git tags to make snapshots of your project. This tag can be used to make a release.
+
+```bash 
+git log --oneline --decorate --graph  # shows history of commits
+git tag v0.1.0                        # creates a lighweight tag of previous commit
+git show v0.1.0                       # information about the tag
+git push origin v0.1.0                # pushs the tag to the repository
+```
+
 
 **[⬆ back to top](#contents)**
 
@@ -815,7 +841,7 @@ git config --global user.name "first_name last_name"
 
 ## Docker
 
-Containerizing applications is incredible important to improve its portability and scalability. Thus developing your application within a docker container is common practice. This awesome [cheat sheet](https://github.com/wsargent/docker-cheat-sheet) helps me very much when working with docker. I still got a lot to learn so I'm visiting their repo now and then.
+Containerizing applications is incredible important to improve portability and scalability. Thus developing your application within a docker container is common practice. This awesome [cheat sheet](https://github.com/wsargent/docker-cheat-sheet) helps me very much when working with docker. I still got a lot to learn so I'm visiting their repo now and then.
 
 Here are some basic commands.
 
@@ -830,28 +856,33 @@ docker search <image-name>      # search for image in docker registry
 docker pull <image-name>        # pulling a pre-built image (ID or name)
 docker rm <cont-ID>             # removes a container
 docker rmi <cont-ID>            # removes an image
+docker rmi -f <cont-ID>         # forces removal
 
 docker run <cont-ID>            # creates and starts a container in one operation.
+docker run -p 8000:8000 <cont-ID> # connects app to a port
 docker stop <cont-ID>           # stopping container
 docker start <cont-ID>          # starts container
 
 docker commit <cont-ID> <name>  # save the state of the container as image
 docker history <cont-ID>        # history of the images
+
+docker login                    # log into registry
 docker push <cont-ID>           # push image to registry
 
 docker exec                     # execute a command in container
-docker exec -it <ID> bash       # enter bash shell of a running container (-it attach newshell process)
+docker exec -it <ID> /bin/sh    # enter shell of a running container (-it attach newshell process)
 docker-compose exec db psql -h localhost -U postgres --dbname=postgres  # enter database within a container
 
-docker build .                  # creates image from dockerfile
+docker build .                        # creates image from dockerfile
+docker build -t github-trending-api . # creates an image and gives a tag name
 
 docker save my_image:my_tag | gzip > my_image.tar.gz   # save an image
 docker load < my_image.tar.gz                          # load image from file
 
-docker run <image> env          # returns env vars of image
+docker run <image> env                # returns env vars of image
 
-docker run $(docker ps -a -q)   # deletes all stopped containers
-docker rmi $(docker images -q) -f   # deletes ALL docker images
+docker run $(docker ps -a -q)         # deletes all stopped containers
+docker rmi $(docker images -q) -f     # deletes ALL docker images
 ```
 
 Usually your application is based on a image from the docker registry and it contains several other libraries. You could run the base image and install everything from within the container, but it's much more preferable to create a Dockerfile which advises docker to build up the image. BTW: Docker stores everything within `/var/lib/docker`.
@@ -876,7 +907,31 @@ Usually your application is based on a image from the docker registry and it con
 | SHELL ["executable", "parameters"]            | Override default shell is used by docker to run commands                            |
 | HEALTHCHECK                                   | Tells docker how to test a container to check that it is still working              |
 
-The instructions are stored within the `Dockerfile`. Your image is then built from this file using the `docker build .` command. Here's an example Dockerfile for a fastAPI-postgreSQL backend:
+The instructions are stored within the `Dockerfile`. Your image is then built from this file using the `docker build .` command. A typical Dockerfile of a fastAPI app (my [Github-Trending-API](https://github.com/NiklasTiede/Github-Trending-API)):
+
+```dockerfile
+FROM python:3.9.2-alpine3.13
+
+LABEL maintainer="Niklas Tiede <niklastiede2@gmail.com>"
+
+WORKDIR /github-trending-api
+
+COPY ./requirements.txt .
+
+RUN apk add --update --no-cache --virtual .build-deps \
+    g++ \
+    libxml2 \
+    libxml2-dev && \
+    apk add libxslt-dev && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apk del .build-deps
+
+COPY ./app ./app
+
+CMD uvicorn app.main:app --host 0.0.0.0 --port=${PORT:-5000}
+```
+
+Here's another example of Dockerfile. A fastAPI-postgreSQL backend:
 
 ```dockerfile
 FROM python:3.8.1-alpine
@@ -1151,6 +1206,50 @@ test_file
 
 Furthermore, `spasco` lets you customize the search-value (default: whitespaces) and the new-value (default: underscores). All renaming operations can be logged, to ensure that a renaming operation doesn't break things.
 
+### [Uvicorn](https://github.com/encode/uvicorn)
+
+A nice asynchronous server gateway interface (ASGI) written in python. Makes an app in combination with `Gunicorn` lightning fast.
+
+```
+uvicorn app.main:app --host 0.0.0.0 --port 5000 --reload
+```
+
+
+### [Heroku](https://github.com/heroku/cli)
+
+Heroku is a nice cloud PaaS to build, run and scale applications. Some iles have to be created on the root directory of the project.
+
+The `Procfile` specifies the commands that are executed by the app on startup. Here a fastAPI app served by uvicorn is executed:
+
+```
+web: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+```
+
+The `heroku.yml` allows you to build Docker images on Heroku:
+
+```yaml
+build:
+  docker:
+    web: Dockerfile
+```
+
+Python apps need a `runtime.txt` to specify a Python runtime:
+
+```
+python-3.9.2
+```
+
+Then the apps can be tested locally and then a dyno created and pushed:
+
+```bash
+heroku local                              # run app locally
+heroku create -a <my-app>                 # creates the app on Heroku
+heroku container:push web -a <my-app>     # build and push code
+heroku container:release web -a <my-app>  # release 
+heroku logs --tail <my-app>               # log of running dyno
+```
+
+
 **[⬆ back to top](#contents)**
 
 ---
@@ -1187,6 +1286,10 @@ gitcom() {                                      # add/com/push all in one
     git add .
     git commit -m $1
     git push
+}
+
+response() {
+    curl -s -w 'Testing Website Response Time for :%{url_effective}\n\nLookup Time:\t\t%{time_namelookup}\nConnect Time:\t\t%{time_connect}\nPre-transfer Time:\t%{time_pretransfer}\nStart-transfer Time:\t%{time_starttransfer}\n\nTotal Time:\t\t%{time_total}\n' -o /dev/null $1
 }
 ```
 
