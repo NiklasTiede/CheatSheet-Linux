@@ -887,25 +887,25 @@ docker rmi $(docker images -q) -f     # deletes ALL docker images
 
 Usually your application is based on a image from the docker registry and it contains several other libraries. You could run the base image and install everything from within the container, but it's much more preferable to create a Dockerfile which advises docker to build up the image. BTW: Docker stores everything within `/var/lib/docker`.
 
-| Instruction                                   | Meaning                                                                             |
-| --------------------------------------------- | ----------------------------------------------------------------------------------- |
-| FROM \<image name>                            | Sets base image for subsequent instructions                                         |
-| RUN \<command>                                | Execute any command in a new layer on top of img and commit results                 |
-| CMD                                           | Provide defaults for an executing container.                                        |
-| EXPOSE \<port>                                | Informs Docker that the container listens on the specified network ports at runtime |
-| ENV \<key> \<value>                           | Sets environment variable                                                           |
-| ADD \<src> \<destination>                     | Copies new files, directories or remote file to container                           |
-| COPY \<src> \<destination>                    | Copies new files or directories to container.                                       |
-| ENTRYPOINT ["executable", "param1", "param2"] | Configures a container that will run as an executable                               |
-| VOLUME [‘/data’]                              | Creates a mount point for externally mounted volumes or other containers            |
-| USER \<uid>                                   | Sets the user name for following RUN / CMD / ENTRYPOINT commands                    |
-| WORKDIR /path/to/workdir                      | Sets the working directory                                                          |
-| ARG \<name>[=\<default value>]                | Defines a build-time variable                                                       |
-| ONBUILD \<INSTRUCTION>                        | Adds a trigger instruction when the image is used as the base for another build     |
-| STOPSIGNAL                                    | Sets the system call signal that will be sent to the container to exit              |
-| LABEL                                         | Apply key/value metadata to your images, containers, or daemons                     |
-| SHELL ["executable", "parameters"]            | Override default shell is used by docker to run commands                            |
-| HEALTHCHECK                                   | Tells docker how to test a container to check that it is still working              |
+| Instruction                                       | Meaning                                                                             |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **FROM** \<image name>                            | Sets base image for subsequent instructions                                         |
+| **RUN** \<command>                                | Execute any command in a new layer on top of img and commit results                 |
+| **CMD**                                           | Provide defaults for an executing container.                                        |
+| **EXPOSE** \<port>                                | Informs Docker that the container listens on the specified network ports at runtime |
+| **ENV** \<key> \<value>                           | Sets environment variable                                                           |
+| **ADD** \<src> \<destination>                     | Copies new files, directories or remote file to container                           |
+| **COPY** \<src> \<destination>                    | Copies new files or directories to container.                                       |
+| **ENTRYPOINT** ["executable", "param1", "param2"] | Configures a container that will run as an executable                               |
+| **VOLUME** [‘/data’]                              | Creates a mount point for externally mounted volumes or other containers            |
+| **USER** \<uid>                                   | Sets the user name for following RUN / CMD / ENTRYPOINT commands                    |
+| **WORKDIR** /path/to/workdir                      | Sets the working directory                                                          |
+| **ARG** \<name>[=\<default value>]                | Defines a build-time variable                                                       |
+| **ONBUILD** \<INSTRUCTION>                        | Adds a trigger instruction when the image is used as the base for another build     |
+| **STOPSIGNAL**                                    | Sets the system call signal that will be sent to the container to exit              |
+| **LABEL**                                         | Apply key/value metadata to your images, containers, or daemons                     |
+| **SHELL** ["executable", "parameters"]            | Override default shell is used by docker to run commands                            |
+| **HEALTHCHECK**                                   | Tells docker how to test a container to check that it is still working              |
 
 The instructions are stored within the `Dockerfile`. Your image is then built from this file using the `docker build .` command. A typical Dockerfile of a fastAPI app (my [Github-Trending-API](https://github.com/NiklasTiede/Github-Trending-API)):
 
