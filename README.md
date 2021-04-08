@@ -46,7 +46,7 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
     - [Bpython](#bpython)
     - [Jupyter Lab](#jupyter-lab)
     - [Cookiecutter](#cookiecutter)
-    - [Black & [Yapf](https://github.com/google/yapf)](#black--yapf)
+    - [Black & Yapf](#black-&-yapf)
     - [Spasco](#spasco)
     - [Uvicorn](#uvicorn)
     - [Heroku](#heroku)
@@ -1038,9 +1038,9 @@ tree -L 2         # max depth is set to 2
 
 ---
 
-### [Fuzzyfinder](https://github.com/junegunn/fzf)
+### Fuzzyfinder
 
-The fuzzyfinder improves when searching for a path or within your command history. I don't harness it's pull power currently. So I should keep learning this tool!
+The [fuzzyfinder](https://github.com/junegunn/fzf) improves when searching for a path or within your command history. I don't harness it's pull power currently. So I should keep learning this tool!
 
 ```bash
 fzf                  # search for path
@@ -1048,9 +1048,9 @@ fzf                  # search for path
 
 ---
 
-### [HTTPie](https://github.com/httpie/httpie)
+### HTTPie
 
-HTTPie is designed for testing, debugging, and generally interacting with APIs & HTTP servers. I use it mainly for testing and exploring API's.
+[HTTPie](https://github.com/httpie/httpie) is designed for testing, debugging, and generally interacting with APIs & HTTP servers. I use it mainly for testing and exploring API's.
 
 ```bash
 
@@ -1088,9 +1088,9 @@ I Added `"--style=monokai"` to Httpie's default options (`.httpie/config.json`) 
 
 ---
 
-### [Openssl](https://github.com/openssl/openssl)
+### Openssl
 
-Openssl s a general-purpose cryptography library. I'm using it only for generating passwords.
+[Openssl](https://github.com/openssl/openssl) s a general-purpose cryptography library. I'm using it only for generating passwords.
 
 ```bash
 openssl rand -hex 30     # generate hexadecimal key, 30 characters long
@@ -1098,9 +1098,9 @@ openssl rand -hex 30     # generate hexadecimal key, 30 characters long
 
 ---
 
-### [Glances](https://github.com/nicolargo/glances)
+### Glances
 
-Glances is a monitoring tool which aims to present a large amount of monitoring information.
+[Glances](https://github.com/nicolargo/glances) is a monitoring tool which aims to present a large amount of monitoring information.
 
 ```bash
 glances
@@ -1108,9 +1108,9 @@ glances
 
 ---
 
-### [Tlp](https://github.com/linrunner/TLP)
+### Tlp
 
-Tlp is a tool to optimize laptop battery life for linux. It will also return some interesting parameters like CPU temperature and information about your disk.
+[Tlp](https://github.com/linrunner/TLP) is a tool to optimize laptop battery life for linux. It will also return some interesting parameters like CPU temperature and information about your disk.
 
 ```bash
 sudo tlp-stat -s      # system information
@@ -1120,9 +1120,9 @@ watch tlp-stat -t     # returns your CPU temperature every 2s
 
 ---
 
-### [Tokei](https://github.com/XAMPPRocky/tokei)
+### Tokei
 
-Tokei is a static code analysis tool. It counts the number of lines code of each file within a selected directory. I use it to get a rough idea of how big a project is and which languages are included. Tokei itself is written in Rust, so it's blazing fast.
+[Tokei](https://github.com/XAMPPRocky/tokei) is a static code analysis tool. It counts the number of lines code of each file within a selected directory. I use it to get a rough idea of how big a project is and which languages are included. Tokei itself is written in Rust, so it's blazing fast.
 
 ```bash
 tokei <dir>         # counts the number of lines code per language recursively
@@ -1130,9 +1130,9 @@ tokei <dir>         # counts the number of lines code per language recursively
 
 ---
 
-### [Bpython](https://github.com/bpython/bpython)
+### Bpython
 
-A fancier interface than the normal python interpreter. Bpython gives your REPL session a nice syntax highlighting and autocomplete. It will definitly enhance REPL session experience.
+A fancier interface than the normal python interpreter. [Bpython](https://github.com/bpython/bpython) gives your REPL session a nice syntax highlighting and autocomplete. It will definitly enhance REPL session experience.
 
 ```bash
 bpython
@@ -1140,9 +1140,9 @@ bpython
 
 ---
 
-### [Jupyter Lab](https://github.com/jupyterlab/jupyterlab)
+### Jupyter Lab
 
-I have a background in chemistry, so python and data science tasks are a natural fit to me. Jupyter notebooks took data science collaboration to another level. Notebooks enable us to share how a set of data is processed and then used for modeling. [Kaggle](https://www.kaggle.com/) is the best place to get a plethora of interesting data sets.
+I have a background in chemistry, so python and data science tasks are a natural fit to me. Jupyter notebooks took data science collaboration to another level. Notebooks enable us to share how a set of data is processed and then used for modeling. [Jupyter lab](https://github.com/jupyterlab/jupyterlab) has a nicer interface. [Kaggle](https://www.kaggle.com/) is the best place to get a plethora of interesting data sets.
 
 ```bash
 conda install jupyter lab
@@ -1153,9 +1153,9 @@ A lot of extensions are available to customize jupyter lab.
 
 ---
 
-### [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
+### Cookiecutter
 
-Setting up a python project can be time-consuming. Cookiecutter speeds this process up. The templating engine Jinja2 is used by cookiecutter. You select a cookiecutter project template you like (search at github `search?q=cookiecutter+YourSearch`) and use its github URL. Then you're enter your settings of choice and voilà: you have a good foundation for a new project!
+Setting up a python project can be time-consuming. [Cookiecutter](https://github.com/cookiecutter/cookiecutter) speeds this process up. The templating engine Jinja2 is used by cookiecutter. You select a cookiecutter project template you like (search at github `search?q=cookiecutter+YourSearch`) and use its github URL. Then you're enter your settings of choice and voilà: you have a good foundation for a new project!
 
 ```bash
 cookiecutter <git-URL>                                    # base command
@@ -1171,9 +1171,9 @@ https://github.com/conda/cookiecutter-conda-python.git  # conda package
 
 ---
 
-### [Black](https://github.com/psf/black) & [Yapf](https://github.com/google/yapf)
+### Black & Yapf
 
-Linting tools increase readability and give your project a consistent style. Black is a more common linting tool for python. But there are also others tools like Yapf, flake etc. Some linting tools are only code formatter (like black), some give you also some introspection in your code and can help fixing potential bugs.
+Linting tools increase readability and give your project a consistent style. [Black](https://github.com/psf/black) is a more common linting tool for python. But there are also others tools like [Yapf](https://github.com/google/yapf), flake etc. Some linting tools are only code formatter (like black), some give you also some introspection in your code and can help fixing potential bugs.
 
 ```bash
 black <file.py>           # linting performed on file.py
@@ -1182,9 +1182,9 @@ yapf -i <file.py>         # --in-place has to be used here to apply linting
 
 ---
 
-### [Spasco](https://github.com/NiklasTiede/Spasco)
+### Spasco
 
-And I should not forget to mention Spasco. A nice renaming tool written by myself. :wink: It can be easily installed with `pip install spasco`. It can speed up your renaming operations. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
+And I should not forget to mention [Spasco](https://github.com/NiklasTiede/Spasco). A nice renaming tool written by myself. :wink: It can be easily installed with `pip install spasco`. It can speed up your renaming operations. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
 
 I'll show you how it substitutes the whitesspaces within the directory `test dir` and the file `test file` by underscores:
 
@@ -1207,18 +1207,18 @@ test_file
 
 Furthermore, `spasco` lets you customize the search-value (default: whitespaces) and the new-value (default: underscores). All renaming operations can be logged, to ensure that a renaming operation doesn't break things.
 
-### [Uvicorn](https://github.com/encode/uvicorn)
+### Uvicorn
 
-A nice asynchronous server gateway interface (ASGI) written in python. Makes an app in combination with `Gunicorn` lightning fast.
+[Uvicorn](https://github.com/encode/uvicorn) is a nice asynchronous server gateway interface (ASGI) written in python. Makes an app in combination with `Gunicorn` lightning fast.
 
 ```
 uvicorn app.main:app --host 0.0.0.0 --port 5000 --reload
 ```
 
 
-### [Heroku](https://github.com/heroku/cli)
+### Heroku
 
-Heroku is a nice cloud PaaS to build, run and scale applications. Some iles have to be created on the root directory of the project.
+[Heroku](https://github.com/heroku/cli) is a nice cloud PaaS to build, run and scale applications. Some iles have to be created on the root directory of the project.
 
 The `Procfile` specifies the commands that are executed by the app on startup. Here a fastAPI app served by uvicorn is executed:
 
