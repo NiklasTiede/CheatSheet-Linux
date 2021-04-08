@@ -621,6 +621,7 @@ python -m pip <package>         # recommended over pip install (especially on wi
 pip uninstall <package>         # uninstalls specified package
 pip list                        # lists all pip-packages within the current env
 pip freeze > requirements.txt   # saves all package-versions of current env
+pip install -r requirements.txt # installs packages requirements.txt file
 ```
 
 The package dependencies of each python project should be managed with care. Therefore using an isolated virtual environment for each project is best practice. `pipenv` is a nice dependency manager.
