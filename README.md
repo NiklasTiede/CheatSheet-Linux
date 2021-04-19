@@ -1098,75 +1098,58 @@ A good commit message has good style (punctuation, capitalization etc.). I add [
 
 #### Gitmojis I'm using
 
-🎉  Begin a project.
-
-⚗️   Perform experiments.
-🚧  Work in progress.
-⏪️  Revert changes.
-
-#### Code-related
-
-✨  Introduce new features.
-⚡️   Improve performance.
-
-🥅  Catch errors.
-🐛  Fix a bug.
-🩹  Simple fix for a non-critical issue.
-💥  Introduce breaking changes.
-🚑️  Critical hotfix.
-
-🏗️  Make architectural changes.
-🎨  Improve structure / format of the code.
-♻️   Refactor code.
-💬  Add or update text and literals.
-💩  Write bad code that needs to be improved.
-
-💡  Add or update comments in source code.
-🏷️  Add or update types.
-
-✏️   Fix typos.
-🚨  Fix compiler / linter warnings.
-
-🚚  Move or rename resources (e.g.: files, paths, routes).
-🔥  Remove code or files.
-⚰️   Remove dead code.
-
-#### Docs, Assets, Dependencies
-
-📝  Add or update documentation.
-🍱  Add or update assets.
-
-🙈  Add or update a .gitignore file.
-📄  Add or update license.
-🔧  Add or update configuration files.
-💫  Add or update animations and transitions.
-
-⬆️   Upgrade dependencies.
-➕  Add a dependency.
-
-#### CI and CD
-
-🤡  Mock things.
-✅  Add or update tests.
-
-💚  Fix CI Build.
-👷  Add or update CI build system.
-
-🚀  Deploy stuff.
-🔖  Release / Version tags.
-
-🔀  Merge branches.
-
-#### Web Dev: Frontend and Backend
-
-🚸  Improve user experience / usability.
-💄  Add or update the UI and style files.
-🔍️  Improve SEO.
-
-🔒️  Fix security issues.
-🗃️  Perform database related changes.
-🛂  Work on code related to authorization, roles and permissions.
-🔊  Add or update logs.
+| Emoji | Meaning                                   |
+|-------|-------------------------------------------|
+|       | **General**                               |
+| 🎉    | Begin a project.                          |
+| ⚗️     | Perform experiments.                      |
+| 🚧    | Work in progress.                         |
+| ⏪️    | Revert changes.                           |
+|       | **Code related**                          |
+| ✨    | Introduce new features.                   |
+| ⚡️     | Improve performance.                      |
+| 🥅    | atch errors.                              |
+| 🐛    | Fix a bug.                                |
+| 🩹    | Simple fix for a non-critical issue.      |
+| 💥    | Introduce breaking changes.               |
+| 🚑️    | Critical hotfix.                          |
+| 🏗️    | Make architectural changes.               |
+| 🎨    | Improve structure / format of the code.   |
+| ♻️     | Refactor code.                            |
+| 💬    | Add or update text and literals.          |
+| 💩    | Write bad code that needs to be improved. |
+| 💡    | Add or update comments in source code.    |
+| 🏷️    | Add or update types.                      |
+| ✏️     | Fix typos.                                |
+| 🚨    | Fix compiler / linter warnings.           |
+| 🚚    | Move or rename resources                  |
+| 🔥    | Remove code or files.                     |
+| ⚰️     | Remove dead code.                         |
+|       | **Docs, Assets, Dependencies**            |
+| 📝    | Add or update documentation.              |
+| 🍱    | Add or update assets.                     |
+| 🙈    | Add or update a .gitignore file.          |
+|  📄   | Add or update license.                    |
+| 🔧    | Add or update configuration files.        |
+| 💫    | Add or update animations and transitions. |
+| ⬆️     | Upgrade dependencies.                     |
+| ➕    | Add a dependency.                         |
+|       | **CI and CD**                             |
+| 🤡    | Mock things.                              |
+| ✅    | Add or update tests.                      |
+| 💚    | Fix CI Build.                             |
+| 👷    | Add or update CI build system.            |
+| 🚀    | Deploy stuff.                             |
+| 🔖    | Release / Version tags.                   |
+| 🔀    | Merge branches.                           |
+|       | **Web Development**                       |
+| 🚸    | Improve user experience / usability.      |
+| 💄    | Add or update the UI and style files.     |
+| 🔍️    | Improve SEO.                              |
+| 🔒️    | Fix security issues.                      |
+| 🗃️    | Perform database related changes.         |
+| 🛂    | Work on code related to authorization, roles and permissions. |
+| 🔊    | Add or update logs.                       |
 
 
 **[⬆ back to top](#contents)**
