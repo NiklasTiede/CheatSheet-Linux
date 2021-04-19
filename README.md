@@ -434,6 +434,8 @@ Several tools to search for files and file-content exist. This can speed up thin
 Sometimes I search through a folder filled with files for a pattern. Most commonly I use `grep -rnw 'patt' .` to know how much times the pattern is occurring.
 
 ```bash
+grep -i 'patt' <file>            # search for pattern in specified file
+
 grep -rnw 'patt' .               # search through cwd for pattern
 
 grep -rl 'patt' .                # print names of files containing pattern
@@ -718,9 +720,11 @@ conda config --show                                # shows all configurations
 
 ## Git
 
-Visit [git-scm.com](https://git-scm.com/book/en/v2), it's a great source for commands!
+
+Visit [git-scm.com](https://git-scm.com/book/en/v2), it's a great source for commands! 
 
 A version control system (VCS) like Git is a developers lab notebook. Don't forget that making good commit messages and doing work bit by bit is of uttermost importance. Connecting a newly created local repository with a remote repository is important for sharing things. Go to [github.com](https://github.com/), create a new repo and add it's URL to the local repo by entering the following commands:
+### Creating a new Project
 
 ```bash
 echo "# projectname" >> README.md
@@ -732,7 +736,9 @@ git remote add origin https://github.com/NiklasTiede/projectname.git
 git push -u origin main
 ```
 
-Exploring other peoples projects is also easy. Clone it and build its dependencies to run it properly. Python projects which contain a `setup.py` file can be installed directly from a github repo.
+### Cloning a Project
+
+Exploring other peoples projects is also easy. Clone it and build its dependencies to run it properly. Python projects which contain a `setup.py` file can also be installed directly from a github repo.
 
 ```bash
 git clone https://github.com/owner/projectname                                    # download repo into cwd
@@ -744,26 +750,160 @@ pip install git+https://github.com/owner/projectname                            
 pip install https://github.com/owner/projectname/archive/branchname.zip           # dwn, built, install on side branch
 ```
 
-Here's a normal workflow when making commits on a project:
+### Moving files between Working Directory and Staging Area
+
+Each commit should address a particular problem. So having control about working directory and staging area is crucial.
 
 ```bash
-git status                          # status information (optional)
-git diff                            # difference to last commit (optional)
-git add <file1> <newfile2>          # adds new/changed files to staging area
-git commit -m 'descr. of commit'    # commit files to the local repo
-git push                            # pushs commit t
+git add <file1> <newfile2>    # adds new/changed files to staging area
+git add -u <file>             # adds only already tracked files to staging area
+
+git restore --staged          # moves file from stages to unstaged area
+git restore --staged .        # empty staging area
+git restore <file>            # restores file which is in working dir (from last commit) 
+
+git rm file1.py               # Removes from working directory and staging area
+git rm --cached file1.py      # Removes from staging area only
+git rm ---cached -r bin/      # removes files from staging area recursively
+
+git mv file1.js file1.txt     # renaming or moving files
 ```
 
-If your would like to look at the work you've done so far, use these:
+Checking status and differences.
 
 ```bash
-git status                 # returns state of working dir and staging area
-git diff                   # view changes you haven't committed yet
+git status                    # status of working dir/staging area files
+git status -s                 # short form of status
 
-git log                    # to see what you've done so far
-git log -n3                # to see the last few commits you've made
-git log --stat --summary   # a complete overview
+git diff                      # show changes between working dir and last commit
+git diff --staged             # show changes between staging area and last commit
 ```
+
+If ready for commit, use short or lang commits.
+
+```bash
+git commit -m '🐛 descr. of commit'    
+git commit 
+```
+
+**[⬆ back to top](#contents)**
+
+---
+
+### Browsing and Interacting with Commit History
+
+`git log` returns the a number of interesting information about a repositories history.
+
+```bash
+git log                                     # Full history
+git log --all --decorate --oneline --graph  # nice overview
+git log --oneline                           # Summary
+git log --patch                             # Content of commits
+
+git log --oneline --author="Niklas"         # filter by author
+git log --oneline --after="2020-08-17"      # filter by date
+
+git log --oneline --grep="GUI"              # filter by commit description
+git log --oneline -S "fct()" --patch        # filter by commits content
+
+git log --oneline file.txt                  # all commits which changed this file
+git log --oneline -- file.txt               # if git complains about the file name
+```
+
+Looking at specific commits and comparing them.
+
+```bash
+
+git show 921a2ff                # Shows the given commit
+git show HEAD                   
+git show HEAD~2                 # Two steps before the last commit
+git show HEAD:file.js           # Shows the version of file.js stored in the last commit
+git show f40a820:file.js        # Shows the version of file.js stored at specified commit
+
+git show HEAD~2 --name-only     # showing only filenames that has been modofied etc
+git show HEAD~2 --name-status   # shows if added/modified/deleted 
+
+git diff HEAD~2 HEAD            # changes across commits of all files
+git diff HEAD~2 HEAD <file>     # changes across commits of specified file
+git diff HEAD~2 HEAD <file> --name-status  # changes across commits of specified file
+
+git checkout <commit-id>        # HEAD goes back to that commit (HEAD is detached)
+git checkout master
+```
+
+Finding a commit where a bug was introduced with bisect method.
+
+```bash
+git bisect start                 
+git bisect bad                   
+git bisect good <commit-id>      
+
+git bisect good/bad             # typing good or bad, depending if code is good
+git bisect reset                # back on master
+```
+
+Restoring a deleted file.
+
+```bash
+git log --oneline -- <file>     
+git checkout <comm-id> <file>    
+git status -s
+git commit -m 'restore file'
+```
+
+Restoring a file from a commit.
+
+```bash
+git restore --source=HEAD~2 file.js   # restore file to a previous version
+git restore --source=f40a820 file.js  
+```
+
+
+**[⬆ back to top](#contents)**
+
+---
+
+## Working with Local Branches
+
+Creating/Deleting and switching between local branches.
+
+```bash
+git branch                       # show all local branches
+git branch -r                    # show all remote brnaches
+git branch -a                    # show all remote and local branches
+
+git checkout -b bugfix/database  # create a branch and switch immediately
+git switch -C bugfix/database    # same as above
+
+git switch main                  # switch branch
+git branch -m oldname newname    # rename branch
+
+git branch -D more-sections      # deletes a local branch
+git push origin my-branch        # create remote branch
+```
+
+Comparing branches.
+
+```bash
+git diff master..add-feature-y                 
+git diff --name-status master..add-feature-y   # shows only filenames
+```
+
+Uncommitted files can be stashed when you want to switch to another branch and uncommitted work is left. stash is stored as number.
+
+```bash
+git stash push -m 'new tax rules'  # untracked files are not included in the stash!
+git stash push -am 'my new stash'  # this includes untracked files
+
+  switch to branch and back
+
+git stash show 1
+git stash apply 1                  # applied to working dir
+git stash drop 1                   # remove stash when back to workdir
+git stash clear                    # removes all stashes
+```
+
+### Branching Workflow
 
 When working on a more sophisticated project, you separate your work (adding features/bug-fixes) from the production-ready main branch by switching to a branch which is named according to it's purpose (like fix-readme-typo). You commit changes and push it to the remote repo. If you're the owner of the repo, you can decide to merge it into your production-ready main branch on your own. If the owner of the project is someone else, you push it and make a pull request. Usually merging bug-fix/feature-branches into the main branch is associated with semantic versioning.
 
@@ -787,6 +927,8 @@ git branch -d <new-branch>             # delete local <new-branch>
 git push origin --delete <new-branch>  # delete remote <new-branch>
 ```
 
+### Pullrequest Workflow
+
 Pull requests are the way to contribute on Github. It's workflow is: fork -> clone -> edit -> pull request.
 
 ```bash
@@ -799,8 +941,7 @@ git checkout -b <branch-name>        # create a new branch
 
 loop:
    [make changes to the project]
-   git status
-   git diff
+   git status/diff/log
    git add <file>
    git commit -m 'message'
    git push origin <branch-name>
@@ -808,6 +949,101 @@ loop:
 on Github:
    - create pull request             # add description and title
 ```
+
+**[⬆ back to top](#contents)**
+
+---
+
+### Merging Branches
+
+Each branch has to be merged sooner or later. Fast-forward merges just move the pointer forward and create a linear history while three-way merges create a history where the branch is still visible. I prefer three-way merges due to a better 'true' representation of the history.
+
+```bash
+git merge --no-ff                        # reflects true history (I will prefer this kind of merging in the future!)
+git merge --abort
+
+
+git branch --merged                      # shows branches which have been merged into master
+git branch --no-merged                   # shows branches which have not been merged currently
+git branch -d branch-name                # delete merged branches, to clean everything up
+```
+
+Merge conflicts have to be resolved with care.
+
+### Working with Remote Branches
+
+Origin is the URL which is used by git for pushing/fetching. 
+
+```bash
+git remote        
+git remote -v            # URLs for fetch/push
+git branch -vv           # shows how local and remote repos are diverging
+git branch -r            # all remote tracking branches
+
+git fetch                # downloads changes of remote repo; origin/MASTER moves forward and master kept on last commit
+git merge origin/master  # fast forward merge
+git pull                 # fetch + merge 
+
+git pull --rebase        # getting linear history, when remote repo has a diff commit and local another as well
+
+git remote update        # brings remote refs up to date
+git status -uno          # tells if you're behind/ahead etc.
+
+git push                 # push commit to remote repo
+```
+
+Create/Delete remote branches.
+
+```bash
+git push <my-branch>            # creates remote branch 
+git push -u origin <my-branch>  
+
+git switch master
+git push -d origin my-branch    # deletes branch from origin
+git branch -d my-branch         # deletes local version
+```
+
+Keep a forked repo up to date.
+
+```bash
+git remote add upstream <url>   # add a url
+git remote rename               # renaming        
+git remote rm <my-branch>
+
+git fetch base                  # update local repo
+git switch master
+git merge base/master
+git push
+```
+
+**[⬆ back to top](#contents)**
+
+---
+
+### Rewriting History
+
+Rewrite only local history to avoid messing up other peoples history. Here's how to undo  a scrwed merge:
+
+```bash
+git reset --hard HEAD~1     # undo commit (mixed is default option)
+
+  --soft   # removes the commit only
+  --mixed  # unstages files
+  --hard   # discard local changes
+
+git revert HEAD             # if history was shared, this is used
+```
+
+Reverting commits. All changed can be found in the staging area
+
+```bash
+git revert --no-commit HEAD~3..     # 
+
+git revert --continue        
+git revert --abort 
+```
+
+### .gitignore
 
 A `.gitignore` file specifies intentionally untracked files that `git` should ignore. But if a file was already indexed, how do we remove this file from the index? Add the filename to the `.gitignore` file and then type:
 
@@ -819,21 +1055,118 @@ git commit -m 'Removing ignored files'
 git push
 ```
 
+### Configuration
+
 To prevent tracking files unintentionally it's useful to use `git add -u` instead of `git add .`! Git can be configured globally and locally. The `.gitconfig` file is the way to go.
 
 ```bash
+git config -e                                         # edit current projects git config file
+git config --global                                   # edit global git config file 
+
 git config --global user.email "my@emailaddress.com"
 git config --global user.name "first_name last_name"
+git config --global core.autocrlf input               # collaboration win/linux
+git config --add merge.ff false                       # disable fast-forward merging for all branches within current repo
+git config --global --add merge.ff false              # disable ff for all branches within all repos
 ```
+
+**[⬆ back to top](#contents)**
+
+---
+
+### Tagging
 
 Creating lightweight git tags to make snapshots of your project. This tag can be used to make a release.
 
 ```bash 
-git log --oneline --decorate --graph  # shows history of commits
-git tag v0.1.0                        # creates a lighweight tag of previous commit
-git show v0.1.0                       # information about the tag
-git push origin v0.1.0                # pushs the tag to the repository
+git tag v1.0.0                         # tagging last commit
+git tag v1.0.0 <comm-id>               # if you wanna tag an earlier commit
+git tag -a v1.0.0 -m 'feature x added' # annotated tag    
+
+git tag                                # shows all lightweight tags
+git tag -n                             # shows the tags messages    
+git show v1.0.0                        # shows a specific tag  
+git tag -d v1.0.0                      # delete a tag 
+
+git push origin v1.0.0                 # pushing to github
+git push origin --delete v1.0.0        # deletes the tag from origin
 ```
+
+### Good Commit Messages
+
+A good commit message has good style (punctuation, capitalization etc.). I add [gitmojis](https://github.com/carloscuesta/gitmoji) to make the commits visually more appealing. The body of the message should explain WHAT and WHY vs how. A properly formed git commit subject line should always be able to complete the following sentence `If applied, this commit will <your subject line here>`
+
+#### Gitmojis I'm using
+
+🎉  Begin a project.
+
+⚗️   Perform experiments.
+🚧  Work in progress.
+⏪️  Revert changes.
+
+#### Code-related
+
+✨  Introduce new features.
+⚡️   Improve performance.
+
+🥅  Catch errors.
+🐛  Fix a bug.
+🩹  Simple fix for a non-critical issue.
+💥  Introduce breaking changes.
+🚑️  Critical hotfix.
+
+🏗️  Make architectural changes.
+🎨  Improve structure / format of the code.
+♻️   Refactor code.
+💬  Add or update text and literals.
+💩  Write bad code that needs to be improved.
+
+💡  Add or update comments in source code.
+🏷️  Add or update types.
+
+✏️   Fix typos.
+🚨  Fix compiler / linter warnings.
+
+🚚  Move or rename resources (e.g.: files, paths, routes).
+🔥  Remove code or files.
+⚰️   Remove dead code.
+
+#### Docs, Assets, Dependencies
+
+📝  Add or update documentation.
+🍱  Add or update assets.
+
+🙈  Add or update a .gitignore file.
+📄  Add or update license.
+🔧  Add or update configuration files.
+💫  Add or update animations and transitions.
+
+⬆️   Upgrade dependencies.
+➕  Add a dependency.
+
+#### CI and CD
+
+🤡  Mock things.
+✅  Add or update tests.
+
+💚  Fix CI Build.
+👷  Add or update CI build system.
+
+🚀  Deploy stuff.
+🔖  Release / Version tags.
+
+🔀  Merge branches.
+
+#### Web Dev: Frontend and Backend
+
+🚸  Improve user experience / usability.
+💄  Add or update the UI and style files.
+🔍️  Improve SEO.
+
+🔒️  Fix security issues.
+🗃️  Perform database related changes.
+🛂  Work on code related to authorization, roles and permissions.
+🔊  Add or update logs.
 
 
 **[⬆ back to top](#contents)**
@@ -1171,13 +1504,16 @@ https://github.com/conda/cookiecutter-conda-python.git  # conda package
 
 ---
 
-### Black & Yapf
+### Isort, Black, Pylint & MyPy
 
-Linting tools increase readability and give your project a consistent style. [Black](https://github.com/psf/black) is a more common linting tool for python. But there are also others tools like [Yapf](https://github.com/google/yapf), flake etc. Some linting tools are only code formatter (like black), some give you also some introspection in your code and can help fixing potential bugs.
+Linting tools increase readability and give your project a consistent style. [Black](https://github.com/psf/black) is quite common for code formatting python code. [Isort](https://github.com/PyCQA/isort) sorts the import-statements nicely. Some linting tools are only code formatter (like black), some give you also some introspection in your code (like [Pylint]()) and can help fixing potential bugs. I also try to make use of Pythons optional static typing capabilities, [MyPy]() helps me here.
 
 ```bash
-black <file.py>           # linting performed on file.py
+black <file.py>           # code formatting in black-style performed on file.py
 yapf -i <file.py>         # --in-place has to be used here to apply linting
+isort <file.py>           # sorts import statements
+pylint <file.py>          # returns some xxx
+mypy <file.py>            # generates a mypy-folder and shows have to improve static typing
 ```
 
 ---
@@ -1283,6 +1619,12 @@ When your newly defined command needs arguments: functions are the solution! Her
 ```bash
 c() { cd "$@" && ls; }                          # ls right after cd
 
+alias unstage="git restore --staged ."          # unstages everything from staging area
+
+alias glog1="git log --all --decorate --oneline --graph"
+
+alias glog2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+
 gitcom() {                                      # add/com/push all in one
     git add .
     git commit -m $1
@@ -1293,6 +1635,19 @@ response() {
     curl -s -w 'Testing Website Response Time for :%{url_effective}\n\nLookup Time:\t\t%{time_namelookup}\nConnect Time:\t\t%{time_connect}\nPre-transfer Time:\t%{time_pretransfer}\nStart-transfer Time:\t%{time_starttransfer}\n\nTotal Time:\t\t%{time_total}\n' -o /dev/null $1
 }
 ```
+
+Git aliases of 'Oh My Zsh' I'm using quite often.
+
+| Alias   | Command          |
+|---------|------------------|
+| ga      | git add          |
+| gau     | git add --update |
+| gcmsg   | git commit -m    |
+| gst  | git status   |
+| gss  | git status -s   |
+| glog  | git log --oneline --decorate --graph   |
+| gds  | git diff --staged   |
+
 
 **[⬆ back to top](#contents)**
 
