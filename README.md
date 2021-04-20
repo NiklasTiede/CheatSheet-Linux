@@ -1022,7 +1022,7 @@ git push
 
 ### Rewriting History
 
-Rewrite only local history to avoid messing up other peoples history. Here's how to undo  a scrwed merge:
+Rewrite only local history to avoid messing up other peoples history. Here's how to undo a screwed merge:
 
 ```bash
 git reset --hard HEAD~1     # undo commit (mixed is default option)
@@ -1032,6 +1032,13 @@ git reset --hard HEAD~1     # undo commit (mixed is default option)
   --hard   # discard local changes
 
 git revert HEAD             # if history was shared, this is used
+```
+
+Wanna squash multiple commits into one?
+
+```bash
+reset --soft HEAD~2   # brings last 2 commits back to staging area
+git commit            # they can be committed as 1 commit
 ```
 
 Reverting commits. All changed can be found in the staging area
