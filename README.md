@@ -35,21 +35,6 @@ This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 L
   - [Git](#git)
   - [Docker](#docker)
   - [Miscellaneous Tools](#miscellaneous-tools)
-    - [Locate](#locate)
-    - [Tree](#tree)
-    - [Fuzzyfinder](#fuzzyfinder)
-    - [HTTPie](#httpie)
-    - [Openssl](#openssl)
-    - [Glances](#glances)
-    - [Tlp](#tlp)
-    - [Tokei](#tokei)
-    - [Bpython](#bpython)
-    - [Jupyter Lab](#jupyter-lab)
-    - [Cookiecutter](#cookiecutter)
-    - [Black & Yapf](#black-&-yapf)
-    - [Spasco](#spasco)
-    - [Uvicorn](#uvicorn)
-    - [Heroku](#heroku)
 - [4. Aliases and Functions](#4-aliases-and-functions)
 - [5. Shortcuts](#5-shortcuts)
   - [Ubuntu Desktop](#ubuntu-desktop)
@@ -1101,63 +1086,7 @@ git push origin --delete v1.0.0        # deletes the tag from origin
 
 ### Good Commit Messages
 
-A good commit message has good style (punctuation, capitalization etc.). I add [gitmojis](https://github.com/carloscuesta/gitmoji) to make the commits visually more appealing. The body of the message should explain WHAT and WHY vs how. A properly formed git commit subject line should always be able to complete the following sentence `If applied, this commit will <your subject line here>`
-
-#### Gitmojis I'm using
-
-| Emoji | Meaning                                   |
-|-------|-------------------------------------------|
-|       | **General**                               |
-| 🎉    | Begin a project.                          |
-| ⚗️     | Perform experiments.                      |
-| 🚧    | Work in progress.                         |
-| ⏪️    | Revert changes.                           |
-|       | **Code related**                          |
-| ✨    | Introduce new features.                   |
-| ⚡️     | Improve performance.                      |
-| 🥅    | atch errors.                              |
-| 🐛    | Fix a bug.                                |
-| 🩹    | Simple fix for a non-critical issue.      |
-| 💥    | Introduce breaking changes.               |
-| 🚑️    | Critical hotfix.                          |
-| 🏗️    | Make architectural changes.               |
-| 🎨    | Improve structure / format of the code.   |
-| ♻️     | Refactor code.                            |
-| 💬    | Add or update text and literals.          |
-| 💩    | Write bad code that needs to be improved. |
-| 💡    | Add or update comments in source code.    |
-| 🏷️    | Add or update types.                      |
-| ✏️     | Fix typos.                                |
-| 🚨    | Fix compiler / linter warnings.           |
-| 🚚    | Move or rename resources                  |
-| 🔥    | Remove code or files.                     |
-| ⚰️     | Remove dead code.                         |
-|       | **Docs, Assets, Dependencies**            |
-| 📝    | Add or update documentation.              |
-| 🍱    | Add or update assets.                     |
-| 🙈    | Add or update a .gitignore file.          |
-|  📄   | Add or update license.                    |
-| 🔧    | Add or update configuration files.        |
-| 💫    | Add or update animations and transitions. |
-| ⬆️     | Upgrade dependencies.                     |
-| ➕    | Add a dependency.                         |
-|       | **CI and CD**                             |
-| 🤡    | Mock things.                              |
-| ✅    | Add or update tests.                      |
-| 💚    | Fix CI Build.                             |
-| 👷    | Add or update CI build system.            |
-| 🚀    | Deploy stuff.                             |
-| 🔖    | Release / Version tags.                   |
-| 🔀    | Merge branches.                           |
-|       | **Web Development**                       |
-| 🚸    | Improve user experience / usability.      |
-| 💄    | Add or update the UI and style files.     |
-| 🔍️    | Improve SEO.                              |
-| 🔒️    | Fix security issues.                      |
-| 🗃️    | Perform database related changes.         |
-| 🛂    | Work on code related to authorization, roles and permissions. |
-| 🔊    | Add or update logs.                       |
-
+A good commit message has good style (punctuation, capitalization etc.). I add [gitmojis](https://github.com/carloscuesta/gitmoji) to make the commits visually more appealing. The body of the message should explain WHAT and WHY vs how. A properly formed git commit subject line should always be able to complete the following sentence `If applied, this commit will <your subject line here>`.
 
 **[⬆ back to top](#contents)**
 
@@ -1335,41 +1264,7 @@ If the application grows further multiple hosts are used to handle the workload.
 
 ## Miscellaneous Tools
 
-There's a plethora of smaller command line tools I use. I
-
-### Locate
-
-`find` is not fast enough to search for a pattern on the whole system. Locate caches the systems filesnames within a database and searchs the database. The database is regenerated once a week. Optionally you can update is manually by using `updatedb`.
-
-```bash
-locate <pattern>       # searches for pattern on system
-sudo updatedb          # updates the database used by locate
-```
-
----
-
-### Tree
-
-`tree` gives you a nice tree-like overview about a directories content. The `-a` flag includes also hidden files and the `-f` flag displays each file/folders full path.
-
-```bash
-tree              # tree of cwd
-tree -a           # dotfiles are also shown
-tree -f           # full path
-tree -L 2         # max depth is set to 2
-```
-
----
-
-### Fuzzyfinder
-
-The [fuzzyfinder](https://github.com/junegunn/fzf) improves when searching for a path or within your command history. I don't harness it's pull power currently. So I should keep learning this tool!
-
-```bash
-fzf                  # search for path
-```
-
----
+There's a plethora of smaller command line tools I use. 
 
 ### HTTPie
 
@@ -1409,8 +1304,6 @@ http -b GET https://api.predic8.de/shop/products/148   # get
 
 I Added `"--style=monokai"` to Httpie's default options (`.httpie/config.json`) to get a nicely colored output.
 
----
-
 ### Openssl
 
 [Openssl](https://github.com/openssl/openssl) s a general-purpose cryptography library. I'm using it only for generating passwords.
@@ -1418,18 +1311,6 @@ I Added `"--style=monokai"` to Httpie's default options (`.httpie/config.json`) 
 ```bash
 openssl rand -hex 30     # generate hexadecimal key, 30 characters long
 ```
-
----
-
-### Glances
-
-[Glances](https://github.com/nicolargo/glances) is a monitoring tool which aims to present a large amount of monitoring information.
-
-```bash
-glances
-```
-
----
 
 ### Tlp
 
@@ -1441,8 +1322,6 @@ sudo tlp-stat -d      # disk information
 watch tlp-stat -t     # returns your CPU temperature every 2s
 ```
 
----
-
 ### Tokei
 
 [Tokei](https://github.com/XAMPPRocky/tokei) is a static code analysis tool. It counts the number of lines code of each file within a selected directory. I use it to get a rough idea of how big a project is and which languages are included. Tokei itself is written in Rust, so it's blazing fast.
@@ -1451,8 +1330,6 @@ watch tlp-stat -t     # returns your CPU temperature every 2s
 tokei <dir>         # counts the number of lines code per language recursively
 ```
 
----
-
 ### Bpython
 
 A fancier interface than the normal python interpreter. [Bpython](https://github.com/bpython/bpython) gives your REPL session a nice syntax highlighting and autocomplete. It will definitly enhance REPL session experience.
@@ -1460,8 +1337,6 @@ A fancier interface than the normal python interpreter. [Bpython](https://github
 ```bash
 bpython
 ```
-
----
 
 ### Jupyter Lab
 
@@ -1473,8 +1348,6 @@ jupyter lab                   # starts a jupyter lab server
 ```
 
 A lot of extensions are available to customize jupyter lab.
-
----
 
 ### Cookiecutter
 
@@ -1492,46 +1365,18 @@ https://github.com/ionelmc/cookiecutter-pylibrary.git   # PyPi package, libary
 https://github.com/conda/cookiecutter-conda-python.git  # conda package
 ```
 
----
+### Linting Tools, Code Formatter and Static Type Checker
 
-### Isort, Black, Pylint & MyPy
-
-Linting tools increase readability and give your project a consistent style. [Black](https://github.com/psf/black) is quite common for code formatting python code. [Isort](https://github.com/PyCQA/isort) sorts the import-statements nicely. Some linting tools are only code formatter (like black), some give you also some introspection in your code (like [Pylint]()) and can help fixing potential bugs. I also try to make use of Pythons optional static typing capabilities, [MyPy]() helps me here.
+Linting tools increase readability and give your project a consistent style. [Black](https://github.com/psf/black) is quite common for code formatting python code. [Isort](https://github.com/PyCQA/isort) sorts the import-statements nicely. Some linting tools are only code formatter (like black), some give you also some introspection in your code (like [Flake8](https://github.com/PyCQA/flake8)) and can help fixing potential bugs. I also try to make use of Pythons optional static typing capabilities, [MyPy](https://github.com/python/mypy) helps me here.
 
 ```bash
 black <file.py>           # code formatting in black-style performed on file.py
 yapf -i <file.py>         # --in-place has to be used here to apply linting
 isort <file.py>           # sorts import statements
-pylint <file.py>          # returns some xxx
-mypy <file.py>            # generates a mypy-folder and shows have to improve static typing
+flake8 <file.py>          # linting
+pylint <file.py>          # linting
+mypy <file.py>            # static type checker
 ```
-
----
-
-### Spasco
-
-And I should not forget to mention [Spasco](https://github.com/NiklasTiede/Spasco). A nice renaming tool written by myself. :wink: It can be easily installed with `pip install spasco`. It can speed up your renaming operations. By default it replaces all whitespaces of file/directory names by underscores to diminish problems which can sometimes occur with whitesspaces in names.
-
-I'll show you how it substitutes the whitesspaces within the directory `test dir` and the file `test file` by underscores:
-
-```console
-❯ ls
-test dir
-test file
-
-❯ spasco
-2 files/directories can be renamed:
-before             after
-'test dir'  --> 'test_dir'
-'test file' --> 'test_file'
-OK to proceed with renaming? [y/n] y
-
-❯ ls
-test_dir
-test_file
-```
-
-Furthermore, `spasco` lets you customize the search-value (default: whitespaces) and the new-value (default: underscores). All renaming operations can be logged, to ensure that a renaming operation doesn't break things.
 
 ### Uvicorn
 
@@ -1540,7 +1385,6 @@ Furthermore, `spasco` lets you customize the search-value (default: whitespaces)
 ```
 uvicorn app.main:app --host 0.0.0.0 --port 5000 --reload
 ```
-
 
 ### Heroku
 
@@ -1628,15 +1472,15 @@ response() {
 
 Git aliases of 'Oh My Zsh' I'm using quite often.
 
-| Alias   | Command          |
-|---------|------------------|
-| ga      | git add          |
-| gau     | git add --update |
-| gcmsg   | git commit -m    |
-| gst  | git status   |
-| gss  | git status -s   |
-| glog  | git log --oneline --decorate --graph   |
-| gds  | git diff --staged   |
+| Alias   | Command           |
+|---------|-------------------|
+| ga      | git add           |
+| gau     | git add --update  |
+| gcmsg   | git commit -m     |
+| gst     | git status        |
+| gss     | git status -s     |
+| glog    | git log --oneline --decorate --graph |
+| gds     | git diff --staged |
 
 
 **[⬆ back to top](#contents)**
