@@ -150,6 +150,7 @@ Linux distributions contain a plethora of powerful built-in commands. The presen
 <command> --version
 
 time <command>             # returns time to execute command
+exec zsh                   # replace current shell process with new instance
 ```
 
 Sometimes it's nice to know how much time the execution of a command or a chain of commands took, here the `time` command does the job!
