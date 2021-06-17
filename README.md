@@ -1041,7 +1041,8 @@ git revert --abort
 A `.gitignore` file specifies intentionally untracked files that `git` should ignore. But if a file was already indexed, how do we remove this file from the index? Add the filename to the `.gitignore` file and then type:
 
 ```bash
-git rm -r --cached .         # untracks all files which are within .gitignore
+git rm -r --cached .         # untracks all files
+git add .                    # tracks all files except for files declared within .gitignore
 
 git add .
 git commit -m 'Removing ignored files'
