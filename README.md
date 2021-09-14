@@ -1023,7 +1023,7 @@ git revert HEAD             # if history was shared, this is used
 Wanna squash multiple commits into one?
 
 ```bash
-reset --soft HEAD~2   # brings last 2 commits back to staging area
+git reset --soft HEAD~2   # brings last 2 commits back to staging area
 git commit            # they can be committed as 1 commit
 ```
 
