@@ -1024,7 +1024,7 @@ Wanna squash multiple commits into one?
 
 ```bash
 git reset --soft HEAD~2   # brings last 2 commits back to staging area
-git commit            # they can be committed as 1 commit
+git commit                # they can be committed as 1 commit
 ```
 
 Reverting commits. All changed can be found in the staging area
