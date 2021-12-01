@@ -1036,6 +1036,13 @@ git revert --continue
 git revert --abort 
 ```
 
+Reverting already pushed commits. New commit is created which has the state before the reverted commit.
+
+```bash
+git revert <commit_hash>
+```
+
+
 ### .gitignore
 
 A `.gitignore` file specifies intentionally untracked files that `git` should ignore. But if a file was already indexed, how do we remove this file from the index? Add the filename to the `.gitignore` file and then type:
