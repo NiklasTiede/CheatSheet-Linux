@@ -1011,7 +1011,7 @@ git push
 Rewrite only local history to avoid messing up other peoples history. Here's how to undo a screwed merge:
 
 ```bash
-git reset --hard HEAD~1     # undo commit (mixed is default option)
+git reset --soft HEAD~1     # undo commit (mixed is default option)
 
   --soft   # removes the commit only
   --mixed  # unstages files
