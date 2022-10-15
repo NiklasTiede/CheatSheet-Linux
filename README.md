@@ -7,7 +7,7 @@
   <img  align="center" height="400px" src="docs/wordcloud_transparent.png" /> 
 <p>
 
-This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 LTS) as a Python developer. It is a structured documentation of the commands I'm using throughout interactive shell sessions. Caution, this abstract is highly opinionated :wink:
+This is a collection of commands I'm using on my linux machine (Ubuntu 20.04.1 LTS) as a Python/Java developer. It is a structured documentation of the commands I'm using throughout interactive shell sessions. Caution, this abstract is highly opinionated :wink:
 
 <!-- [Python Cheat sheet](https://www.pythoncheatsheet.org/) -->
 
